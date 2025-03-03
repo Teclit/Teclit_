@@ -1,0 +1,95 @@
+/* Container général pour la navbar et la section home */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  height: 80vh;
+  background: url('../assets/images/home.jpg') no-repeat center center/cover;
+  opacity: 100%;
+  color: white;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Styles pour la navbar */
+.navbar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 200px;
+  background-color: transparent; /* Semi-transparent background for visibility */
+  position: relative;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  list-style: none;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.navbar a:hover{
+  border-bottom: 2px solid white;
+  color: var(--secondary-color);
+  transition: color 0.9s, border-bottom 0.3s;
+}
+
+.navbar .active {
+  border-bottom: 2px solid var(--secondary-color);
+
+}
+
+/* Description dans la section Home */
+.home-description {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.home-description h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.home-description p {
+  font-size: 18px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Responsiveness pour mobiles */
+@media (max-width: 568px) {
+  .header-container {
+    padding: 20px;
+    height: auto; /* Permet d'adapter la hauteur selon le contenu */
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .home-description h1 {
+    font-size: 30px;
+  }
+
+  .home-description p {
+    font-size: 16px;
+  }
+}
