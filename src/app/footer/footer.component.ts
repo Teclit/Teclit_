@@ -1,6 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {FaIconComponent} from '@fortawesome/angular-fontawesome';
-
 
 interface ContactInfo {
   email?: string;
@@ -10,9 +8,6 @@ interface ContactInfo {
 
 @Component({
   selector: 'app-footer',
-  imports: [
-    FaIconComponent
-  ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.css'
 })
@@ -27,12 +22,6 @@ export class FooterComponent {
     this.activeLink = link;
   }
 
-  socialLinks = [
-    {url: '#', iconClass: 'fab fa-github'},
-    {url: '#', iconClass: 'fab fa-facebook'},
-    {url: '#', iconClass: 'fab fa-instagram'},
-    {url: '#', iconClass: 'fab fa-twitter'}
-  ];
 
   contactInfo: ContactInfo = {
     email: 'Email',
