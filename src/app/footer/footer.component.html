@@ -1,0 +1,37 @@
+<!-- Footer -->
+<div class="footer bg-dark py-5">
+  <div class="container grid grid-3">
+    <div>
+      <h1>{{ title }}</h1>
+      <p>Copyright &copy; {{ startingYear }} - {{ year }}</p>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#" [class.active]="activeLink === 'Accueil'" (click)="setActiveLink('Accueil')"><i
+          class="fa-thin fa-house"></i>Accueil</a></li>
+        <li><a href="#" [class.active]="activeLink === 'Portfolio'" (click)="setActiveLink('Portfolio')">Portfolio</a>
+        </li>
+        <li><a href="#" [class.active]="activeLink === 'Compétences'"
+               (click)="setActiveLink('Compétences')">Compétences</a></li>
+        <li><a href="#" [class.active]="activeLink === 'Expériences'"
+               (click)="setActiveLink('Expériences')">Expériences</a></li>
+        <li><a href="#" [class.active]="activeLink === 'À propos'" (click)="setActiveLink('À propos')">À propos</a></li>
+        <li><a href="#" [class.active]="activeLink === 'Contact'" (click)="setActiveLink('Contact')">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="social">
+      <a href="#">
+        <fa-icon [icon]="['fab', 'github']" size="2x"></fa-icon>
+      </a>
+      <a href="#">
+        <fa-icon [icon]="['fab', 'facebook']" size="2x"></fa-icon>
+      </a>
+      <a href="#">
+        <fa-icon [icon]="['fab', 'instagram']" size="2x"></fa-icon>
+      </a>
+      <a href="#">
+        <fa-icon [icon]="['fab', 'twitter']" size="2x"></fa-icon>
+      </a>
+    </div>
+  </div>
+</div>

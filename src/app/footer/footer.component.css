@@ -1,0 +1,13 @@
+/* Footer */
+.footer .social a {
+  margin: 0 10px;
+  background-color: white;
+}
+.footer .social i:hover {
+
+  transform: scale(0.90);
+}
+
+.footer nav a:hover{
+  border-bottom: 1px solid #ccc;
+}

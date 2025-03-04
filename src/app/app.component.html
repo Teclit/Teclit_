@@ -1,22 +1,10 @@
+
+
+<app-navbar [title]="title"></app-navbar>
+<app-home [title]="title"></app-home>
+<app-footer [title]="title"></app-footer>
+
 <div class="header-container">
   <!-- Navbar -->
-  <div class="navbar">
-    <h1 class="logo">Teklit T.</h1>
-    <nav>
-      <ul>
-        <li><a href="#" [class.active]="activeLink === 'Accueil'" (click)="setActiveLink('Accueil')">Accueil</a></li>
-        <li><a href="#" [class.active]="activeLink === 'Portfolio'" (click)="setActiveLink('Portfolio')">Portfolio</a></li>
-        <li><a href="#" [class.active]="activeLink === 'Compétences'" (click)="setActiveLink('Compétences')">Compétences</a></li>
-        <li><a href="#" [class.active]="activeLink === 'Expériences'" (click)="setActiveLink('Expériences')">Expériences</a></li>
-        <li><a href="#" [class.active]="activeLink === 'À propos'" (click)="setActiveLink('À propos')">À propos</a></li>
-        <li><a href="#" [class.active]="activeLink === 'Contact'" (click)="setActiveLink('Contact')">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
 
-  <!-- Home Description -->
-  <div class="home-description">
-    <h1>Welcome to Our Website</h1>
-    <p>Discover amazing content and services.</p>
-  </div>
 </div>

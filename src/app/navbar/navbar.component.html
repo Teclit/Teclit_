@@ -1,22 +1,21 @@
 <!-- Navbar -->
 <div class="navbar">
   <div class="container flex">
-    <h1 class="logo">Teklit T.</h1>
-    <nav>
+    <h1 class="logo">{{title}}</h1>
+    <div class="burger-menu" (click)="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav [class.active]="menuOpen">
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#" [class.active]="activeLink === 'Accueil'" (click)="setActiveLink('Accueil', $event)">Accueil</a></li>
+        <li><a href="#" [class.active]="activeLink === 'Portfolio'" (click)="setActiveLink('Portfolio', $event)">Portfolio</a></li>
+        <li><a href="#" [class.active]="activeLink === 'Compétences'" (click)="setActiveLink('Compétences', $event)">Compétences</a></li>
+        <li><a href="#" [class.active]="activeLink === 'Expériences'" (click)="setActiveLink('Expériences', $event)">Expériences</a></li>
+        <li><a href="#" [class.active]="activeLink === 'À propos'" (click)="setActiveLink('À propos', $event)">À propos</a></li>
+        <li><a href="#" [class.active]="activeLink === 'Contact'" (click)="setActiveLink('Contact', $event)">Contact</a></li>
       </ul>
     </nav>
   </div>
 </div>
-
-<nav class="navbar">
-  <div class="logo">Tafrize.</div>
-  <ul class="nav-links">
-
-  </ul>
-</nav>
-

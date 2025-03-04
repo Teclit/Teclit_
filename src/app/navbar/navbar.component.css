@@ -1,7 +1,7 @@
 /* Navbar */
 .navbar {
-  background-color: white;
-  color: var(--primary-color);
+  background-color: var(--dark-color);
+  color: #fff;
   height: 70px;
 }
 
@@ -10,47 +10,100 @@
 }
 
 .navbar a {
-  color: #fff;
+  color: var(--light-color);
   padding: 10px;
   margin: 0 5px;
 }
 
-.navbar a:hover {
-  border-bottom: 2px #fff solid;
+.navbar a:hover, a:active {
+  font-weight: bold;
+  border-bottom: 2px var(--primary-color) solid;
 }
 
 .navbar .flex {
   justify-content: space-between;
 }
 
-
-/* Footer */
-.footer .social a {
-  margin: 0 10px;
-}
-.footer .social i:hover {
-  transform: scale(0.90);
+.burger-menu {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
 }
 
-.footer nav a:hover{
-  border-bottom: 1px solid #ccc;
+.burger-menu span {
+  background: white;
+  width: 25px;
+  height: 3px;
+  margin: 4px 0;
+  transition: all 0.3s ease-in-out;
 }
 
 
-
-/* Mobile */
-@media (max-width: 500px) {
+/* Tablet */
+@media (max-width: 900px) {
   .navbar {
-    height: 110px;
-    overflow: auto;
+    height: auto;
+    overflow: hidden;
   }
 
   .navbar .flex {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
   }
 
   .navbar ul {
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 8px 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 5px;
+
+  }
+
+  .navbar ul li {
+    margin: 5px;
   }
 }
+
+
+/* Mobile */
+@media (max-width: 730px) {
+  .burger-menu {
+    display: flex;
+  }
+
+  .navbar .flex {
+    justify-content: space-between;
+  }
+
+  .navbar nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 60px;
+    left: 0;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .navbar nav.active {
+    display: flex;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .navbar ul li {
+    padding: 10px;
+  }
+}
+

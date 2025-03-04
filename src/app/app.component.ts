@@ -1,19 +1,21 @@
-import {Component} from '@angular/core';
+import {NavbarComponent} from './navbar/navbar.component';
+import {HomeComponent} from './home/home.component';
+import {FooterComponent} from './footer/footer.component';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  imports: [
+    NavbarComponent,
+    HomeComponent,
+    FooterComponent
+  ],
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'teclit';
 
-
-  activeLink: string = 'Accueil';
-
-  setActiveLink(link: string): void {
-    this.activeLink = link;
-  }
-
+  @Input() titleInput!: string;
+  title = 'Teklit T.';
 
 }
