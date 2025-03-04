@@ -16,6 +16,6 @@ import {Component, Input} from '@angular/core';
 export class AppComponent {
 
   @Input() titleInput!: string;
-  title = 'Teklit T.';
+  title = 'Teklit Te.';
 
 }

@@ -1,11 +1,14 @@
 /* Navbar */
 .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   background-color: var(--primary-color);
   color: var(--light-color);
   height: 70px;
   display: flex;
   align-items: center;
-  padding: 0 20px; /* Spacing for navbar content */
+  padding: 0 20px;
   box-sizing: border-box;
 }
 
