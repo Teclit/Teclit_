@@ -1,109 +1,122 @@
 /* Navbar */
 .navbar {
-  background-color: var(--dark-color);
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--light-color);
   height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px; /* Spacing for navbar content */
+  box-sizing: border-box;
+}
+
+.navbar .flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .navbar ul {
   display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li {
+  margin: 0 10px;
 }
 
 .navbar a {
   color: var(--light-color);
+  text-decoration: none;
   padding: 10px;
-  margin: 0 5px;
+  transition: all 0.3s ease-in-out;
 }
 
-.navbar a:hover, a:active {
+.navbar a:hover,
+.navbar a:active {
   font-weight: bold;
-  border-bottom: 2px var(--primary-color) solid;
+  border-bottom: 2px solid var(--light-color);
 }
-
 .navbar .flex {
   justify-content: space-between;
 }
-
 .burger-menu {
-  display: none;
+  display: none; /* Hidden by default */
   flex-direction: column;
   cursor: pointer;
 }
 
 .burger-menu span {
-  background: white;
+  background: #fff;
   width: 25px;
   height: 3px;
   margin: 4px 0;
   transition: all 0.3s ease-in-out;
 }
 
-
-/* Tablet */
-@media (max-width: 900px) {
+/* Responsive: Tablet (max-width: 920px) */
+@media (max-width: 920px) {
   .navbar {
-    height: auto;
-    overflow: hidden;
+    height: auto; /* Adjust height for wrapping content */
+  }
+
+  .navbar .flex {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+  }
+
+  .navbar ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%; /* Full width for tablet view */
+    padding: 8px 0;
+    background-color: rgba(26, 101, 158, 0.9);
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .navbar ul li {
+    margin: 5px; /* Adjust spacing between items */
+  }
+}
+
+/* Responsive: Mobile (max-width: 730px) */
+@media (max-width: 730px) {
+  .burger-menu {
+    display: flex; /* Show to toggle menu */
   }
 
   .navbar .flex {
     flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .navbar ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-    padding: 8px 0;
-    background-color: rgba(0, 0, 0, 0.9);
-    border-radius: 5px;
-
-  }
-
-  .navbar ul li {
-    margin: 5px;
-  }
-}
-
-
-/* Mobile */
-@media (max-width: 730px) {
-  .burger-menu {
-    display: flex;
-  }
-
-  .navbar .flex {
     justify-content: space-between;
   }
 
   .navbar nav {
-    display: none;
+    display: none; /* Hidden by default */
     flex-direction: column;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
     position: absolute;
-    top: 60px;
+    width: 100%;
+    top: 70px; /* Match navbar height */
     left: 0;
+    background-color: rgba(26, 101, 158, 0.9);
+    border-radius: 5px;
     text-align: center;
-    transition: all 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
 
   .navbar nav.active {
-    display: flex;
+    display: flex; /* Show active navbar */
   }
 
   .navbar ul {
-    flex-direction: column;
+    flex-direction: column; /* Stack items */
     width: 100%;
     padding: 10px 0;
   }
 
   .navbar ul li {
-    padding: 10px;
+    padding: 10px; /* Space between items */
   }
 }
-
