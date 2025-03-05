@@ -2,6 +2,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {HomeComponent} from './home/home.component';
 import {FooterComponent} from './footer/footer.component';
 import {Component, Input} from '@angular/core';
+import {COMPANY_NAME} from '../../data';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,6 @@ import {Component, Input} from '@angular/core';
 export class AppComponent {
 
   @Input() titleInput!: string;
-  title = 'Teklit Te.';
+  title = COMPANY_NAME;
 
 }

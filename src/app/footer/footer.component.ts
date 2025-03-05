@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {SOCIAL_LINKS} from '../../../data';
 
 interface ContactInfo {
   email?: string;
@@ -15,6 +16,8 @@ export class FooterComponent {
   @Input() title!: string;
   startingYear: number = 2019;
   year: number = new Date().getFullYear();
+  linkedInUrl: string = SOCIAL_LINKS.linkedIn;
+  githubUrl: string = SOCIAL_LINKS.github;
 
   activeLink: string = 'Accueil';
 

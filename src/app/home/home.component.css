@@ -72,10 +72,11 @@
   border: 1px solid var(--light-color);
   cursor: pointer;
   transition: 0.3s;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 .btn:hover {
+  font-weight: bold;
   background: var(--light-color);
   color: var(--primary-color);
 }
