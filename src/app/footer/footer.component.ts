@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {SOCIAL_LINKS} from '../../../data';
+import {RouterLink} from '@angular/router';
 
 interface ContactInfo {
   email?: string;
@@ -10,6 +11,9 @@ interface ContactInfo {
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
+  imports: [
+    RouterLink
+  ],
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
@@ -19,9 +23,10 @@ export class FooterComponent {
   linkedInUrl: string = SOCIAL_LINKS.linkedIn;
   githubUrl: string = SOCIAL_LINKS.github;
 
-  activeLink: string = 'Accueil';
+  activeLink: string = 'accueil';
 
-  setActiveLink(link: string): void {
+  setActiveLink(link: string, event: Event): void {
+    event.preventDefault();
     this.activeLink = link;
   }
 

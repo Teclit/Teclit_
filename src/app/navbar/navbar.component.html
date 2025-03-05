@@ -1,7 +1,7 @@
 <!-- Navbar -->
 <div class="navbar">
   <div class="container flex">
-    <h1 class="logo">{{title}}</h1>
+    <h1 class="logo">{{ title }}</h1>
     <div class="burger-menu" (click)="toggleMenu()">
       <span></span>
       <span></span>
@@ -9,12 +9,18 @@
     </div>
     <nav [class.active]="menuOpen">
       <ul>
-        <li><a href="#" [class.active]="activeLink === 'Accueil'" (click)="setActiveLink('Accueil', $event)">Accueil</a></li>
-        <li><a href="#" [class.active]="activeLink === 'Portfolio'" (click)="setActiveLink('Portfolio', $event)">Portfolio</a></li>
-        <li><a href="#" [class.active]="activeLink === 'Compétences'" (click)="setActiveLink('Compétences', $event)">Compétences</a></li>
-        <li><a href="#" [class.active]="activeLink === 'Expériences'" (click)="setActiveLink('Expériences', $event)">Expériences</a></li>
-        <li><a href="#" [class.active]="activeLink === 'À propos'" (click)="setActiveLink('À propos', $event)">À propos</a></li>
-        <li><a href="#" [class.active]="activeLink === 'Contact'" (click)="setActiveLink('Contact', $event)">Contact</a></li>
+        <li><a routerLink="/" fragment="accueil" [class.active]="activeLink === 'accueil'"
+               (click)="setActiveLink('accueil', $event)">Accueil</a></li>
+        <li><a routerLink="/" fragment="competences" [class.active]="activeLink === 'competences'"
+               (click)="setActiveLink('competences', $event)">Compétences</a></li>
+        <li><a routerLink="/" fragment="portfolio" [class.active]="activeLink === 'portfolio'"
+               (click)="setActiveLink('portfolio', $event)">Portfolio</a></li>
+        <li><a routerLink="/" fragment="experiences" [class.active]="activeLink === 'experiences'"
+               (click)="setActiveLink('experiences', $event)">Expériences</a></li>
+        <li><a routerLink="/" fragment="apropos" [class.active]="activeLink === 'apropos'"
+               (click)="setActiveLink('apropos', $event)">À propos</a></li>
+        <li><a routerLink="/" fragment="contact" [class.active]="activeLink === 'contact'"
+               (click)="setActiveLink('contact', $event)">Contact</a></li>
       </ul>
     </nav>
   </div>

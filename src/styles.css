@@ -16,6 +16,11 @@
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
   font-family: 'Lato', sans-serif;
   color: #333;
