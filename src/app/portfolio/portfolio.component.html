@@ -1,0 +1,12 @@
+<div class="portfolio-container">
+  <h1>Mon Portfolio</h1>
+  <p>Découvrez mes réalisations innovantes dans différents domaines.</p>
+  <div class="portfolio-grid">
+    <div class="portfolio-item" *ngFor="let item of portfolioItems">
+      <img [src]="item.image" [alt]="item.title" />
+      <h3>{{ item.title }}</h3>
+      <div class="view-site">Voir le site</div>
+    </div>
+  </div>
+</div>
+```
