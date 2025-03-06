@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {SkillImage} from '../../../data';
+import { SkillImage } from '../../../data';
 
 @Component({
   selector: 'app-card',
@@ -12,14 +12,43 @@ import {SkillImage} from '../../../data';
 export class CardComponent implements OnInit, OnDestroy {
   @Input() skills: SkillImage[] = [];
   private currentIndex = 0;
-  private readonly imagesPerView = 6;
+  private imagesPerView = 6; // Valeur par défaut
   private intervalId: any;
+
+  constructor() {
+    this.updateImagesPerView(window.innerWidth);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.updateImagesPerView(event.target.innerWidth);
+  }
+
+  private updateImagesPerView(windowWidth: number): void {
+    if (windowWidth >= 1200) {
+      this.imagesPerView = 6;
+    } else if (windowWidth >= 992) {
+      this.imagesPerView = 5;
+    } else if (windowWidth >= 768) {
+      this.imagesPerView = 4;
+    } else if (windowWidth >= 576) {
+      this.imagesPerView = 3;
+    } else {
+      this.imagesPerView = 2;
+    }
+
+    // Réajuster l'index courant si nécessaire
+    if (this.currentIndex + this.imagesPerView > this.skills.length) {
+      this.currentIndex = 0;
+    }
+  }
 
   get visibleImages(): SkillImage[] {
     return this.skills.slice(this.currentIndex, this.currentIndex + this.imagesPerView);
   }
 
   ngOnInit() {
+    this.updateImagesPerView(window.innerWidth);
     this.startAutoSlide();
   }
 

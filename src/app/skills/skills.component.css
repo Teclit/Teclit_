@@ -7,4 +7,39 @@
   padding: 1rem;
   background-color: var(--light-color);
   overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Media queries pour la responsivité */
+@media screen and (max-width: 1200px) {
+  .skills {
+    padding: 1.5rem;
+    gap: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .skills {
+    padding: 1rem;
+    gap: 0.6rem;
+  }
+
+  .skills h2 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .skills {
+    padding: 0.8rem;
+    gap: 0.4rem;
+  }
+
+  .skills h2 {
+    font-size: 1.2rem;
+    margin: 0.8rem 0;
+  }
 }

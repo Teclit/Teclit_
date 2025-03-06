@@ -25,6 +25,54 @@
   transition: transform 0.3s ease;
 }
 
+/* Media queries pour rendre le carrousel responsive */
+@media screen and (max-width: 768px) {
+  .carousel-container {
+    padding: 0 30px;
+  }
+
+  .card {
+    min-width: 100px;
+    height: 140px;
+    padding: 0.8rem;
+  }
+
+  .carousel-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .arrow {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .carousel-container {
+    padding: 0 20px;
+  }
+
+  .carousel {
+    gap: 0.5rem;
+  }
+
+  .card {
+    min-width: 80px;
+    height: 120px;
+    padding: 0.6rem;
+  }
+
+  .carousel-button {
+    width: 25px;
+    height: 25px;
+  }
+
+  .arrow {
+    font-size: 10px;
+  }
+}
+
+/* Le reste du CSS reste inchangé */
 .card:hover {
   background: radial-gradient(circle at top, var(--primary-color) 50%, var(--white-color) 90%);
   color: var(--white-color);
@@ -71,12 +119,6 @@
   right: 0;
 }
 
-.arrow {
-  font-size: 14px;
-  line-height: 1;
-}
-
-/* Animation pour le défilement automatique */
 @keyframes slideIn {
   from {
     transform: translateX(100%);
