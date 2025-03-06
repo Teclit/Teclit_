@@ -54,6 +54,8 @@
 }
 
 .content h2 a:hover {
+  font-weight: bolder;
+  font-size: 2rem;
   border-bottom: solid 2px var(--warning-color);
   transition: 0.3s;
 }
