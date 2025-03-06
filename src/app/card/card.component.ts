@@ -1,10 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface CarouselImage {
-  url: string;
-  alt: string;
-}
+import {SkillImage} from '../../../data';
 
 @Component({
   selector: 'app-card',
@@ -14,16 +10,13 @@ interface CarouselImage {
   styleUrl: './card.component.css'
 })
 export class CardComponent implements OnInit, OnDestroy {
-  @Input() SUPPORTED_LANGUAGES: CarouselImage[] = [];
+  @Input() skills: SkillImage[] = [];
   private currentIndex = 0;
-  private readonly imagesPerView = 4;
+  private readonly imagesPerView = 6;
   private intervalId: any;
 
-  get visibleImages(): CarouselImage[] {
-    return this.SUPPORTED_LANGUAGES.slice(
-      this.currentIndex,
-      this.currentIndex + this.imagesPerView
-    );
+  get visibleImages(): SkillImage[] {
+    return this.skills.slice(this.currentIndex, this.currentIndex + this.imagesPerView);
   }
 
   ngOnInit() {
@@ -37,7 +30,7 @@ export class CardComponent implements OnInit, OnDestroy {
   private startAutoSlide(): void {
     this.intervalId = setInterval(() => {
       this.nextImages();
-    }, 5000); // Intervalle de 1 seconde
+    }, 5000);
   }
 
   private stopAutoSlide(): void {
@@ -47,7 +40,7 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   nextImages(): void {
-    this.currentIndex = (this.currentIndex + this.imagesPerView >= this.SUPPORTED_LANGUAGES.length)
+    this.currentIndex = (this.currentIndex + this.imagesPerView >= this.skills.length)
       ? 0
       : this.currentIndex + this.imagesPerView;
   }
@@ -56,6 +49,6 @@ export class CardComponent implements OnInit, OnDestroy {
     const prevIndex = this.currentIndex - this.imagesPerView;
     this.currentIndex = prevIndex >= 0
       ? prevIndex
-      : Math.floor((this.SUPPORTED_LANGUAGES.length - 1) / this.imagesPerView) * this.imagesPerView;
+      : Math.floor((this.skills.length - 1) / this.imagesPerView) * this.imagesPerView;
   }
 }
