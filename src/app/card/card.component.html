@@ -1,0 +1,15 @@
+<div class="carousel-container">
+  <div class="carousel">
+    <div class="card" *ngFor="let image of visibleImages">
+      <img [src]="image.url"
+           [alt]="image.alt"
+           class="card-image">
+    </div>
+  </div>
+  <button (click)="previousImages()" class="carousel-button previous">
+    <span class="arrow">&#8249;</span>
+  </button>
+  <button (click)="nextImages()" class="carousel-button next">
+    <span class="arrow">&#8250;</span>
+  </button>
+</div>

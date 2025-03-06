@@ -4,6 +4,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { COMPANY_NAME } from '../../data';
+import {SkillsComponent} from './skills/skills.component';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import { COMPANY_NAME } from '../../data';
     RouterModule,
     NavbarComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    SkillsComponent
   ],
   styleUrl: './app.component.css'
 })
