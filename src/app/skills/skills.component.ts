@@ -41,41 +41,4 @@ export class SkillsComponent {
   @Input() images: CarouselImage[] = SUPPORTED_LANGUAGES;
   @Input() config: CarouselConfig = CAROUSEL_CONFIG;
 
-  private currentIndex = 0;
-
-  get visibleImages(): CarouselImage[] {
-    return this.images.slice(
-      this.currentIndex,
-      this.currentIndex + this.config.imagesPerView
-    );
-  }
-
-  get canNavigateNext(): boolean {
-    return this.currentIndex + this.config.imagesPerView < this.images.length;
-  }
-
-  get canNavigatePrevious(): boolean {
-    return this.currentIndex > 0;
-  }
-
-  navigateCarousel(direction: 'next' | 'previous'): void {
-    if (direction === 'next') {
-      this.currentIndex = this.canNavigateNext
-        ? this.currentIndex + this.config.imagesPerView
-        : 0;
-    } else {
-      const prevIndex = this.currentIndex - this.config.imagesPerView;
-      this.currentIndex = prevIndex >= 0
-        ? prevIndex
-        : Math.floor((this.images.length - 1) / this.config.imagesPerView) * this.config.imagesPerView;
-    }
-  }
-
-  nextImages(): void {
-    this.navigateCarousel('next');
-  }
-
-  previousImages(): void {
-    this.navigateCarousel('previous');
-  }
 }
