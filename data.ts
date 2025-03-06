@@ -61,6 +61,7 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'GitHub', url: `${imgDirectory}github.png`, alt: 'GitHub Logo'},
   {name: 'GitLab', url: `${imgDirectory}gitlab.png`, alt: 'GitLab Logo'},
   {name: 'Docker', url: `${imgDirectory}docker.png`, alt: 'Docker Logo'},
+  {name: 'AWS', url: `${imgDirectory}aws.png`, alt: 'AWS Logo'},
   {name: 'Kubernetes', url: `${imgDirectory}kubernetes.png`, alt: 'Kubernetes Logo'},
   {name: 'Jenkins', url: `${imgDirectory}jenkins.png`, alt: 'Jenkins Logo'},
   {name: 'Nginx', url: `${imgDirectory}nginx.png`, alt: 'Nginx Logo'},
