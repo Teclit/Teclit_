@@ -9,16 +9,20 @@ interface PortfolioItem {
 const PORTFOLIO_ASSETS_PATH = 'assets/portfolio/';
 const PORTFOLIO_ITEMS: PortfolioItem[] = [
   {title: 'E-commerce Website', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
-  {title: 'Freelance Platform', image: `${PORTFOLIO_ASSETS_PATH}freelance.png`},
-  {title: 'Restaurant App', image: `${PORTFOLIO_ASSETS_PATH}restaurant.png`},
-  {title: 'Weather App', image: `${PORTFOLIO_ASSETS_PATH}weather.png`},
-  {title: 'Job Board', image: `${PORTFOLIO_ASSETS_PATH}jobboard.png`},
-  {title: 'Airbnb Clone', image: `${PORTFOLIO_ASSETS_PATH}airbnb.png`},
-  {title: 'Freelance Platform', image: `${PORTFOLIO_ASSETS_PATH}freelance.png`},
-  {title: 'Restaurant App', image: `${PORTFOLIO_ASSETS_PATH}restaurant.png`},
-  {title: 'Weather App', image: `${PORTFOLIO_ASSETS_PATH}weather.png`},
-  {title: 'Job Board', image: `${PORTFOLIO_ASSETS_PATH}jobboard.png`},
-  {title: 'Airbnb Clone', image: `${PORTFOLIO_ASSETS_PATH}airbnb.png`}
+  {title: 'Freelance Platform', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Restaurant App', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Weather App', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Job Board', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Airbnb Clone', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Freelance Platform', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Restaurant App', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Weather App', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Job Board', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Airbnb Clone', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Job Board', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Airbnb Clone', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Airbnb Clone', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`},
+  {title: 'Airbnb Clone', image: `${PORTFOLIO_ASSETS_PATH}ecommerce.png`}
 ];
 
 @Component({
