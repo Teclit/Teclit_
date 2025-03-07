@@ -1,0 +1,49 @@
+.experiences-container {
+  text-align: center;
+  padding: 40px;
+  background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+  color: var(--white-color);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.experiences-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  justify-content: center;
+}
+
+.experience-card {
+  background: var(--white-color);
+  color: var(--dark-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.experience-card h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.experience-card p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.discover-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.discover-link:hover {
+  font-size: 1.1rem;
+  text-decoration: underline;
+}

@@ -1,0 +1,12 @@
+<div class="experiences-container">
+  <h2 class="title">Expériences</h2>
+
+  <div class="experiences-grid">
+    <div *ngFor="let exp of experiences" class="experience-card">
+      <h3>{{ exp.title }}</h3>
+      <p>{{ exp.description }}</p>
+      <p><em>{{ exp.location }}</em></p>
+      <a [href]="exp.link" class="discover-link">Découvrir →</a>
+    </div>
+  </div>
+</div>
