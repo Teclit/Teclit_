@@ -8,6 +8,7 @@ import {SkillsComponent} from './skills/skills.component';
 import {PortfolioComponent} from './portfolio/portfolio.component';
 import {CompetencesComponent} from './competences/competences.component';
 import {ExperiencesComponent} from './experiences/experiences.component';
+import {AproposComponent} from './apropos/apropos.component';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ import {ExperiencesComponent} from './experiences/experiences.component';
     SkillsComponent,
     PortfolioComponent,
     CompetencesComponent,
-    ExperiencesComponent
+    ExperiencesComponent,
+    AproposComponent
   ],
   styleUrl: './app.component.css'
 })
