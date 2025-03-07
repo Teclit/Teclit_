@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { COMPANY_NAME } from '../../data';
 import {SkillsComponent} from './skills/skills.component';
 import {PortfolioComponent} from './portfolio/portfolio.component';
+import {CompetencesComponent} from './competences/competences.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import {PortfolioComponent} from './portfolio/portfolio.component';
     HomeComponent,
     FooterComponent,
     SkillsComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    CompetencesComponent
   ],
   styleUrl: './app.component.css'
 })

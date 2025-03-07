@@ -1,0 +1,12 @@
+<div class="competences-container" id="competences">
+  <h2 class="title">Compétences</h2>
+  <p class="subtitle">Développeur passionné par les nouvelles technologies.</p>
+
+  <div class="competences-grid">
+    <div *ngFor="let comp of competences" class="competence-card">
+      <i class="icon" [ngClass]="'fas fa-' + comp.icon"></i>
+      <h3>{{ comp.title }}</h3>
+      <p>{{ comp.description }}</p>
+    </div>
+  </div>
+</div>

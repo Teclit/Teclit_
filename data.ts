@@ -81,5 +81,6 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'Next.js', url: `${imgDirectory}nextjs.png`, alt: 'Next.js Logo'},
   {name: 'NPM', url: `${imgDirectory}npm.png`, alt: 'NPM Logo'},
   {name: 'Rest API', url: `${imgDirectory}restapi.png`, alt: 'Rest API Logo'},
+  {name: 'Tock', url: `${imgDirectory}tock.png`, alt: 'Tock Logo'},
 
 ];

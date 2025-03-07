@@ -1,0 +1,80 @@
+.competences-container {
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: clamp(24px, 5vw, 28px);
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: clamp(14px, 3vw, 16px);
+  margin-bottom: 30px;
+}
+
+.competences-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  width: 100%;
+}
+
+.competence-card {
+  background: var(--white-color);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(26, 101, 158, 0.5);
+  flex: 1;
+  align-content: center;
+  min-width: 250px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.competence-card:hover {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  font-weight: bolder;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(26, 101, 158, 0.6), 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.competence-card:hover .icon {
+  color: var(--white-color);
+}
+
+.icon {
+  font-size: clamp(32px, 8vw, 40px);
+  margin-bottom: 15px;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .competences-container {
+    padding: 15px;
+  }
+
+  .competences-grid {
+    gap: 15px;
+  }
+
+  .competence-card {
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .competences-container {
+    padding: 10px;
+  }
+
+  .competence-card {
+    min-width: 100%;
+  }
+}
