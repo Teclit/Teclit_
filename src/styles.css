@@ -24,7 +24,7 @@ html {
 
 body {
   font-family: 'Lato', sans-serif;
-  color: #333;
+  color: var(--secondary-color);
   line-height: 1.6;
   background-color: var(--light-color);
 }
@@ -35,7 +35,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #333;
+  color: var(--secondary-color);
 }
 
 h1,
@@ -55,8 +55,8 @@ img {
 
 code,
 pre {
-  background: #333;
-  color: #fff;
+  background: var(--secondary-color);
+  color: var(--white-color);
   padding: 10px;
 }
 
@@ -73,8 +73,8 @@ pre {
 }
 
 .card {
-  background-color: #fff;
-  color: #333;
+  background-color: var(--secondary-color);
+  color: var(--secondary-color);
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -86,14 +86,14 @@ pre {
   padding: 10px 30px;
   cursor: pointer;
   background: var(--primary-color);
-  color: #fff;
+  color: var(--white-color);
   border: none;
   border-radius: 5px;
 }
 
 .btn-outline {
   background-color: transparent;
-  border: 1px #fff solid;
+  border: 1px var(--white-color) solid;
 }
 
 .btn:hover {
@@ -104,25 +104,25 @@ pre {
 .bg-primary,
 .btn-primary {
   background-color: var(--primary-color);
-  color: #fff;
+  color: var(--white-color);
 }
 
 .bg-secondary,
 .btn-secondary {
   background-color: var(--secondary-color);
-  color: #fff;
+  color: var(--white-color);
 }
 
 .bg-dark,
 .btn-dark {
   background-color: var(--dark-color);
-  color: #fff;
+  color: var(--white-color);
 }
 
 .bg-light,
 .btn-light {
   background-color: var(--light-color);
-  color: #333;
+  color: var(--secondary-color);
 }
 
 .bg-primary a,
@@ -131,7 +131,7 @@ pre {
 .btn-secondary a,
 .bg-dark a,
 .btn-dark a {
-  color: #fff;
+  color: var(--light-color);
 }
 
 /* Text colors */
@@ -190,12 +190,12 @@ pre {
 
 .alert-success {
   background-color: var(--success-color);
-  color: #fff;
+  color: var(--light-color);
 }
 
 .alert-error {
   background-color: var(--error-color);
-  color: #fff;
+  color: var(--light-color);
 }
 
 .flex {
