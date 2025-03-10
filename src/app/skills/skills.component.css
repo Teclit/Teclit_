@@ -4,6 +4,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  align-content: center;
   padding: 1rem;
   background-color: var(--light-color);
   overflow: hidden;
