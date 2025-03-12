@@ -22,14 +22,13 @@
   width: 300px;
   height: auto;
   padding: 20px;
-  background-color: var(--primary-color);
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: var(--light-color);
+  border-radius: 5px;
 }
 
 .description {
   font-size: 16px;
-  text-align: left;
+  text-align: center;
   line-height: 1.6;
 }
 
