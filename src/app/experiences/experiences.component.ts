@@ -10,6 +10,12 @@ import {CommonModule} from '@angular/common';
 export class ExperiencesComponent {
   experiences = [
     {
+      title: "Développeur Full Stack",
+      description: "Développement et optimisation de solutions web et mobiles pour une agence web-marketing en pleine croissance. Conception d’interfaces utilisateur modernes en React.js et Next.js, intégration d’API et gestion des bases de données relationnelles et non relationnelles. Participation aux phases de spécifications techniques, développement, tests et maintenance évolutive.",
+      location: "TXStudio, Asnières-sur-Seine",
+      link: "#"
+    },
+    {
       title: 'Développeur Full Stack Java',
       description: 'Développement d’un assistant virtuel et d’interfaces utilisateur modernes en React.js.',
       location: 'SNCF Connect & Tech, Puteaux',
