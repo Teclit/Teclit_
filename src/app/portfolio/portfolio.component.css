@@ -11,6 +11,11 @@
   margin-top: 20px;
 }
 
+.portfolio-item h3 {
+  color: var(--primary-color);
+  font-weight: bolder;
+}
+
 .portfolio-item {
   background: #fff;
   border-radius: 10px;
@@ -27,10 +32,9 @@
 }
 
 .portfolio-item:hover {
-  background: radial-gradient(circle at top, var(--primary-color) 50%, var(--white-color) 90%);
-  color: var(--dark-color);
+  background: radial-gradient(circle at top, var(--primary-color) 50%, var(--white-color) 10%);
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(26, 101, 158, 0.6), 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(26, 101, 158, 0.6), 0 4px 8px rgb(255, 255, 255, 0.5);
   border: 2px solid var(--primary-color);
   cursor: pointer;
 }

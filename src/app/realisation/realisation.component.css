@@ -54,10 +54,23 @@
   font-size: 12px;
 }
 
+.tech:hover {
+  color: var(--primary-color);
+  background: var(--white-color);
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .project-link {
   display: block;
   margin-top: 10px;
   color: var(--primary-color);
   text-decoration: none;
   font-weight: bold;
+}
+
+
+.project-link:hover {
+  font-size: 1.1rem;
+  text-decoration: underline;
 }
