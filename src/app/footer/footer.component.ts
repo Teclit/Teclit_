@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SOCIAL_LINKS } from '../../../data';
+import { SOCIAL_LINKS, STARTING_YEAR } from '../../../data';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -13,12 +13,12 @@ import { RouterLink } from '@angular/router';
 export class FooterComponent {
   @Input() title!: string;
 
-  startingYear = 2019; // Suppression ": number"
-  year = new Date().getFullYear(); // ": number" évident
-  linkedInUrl = SOCIAL_LINKS.linkedIn; // ": string" évident
-  githubUrl = SOCIAL_LINKS.github; // ": string" évident
+  startingYear = STARTING_YEAR;
+  year = new Date().getFullYear();
+  linkedInUrl = SOCIAL_LINKS.linkedIn;
+  githubUrl = SOCIAL_LINKS.github;
 
-  activeLink = 'accueil'; // ": string" évident
+  activeLink = 'accueil';
 
   setActiveLink(link: string, event: Event): void {
     event.preventDefault();

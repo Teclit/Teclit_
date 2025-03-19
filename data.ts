@@ -5,12 +5,18 @@ type SocialLinks = {
   cvdesignr: string;
 };
 
+// Add this with the other constants
+const STARTING_YEAR = 2019;
+
 const COMPANY_NAME = 'Teklit Te...';
 const SOCIAL_LINKS: SocialLinks = {
   linkedIn: 'https://www.linkedin.com/in/teklittewolde/',
   github: 'https://github.com/Teclit',
   cvdesignr: 'https://cvdesignr.com/p/5ca9b929ed8c4'
 };
+
+// Exportation centralisée pour faciliter l'importation ailleurs
+export {COMPANY_NAME, SOCIAL_LINKS, STARTING_YEAR};
 
 
 // data.ts
@@ -19,11 +25,6 @@ export interface SkillImage {
   url: string;
   alt: string;
 }
-
-
-// Exportation centralisée pour faciliter l'importation ailleurs
-export {COMPANY_NAME, SOCIAL_LINKS};
-
 
 const imgDirectory: string = "assets/logos/";
 
