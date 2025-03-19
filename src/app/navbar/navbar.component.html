@@ -2,7 +2,13 @@
 <div class="navbar">
   <div class="container flex">
     <h1 class="logo">{{ title }}</h1>
-    <div class="burger-menu" (click)="toggleMenu()">
+    <div class="burger-menu"
+         role="button"
+         tabindex="0"
+         (click)="toggleMenu()"
+         (keyup.enter)="toggleMenu()"
+         (keyup.space)="toggleMenu()"
+    >
       <span></span>
       <span></span>
       <span></span>

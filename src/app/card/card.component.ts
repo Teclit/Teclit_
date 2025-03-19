@@ -12,16 +12,17 @@ import { SkillImage } from '../../../data';
 export class CardComponent implements OnInit, OnDestroy {
   @Input() skills: SkillImage[] = [];
   private currentIndex = 0;
-  private imagesPerView = 6; // Valeur par défaut
-  private intervalId: any;
+  private imagesPerView = 6;
+  private intervalId?: number; // ⬅ Type corrigé ici
 
   constructor() {
     this.updateImagesPerView(window.innerWidth);
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.updateImagesPerView(event.target.innerWidth);
+  onResize(event: UIEvent) { // ⬅ Type corrigé ici
+    const target = event.target as Window;
+    this.updateImagesPerView(target.innerWidth);
   }
 
   private updateImagesPerView(windowWidth: number): void {
@@ -37,7 +38,6 @@ export class CardComponent implements OnInit, OnDestroy {
       this.imagesPerView = 2;
     }
 
-    // Réajuster l'index courant si nécessaire
     if (this.currentIndex + this.imagesPerView > this.skills.length) {
       this.currentIndex = 0;
     }
@@ -57,7 +57,7 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   private startAutoSlide(): void {
-    this.intervalId = setInterval(() => {
+    this.intervalId = window.setInterval(() => {
       this.nextImages();
     }, 5000);
   }

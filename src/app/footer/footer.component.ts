@@ -1,12 +1,6 @@
-import {Component, Input} from '@angular/core';
-import {SOCIAL_LINKS} from '../../../data';
-import {RouterLink} from '@angular/router';
-
-interface ContactInfo {
-  email?: string;
-  phone?: string;
-  address?: string;
-}
+import { Component, Input } from '@angular/core';
+import { SOCIAL_LINKS } from '../../../data';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -18,23 +12,16 @@ interface ContactInfo {
 })
 export class FooterComponent {
   @Input() title!: string;
-  startingYear: number = 2019;
-  year: number = new Date().getFullYear();
-  linkedInUrl: string = SOCIAL_LINKS.linkedIn;
-  githubUrl: string = SOCIAL_LINKS.github;
 
-  activeLink: string = 'accueil';
+  startingYear = 2019; // Suppression ": number"
+  year = new Date().getFullYear(); // ": number" évident
+  linkedInUrl = SOCIAL_LINKS.linkedIn; // ": string" évident
+  githubUrl = SOCIAL_LINKS.github; // ": string" évident
+
+  activeLink = 'accueil'; // ": string" évident
 
   setActiveLink(link: string, event: Event): void {
     event.preventDefault();
     this.activeLink = link;
   }
-
-
-  contactInfo: ContactInfo = {
-    email: 'Email',
-    phone: "000000",
-    address: "10 rue de paris "
-  };
-
 }

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-apropos',
@@ -8,8 +8,8 @@ import {Component} from '@angular/core';
 })
 
 export class AproposComponent {
-  imageUrl: string = 'assets/images/profile.png'; // Remplace avec ton image
-  description: string = `
+  imageUrl = 'assets/images/profile.png';
+  description = `
     Ingénieur logiciel junior spécialisé en développement Full Stack, avec une expertise en Java, Kotlin et architectures micro-services.
     Expérimenté en conception de solutions innovantes, intégration de services cloud et mise en œuvre de pipelines CI/CD.
     Passionné par les systèmes évolutifs et l’ingénierie logicielle, je vise à devenir expert en contribuant à des projets ambitieux
