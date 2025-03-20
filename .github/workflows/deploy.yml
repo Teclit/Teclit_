@@ -13,28 +13,31 @@ on:
       - master
 
 jobs:
+
+  # Étape 1 : Construire l'application Angular
   build:
-    name: Build Angular App
+    name: ⚙️ Build Angular App
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js (v20)
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build Angular Project
+      - name: Build Angular Project (Production)
         run: npm run build --configuration=production
 
+  # Étape 2 : Tests (linting + tests unitaires)
   test:
-    name: Run Tests
+    name: ✅ Run Tests
     needs: build
     runs-on: ubuntu-latest
 
@@ -42,23 +45,24 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js (v20)
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "npm"
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Run Linting
+      - name: Run Lint
         run: npm run lint
 
       - name: Run Unit Tests
         run: npm run test -- --browsers=ChromeHeadless --watch=false --code-coverage
 
+  # Étape 3 : Construire et pousser l'image Docker sur Docker Hub
   docker-build-push:
-    name: Build and Push Docker Image
+    name: 🐳 Build and Push Docker Image
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
@@ -76,7 +80,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Set Docker Image Tag
+      - name: Define Docker Image Tag
         id: set-tag
         run: |
           if [[ $GITHUB_REF == 'refs/heads/develop' ]]; then
@@ -92,16 +96,19 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:${{ steps.set-tag.outputs.TAG }}
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:${{ steps.set-tag.outputs.TAG }}
+            ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:${{ github.sha }}
 
+  # Étape 4 : Déployer vers Développement
   deploy-dev:
-    name: Deploy to Development
+    name: 🚀 Deploy to Development
     needs: docker-build-push
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
 
     steps:
-      - name: Deploy to Development Server
+      - name: Deploy Application (Development)
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DEV_SERVER_HOST }}
@@ -113,14 +120,15 @@ jobs:
             docker rm teclit-app-dev || true
             docker run -d --name teclit-app-dev -p 8080:80 ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:dev
 
+  # Étape 5 : Déployer vers Staging
   deploy-staging:
-    name: Deploy to Staging
+    name: 🚀 Deploy to Staging
     needs: docker-build-push
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/staging'
 
     steps:
-      - name: Deploy to Staging Server
+      - name: Deploy Application (Staging)
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.STAGING_SERVER_HOST }}
@@ -132,14 +140,15 @@ jobs:
             docker rm teclit-app-staging || true
             docker run -d --name teclit-app-staging -p 8080:80 ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:staging
 
+  # Étape 6 : Déployer vers Production
   deploy-prod:
-    name: Deploy to Production
+    name: 🚀 Deploy to Production
     needs: docker-build-push
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
 
     steps:
-      - name: Deploy to Production Server
+      - name: Deploy Application (Production)
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.PROD_SERVER_HOST }}
@@ -150,3 +159,4 @@ jobs:
             docker stop teclit-app-prod || true
             docker rm teclit-app-prod || true
             docker run -d --name teclit-app-prod -p 80:80 ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:prod
+
