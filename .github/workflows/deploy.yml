@@ -14,12 +14,13 @@ on:
 
 jobs:
 
+  # Step 1: Build the Angular Application
   build:
     name: ⚙️ Build Angular App
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js (v20)
@@ -28,19 +29,20 @@ jobs:
           node-version: 20
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
       - name: Build Angular Project (Production)
         run: npm run build --configuration=production
 
+  # Step 2: Linting & Unit Tests
   test:
     name: ✅ Run Tests
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js (v20)
@@ -49,7 +51,7 @@ jobs:
           node-version: 20
           cache: "npm"
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
       - name: Run Lint
@@ -58,35 +60,38 @@ jobs:
       - name: Run Unit Tests
         run: npm run test -- --browsers=ChromeHeadless --watch=false --code-coverage
 
+  # Step 3: Build & Push Docker Image
   docker-build-push:
     name: 🐳 Build and Push Docker Image
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app
+
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Set Image Tag Based on Branch
+        id: set-tag
+        run: |
+          case "${GITHUB_REF#refs/heads/}" in
+            develop) echo "TAG=dev" >> $GITHUB_ENV ;;
+            staging) echo "TAG=staging" >> $GITHUB_ENV ;;
+            master) echo "TAG=prod" >> $GITHUB_ENV ;;
+            *) echo "Unknown branch. Skipping deployment." && exit 1 ;;
+          esac
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to DockerHub
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-
-      - name: Define Docker Image Tag
-        id: set-tag
-        run: |
-          if [[ $GITHUB_REF == 'refs/heads/develop' ]]; then
-            echo "TAG=dev" >> $GITHUB_ENV
-          elif [[ $GITHUB_REF == 'refs/heads/staging' ]]; then
-            echo "TAG=staging" >> $GITHUB_ENV
-          elif [[ $GITHUB_REF == 'refs/heads/master' ]]; then
-            echo "TAG=prod" >> $GITHUB_ENV
-          fi
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
@@ -94,27 +99,46 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:${{ env.TAG }}
-            ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:${{ github.sha }}
+            $IMAGE_NAME:${{ env.TAG }}
+            $IMAGE_NAME:${{ github.sha }}
 
+  # Step 4: Deploy to SSH Server
   deploy:
-    name: 🚀 Deploy Application
+    name: 🚀 Deploy to Server
     needs: docker-build-push
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy Application
+      - name: Set Deployment Host Based on Branch
+        run: |
+          case "${GITHUB_REF#refs/heads/}" in
+            develop) echo "DEPLOY_HOST=${{ secrets.DEV_SERVER_HOST }}" >> $GITHUB_ENV ;;
+            staging) echo "DEPLOY_HOST=${{ secrets.STAGING_SERVER_HOST }}" >> $GITHUB_ENV ;;
+            master) echo "DEPLOY_HOST=${{ secrets.PROD_SERVER_HOST }}" >> $GITHUB_ENV ;;
+          esac
+
+      - name: Debug Deployment Info
+        run: |
+          echo "Deploying to: $DEPLOY_HOST"
+          echo "Using Image: $IMAGE_NAME:${{ env.TAG }}"
+
+      - name: Deploy Application via SSH
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.SERVER_HOST }}
+          host: ${{ env.DEPLOY_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:${{ env.TAG }}
+            echo "🔹 Pulling latest Docker image..."
+            docker pull $IMAGE_NAME:${{ env.TAG }}
 
-            # Stop and remove old container if it exists
-            docker ps -a | grep teclit-app-${{ env.TAG }} && docker stop teclit-app-${{ env.TAG }} || true
-            docker ps -a | grep teclit-app-${{ env.TAG }} && docker rm teclit-app-${{ env.TAG }} || true
+            echo "🔹 Stopping and removing old container if it exists..."
+            if docker ps -a --format '{{.Names}}' | grep -q teclit-app-${{ env.TAG }}; then
+              docker stop teclit-app-${{ env.TAG }}
+              docker rm teclit-app-${{ env.TAG }}
+            fi
 
-            # Start new container
-            docker run -d --name teclit-app-${{ env.TAG }} -p 8080:80 ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app:${{ env.TAG }}
+            echo "🔹 Running new container..."
+            docker run -d --name teclit-app-${{ env.TAG }} -p 8080:80 $IMAGE_NAME:${{ env.TAG }}
+
+            echo "✅ Deployment complete!"
