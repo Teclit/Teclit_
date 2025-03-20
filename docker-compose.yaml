@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # Service de développement
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+  # Service de production
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Service de test
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: npm run test -- --browsers=ChromeHeadless --watch=false
+    volumes:
+      - ./:/app
+      - /app/node_modules

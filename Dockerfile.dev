@@ -1,0 +1,15 @@
+FROM node:20-alpine
+WORKDIR /app
+
+# Installer les dépendances
+COPY package*.json ./
+RUN npm ci
+
+# Copier le code source
+COPY . .
+
+# Exposer le port pour le serveur de développement
+EXPOSE 4200
+
+# Commande pour démarrer le serveur de développement
+CMD ["npm", "start", "--", "--host", "0.0.0.0", "--poll", "500"]
