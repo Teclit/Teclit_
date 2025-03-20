@@ -99,14 +99,17 @@ jobs:
           context: .
           push: true
           tags: |
-            $IMAGE_NAME:${{ env.TAG }}
-            $IMAGE_NAME:${{ github.sha }}
+            ${{ env.IMAGE_NAME }}:${{ env.TAG }}
+            ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
   # Step 4: Deploy to SSH Server
   deploy:
     name: 🚀 Deploy to Server
     needs: docker-build-push
     runs-on: ubuntu-latest
+
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app
 
     steps:
       - name: Set Deployment Host Based on Branch
@@ -115,12 +118,22 @@ jobs:
             develop) echo "DEPLOY_HOST=${{ secrets.DEV_SERVER_HOST }}" >> $GITHUB_ENV ;;
             staging) echo "DEPLOY_HOST=${{ secrets.STAGING_SERVER_HOST }}" >> $GITHUB_ENV ;;
             master) echo "DEPLOY_HOST=${{ secrets.PROD_SERVER_HOST }}" >> $GITHUB_ENV ;;
+            *) echo "Unknown branch. Skipping deployment." && exit 1 ;;
+          esac
+
+      - name: Set Tag environment again
+        run: |
+          case "${GITHUB_REF#refs/heads/}" in
+            develop) echo "TAG=dev" >> $GITHUB_ENV ;;
+            staging) echo "TAG=staging" >> $GITHUB_ENV ;;
+            master) echo "TAG=prod" >> $GITHUB_ENV ;;
+            *) echo "Unknown branch. Exiting." && exit 1 ;;
           esac
 
       - name: Debug Deployment Info
         run: |
           echo "Deploying to: $DEPLOY_HOST"
-          echo "Using Image: $IMAGE_NAME:${{ env.TAG }}"
+          echo "Using Image: ${{ env.IMAGE_NAME }}:${{ env.TAG }}"
 
       - name: Deploy Application via SSH
         uses: appleboy/ssh-action@master
@@ -130,7 +143,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "🔹 Pulling latest Docker image..."
-            docker pull $IMAGE_NAME:${{ env.TAG }}
+            docker pull ${{ env.IMAGE_NAME }}:${{ env.TAG }}
 
             echo "🔹 Stopping and removing old container if it exists..."
             if docker ps -a --format '{{.Names}}' | grep -q teclit-app-${{ env.TAG }}; then
@@ -139,6 +152,6 @@ jobs:
             fi
 
             echo "🔹 Running new container..."
-            docker run -d --name teclit-app-${{ env.TAG }} -p 8080:80 $IMAGE_NAME:${{ env.TAG }}
+            docker run -d --name teclit-app-${{ env.TAG }} -p 8080:80 ${{ env.IMAGE_NAME }}:${{ env.TAG }}
 
             echo "✅ Deployment complete!"
