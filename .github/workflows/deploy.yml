@@ -112,27 +112,29 @@ jobs:
       IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app
 
     steps:
-      - name: Set Deployment Host Based on Branch
+      - name: Set Deployment Host and Tag Based on Branch
         run: |
           case "${GITHUB_REF#refs/heads/}" in
-            develop) echo "DEPLOY_HOST=${{ secrets.DEV_SERVER_HOST }}" >> $GITHUB_ENV ;;
-            staging) echo "DEPLOY_HOST=${{ secrets.STAGING_SERVER_HOST }}" >> $GITHUB_ENV ;;
-            master) echo "DEPLOY_HOST=${{ secrets.PROD_SERVER_HOST }}" >> $GITHUB_ENV ;;
-            *) echo "Unknown branch. Skipping deployment." && exit 1 ;;
-          esac
-
-      - name: Set Tag environment again
-        run: |
-          case "${GITHUB_REF#refs/heads/}" in
-            develop) echo "TAG=dev" >> $GITHUB_ENV ;;
-            staging) echo "TAG=staging" >> $GITHUB_ENV ;;
-            master) echo "TAG=prod" >> $GITHUB_ENV ;;
-            *) echo "Unknown branch. Exiting." && exit 1 ;;
+            develop)
+              echo "DEPLOY_HOST=${{ secrets.DEV_SERVER_HOST }}" >> $GITHUB_ENV
+              echo "TAG=dev" >> $GITHUB_ENV
+              ;;
+            staging)
+              echo "DEPLOY_HOST=${{ secrets.STAGING_SERVER_HOST }}" >> $GITHUB_ENV
+              echo "TAG=staging" >> $GITHUB_ENV
+              ;;
+            master)
+              echo "DEPLOY_HOST=${{ secrets.PROD_SERVER_HOST }}" >> $GITHUB_ENV
+              echo "TAG=prod" >> $GITHUB_ENV
+              ;;
+            *)
+              echo "Unknown branch. Skipping deployment." && exit 1
+              ;;
           esac
 
       - name: Debug Deployment Info
         run: |
-          echo "Deploying to: $DEPLOY_HOST"
+          echo "Deploying to: ${{ env.DEPLOY_HOST }}"
           echo "Using Image: ${{ env.IMAGE_NAME }}:${{ env.TAG }}"
 
       - name: Deploy Application via SSH
