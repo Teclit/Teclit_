@@ -103,57 +103,33 @@ jobs:
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
   # Step 4: Deploy to SSH Server
+  # Étape 4 : Déploiement sur Vercel (Master-Prod)
   deploy:
-    name: 🚀 Deploy to Server
+    name: 🚀 Deploy to Vercel (Production)
     needs: docker-build-push
     runs-on: ubuntu-latest
-
-    env:
-      IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app
+    if: github.ref == 'refs/heads/master'
 
     steps:
-      - name: Set Deployment Host and Tag Based on Branch
-        run: |
-          case "${GITHUB_REF#refs/heads/}" in
-            develop)
-              echo "DEPLOY_HOST=${{ secrets.DEV_SERVER_HOST }}" >> $GITHUB_ENV
-              echo "TAG=dev" >> $GITHUB_ENV
-              ;;
-            staging)
-              echo "DEPLOY_HOST=${{ secrets.STAGING_SERVER_HOST }}" >> $GITHUB_ENV
-              echo "TAG=staging" >> $GITHUB_ENV
-              ;;
-            master)
-              echo "DEPLOY_HOST=${{ secrets.PROD_SERVER_HOST }}" >> $GITHUB_ENV
-              echo "TAG=prod" >> $GITHUB_ENV
-              ;;
-            *)
-              echo "Unknown branch. Skipping deployment." && exit 1
-              ;;
-          esac
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: Debug Deployment Info
-        run: |
-          echo "Deploying to: ${{ env.DEPLOY_HOST }}"
-          echo "Using Image: ${{ env.IMAGE_NAME }}:${{ env.TAG }}"
-
-      - name: Deploy Application via SSH
-        uses: appleboy/ssh-action@master
+      - name: Setup Node.js (v20)
+        uses: actions/setup-node@v4
         with:
-          host: ${{ env.DEPLOY_HOST }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            echo "🔹 Pulling latest Docker image..."
-            docker pull ${{ env.IMAGE_NAME }}:${{ env.TAG }}
+          node-version: 20
+          cache: "npm"
 
-            echo "🔹 Stopping and removing old container if it exists..."
-            if docker ps -a --format '{{.Names}}' | grep -q teclit-app-${{ env.TAG }}; then
-              docker stop teclit-app-${{ env.TAG }}
-              docker rm teclit-app-${{ env.TAG }}
-            fi
+      - name: Install Dependencies
+        run: npm ci
 
-            echo "🔹 Running new container..."
-            docker run -d --name teclit-app-${{ env.TAG }} -p 8080:80 ${{ env.IMAGE_NAME }}:${{ env.TAG }}
+      - name: Build Production Assets
+        run: npm run build --configuration=production
 
-            echo "✅ Deployment complete!"
+      - name: 🚀 Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
