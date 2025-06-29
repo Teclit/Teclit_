@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-apropos',
   imports: [],
   templateUrl: './apropos.component.html',
-  styleUrl: './apropos.component.css'
+  styleUrls: ['./apropos.component.css']
 })
 
 export class AproposComponent {

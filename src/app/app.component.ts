@@ -29,7 +29,7 @@ import {RealisationComponent} from './realisation/realisation.component';
     AproposComponent,
     ContactComponent
   ],
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   @Input() titleInput!: string;
