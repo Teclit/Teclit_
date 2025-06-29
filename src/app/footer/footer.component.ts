@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   imports: [
     RouterLink
   ],
-  styleUrl: './footer.component.css'
+  styleUrls: ['./footer.component.css']
 })
 export class FooterComponent {
   @Input() title!: string;

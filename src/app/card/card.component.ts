@@ -7,7 +7,7 @@ import { SkillImage } from '../../../data';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  styleUrls: ['./card.component.css']
 })
 export class CardComponent implements OnInit, OnDestroy {
   @Input() skills: SkillImage[] = [];

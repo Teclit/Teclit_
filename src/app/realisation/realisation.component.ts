@@ -15,7 +15,7 @@ interface Project {
   selector: 'app-realisation',
   imports: [CommonModule],
   templateUrl: './realisation.component.html',
-  styleUrl: './realisation.component.css'
+  styleUrls: ['./realisation.component.css']
 })
 
 

@@ -10,7 +10,7 @@ import {CardComponent} from '../card/card.component';
   imports: [
     CardComponent
   ],
-  styleUrl: './skills.component.css'
+  styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit {
   images: SkillImage[] = [];
