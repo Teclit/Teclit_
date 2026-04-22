@@ -80,7 +80,6 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'Redis', url: `${imgDirectory}redis.png`, alt: 'Redis Logo'},
 
 
-
   // Databases
   {name: 'MySQL', url: `${imgDirectory}mysql.png`, alt: 'MySQL Logo'},
   {name: 'MongoDB', url: `${imgDirectory}mongodb.png`, alt: 'MongoDB Logo'},
@@ -189,24 +188,39 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    title: "CS Le Club",
+    description: "Site institutionnel avec CMS, gestion d’adhésion et contenus dynamiques (actualités, pages, événements).",
+    technologies: ["Next.js", "TypeScript", "Node.js", "NestJS", "MongoDB", "PostgreSQL"],
+    image: "assets/Cannes-Seniors-Club-webp.png",
+    link: "https://www.csleclub.com/"
+  },
+  {
+    title: "Tech-365",
+    description: "Plateforme web de mise en relation et de catalogue de services avec gestion de contenu dynamique.",
+    technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB", "PostgreSQL", "Redis", "REST API", "GraphQL"],
+    image: "assets/Tech-365.png.jpg",
+    link: "https://tech-365.fr/"
+  },
+
+  {
     title: "QCMPLUS",
     description: "QCMPLUS est une plateforme complète conçue pour gérer efficacement les quiz et les questionnaires. " +
       "La structure du projet comprend divers composants pour les contrôleurs, les modèles, les dépôts et les services, permettant une architecture robuste et évolutive.",
-    technologies: [  "Java 17", "Spring Boot 3", "Spring Security", "MySQL", "JWT", "JUnit", "Mockito", "Docker", "GitHub Actions", "CI/CD", "Qodana"],
+    technologies: ["Java 17", "Spring Boot 3", "Spring Security", "MySQL", "JWT", "JUnit", "Mockito", "Docker", "GitHub Actions", "CI/CD", "Qodana"],
     image: "assets/qcmplus.png",
     link: "https://qcmplus.vercel.app/"
   },
   {
     title: "Bot TGV INOUI",
     description: "Développement d'un chatbot pour fournir des informations en temps réel aux voyageurs.",
-    technologies: ["Java 11+", "Kotlin", "Reactjs", "MongoDB","Nginx", "Kubernetes", "AWS", "Git", "GitLab", "NLP", "Jenkins", "Tock", "API REST", "JIRA"],
+    technologies: ["Java 11+", "Kotlin", "Reactjs", "MongoDB", "Nginx", "Kubernetes", "AWS", "Git", "GitLab", "NLP", "Jenkins", "Tock", "API REST", "JIRA"],
     image: "assets/chatbot-inoui.png",
     link: "https://bot.tgvinoui.sncf/"
   },
   {
     title: "Chatbot SNCF Transilien",
     description: "Développement d'un chatbot pour fournir des informations en temps réel aux voyageurs.",
-    technologies: ["Java 11+", "Kotlin", "Reactjs", "MongoDB","Nginx", "Kubernetes", "AWS", "Git", "GitLab", "NLP", "Jenkins", "Tock", "API REST", "JIRA"],
+    technologies: ["Java 11+", "Kotlin", "Reactjs", "MongoDB", "Nginx", "Kubernetes", "AWS", "Git", "GitLab", "NLP", "Jenkins", "Tock", "API REST", "JIRA"],
     image: "assets/chatbot-tilien.png",
     link: "https://www.transilien.com/en/page-medias/le-chatbot-transilien"
   },
@@ -214,21 +228,21 @@ export const PROJECTS: Project[] = [
     title: "Assistant Virtuel - SNCF",
     description: "Développement d'un chatbot pour fournir des informations en temps réel aux voyageurs. " +
       "L'agent virtuel SNCF vous communique les arrêts et les éventuelles perturbations. Pour ce faire, indiquez-lui votre numéro de train ou de cars TER et LEX (Léman Express).",
-    technologies: ["Java 11+", "Kotlin", "Reactjs", "MongoDB","Nginx", "Kubernetes", "AWS", "Git", "GitLab", "NLP", "Jenkins", "Tock", "API REST", "JIRA"],
+    technologies: ["Java 11+", "Kotlin", "Reactjs", "MongoDB", "Nginx", "Kubernetes", "AWS", "Git", "GitLab", "NLP", "Jenkins", "Tock", "API REST", "JIRA"],
     image: "assets/chatbot-sncf-voyageur.png",
     link: "https://bot.assistant.sncf/index.html"
   },
   {
     title: "Gestion Parking & QR Generator",
     description: "Conception d'une interface web pour générer et gérer des QR codes dynamiques.",
-    technologies: [ "jQuery", "Bootstrap", "PHP", "SQL", "MySQL", "Chart.JS"],
+    technologies: ["jQuery", "Bootstrap", "PHP", "SQL", "MySQL", "Chart.JS"],
     image: "assets/les-rives-droite.png",
     link: "https://rivesqr.web-interactive.fr/"
   },
   {
     title: "Site Vitrine",
     description: "Développement d'un site web moderne pour présenter des services professionnels.",
-    technologies: ["WordPress", "HTML", "CSS", "JS", "PHP" ],
+    technologies: ["WordPress", "HTML", "CSS", "JS", "PHP"],
     image: "assets/la-petite-boutique-de-fleurs.png",
     link: "https://www.la-petite-boutique-de-fleurs.fr/"
   }
