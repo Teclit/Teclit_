@@ -13,7 +13,7 @@
   margin: 0 auto;
 }
 
-/* Media queries pour la responsivité */
+/* Media queries pour la responsive */
 @media screen and (max-width: 1200px) {
   .skills {
     padding: 1.5rem;

@@ -15,7 +15,7 @@ import {CardComponent} from '../card/card.component';
 export class SkillsComponent implements OnInit {
   images: SkillImage[] = [];
 
-  constructor(private carouselService: CarouselImageService) {}
+  constructor(private readonly carouselService: CarouselImageService) {}
 
   ngOnInit(): void {
     this.images = this.carouselService.getSkillImages();

@@ -1,9 +1,9 @@
 // Définition d'un type explicite pour les liens de profil
-type SocialLinks = {
+interface SocialLinks {
   linkedIn: string;
   github: string;
   cvdesignr: string;
-};
+}
 
 // Add this with the other constants
 const STARTING_YEAR = 2019;
@@ -26,7 +26,7 @@ export interface SkillImage {
   alt: string;
 }
 
-const imgDirectory: string = "assets/logos/";
+const imgDirectory = "assets/logos/";
 
 // List of skill images
 export const SKILL_IMAGES: SkillImage[] = [
@@ -56,6 +56,15 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'Laravel', url: `${imgDirectory}laraval.png`, alt: 'Laravel Logo'},
   {name: 'Symfony', url: `${imgDirectory}symfony.png`, alt: 'Symfony Logo'},
   {name: 'Tomcat', url: `${imgDirectory}tomcat.png`, alt: 'Tomcat Logo'},
+  {name: 'NestJS', url: `${imgDirectory}nestjs.png`, alt: 'NestJS Logo'},
+  {name: 'Spring Security', url: `${imgDirectory}spring-security.png`, alt: 'Spring Security Logo'},
+  {name: 'JWT', url: `${imgDirectory}jwt.png`, alt: 'JWT Logo'},
+  {name: 'OAuth2', url: `${imgDirectory}oauth2.png`, alt: 'OAuth2 Logo'},
+  {name: 'Microservices', url: `${imgDirectory}microservices.png`, alt: 'Microservices Architecture'},
+  {name: 'Node.js', url: `${imgDirectory}nodejs.png`, alt: 'Node.js Logo'},
+  {name: 'NestJS', url: `${imgDirectory}nestjs.png`, alt: 'NestJS Logo'},
+  {name: 'Express.js', url: `${imgDirectory}express.png`, alt: 'Express.js Logo'},
+
 
   // Version Control, CI/CD, DevOps & Cloud
   {name: 'Git', url: `${imgDirectory}git.png`, alt: 'Git Logo'},
@@ -66,6 +75,10 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'Kubernetes', url: `${imgDirectory}kubernetes.png`, alt: 'Kubernetes Logo'},
   {name: 'Jenkins', url: `${imgDirectory}jenkins.png`, alt: 'Jenkins Logo'},
   {name: 'Nginx', url: `${imgDirectory}nginx.png`, alt: 'Nginx Logo'},
+  {name: 'CI/CD', url: `${imgDirectory}cicd.png`, alt: 'CI/CD Logo'},
+  {name: 'GitHub Actions', url: `${imgDirectory}github-actions.png`, alt: 'GitHub Actions Logo'},
+  {name: 'Redis', url: `${imgDirectory}redis.png`, alt: 'Redis Logo'},
+
 
 
   // Databases
@@ -73,6 +86,24 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'MongoDB', url: `${imgDirectory}mongodb.png`, alt: 'MongoDB Logo'},
   {name: 'PostgreSQL', url: `${imgDirectory}postgresql.png`, alt: 'PostgreSQL Logo'},
   {name: 'Oracle', url: `${imgDirectory}oracle.png`, alt: 'Oracle Logo'},
+
+  // AI / Tools spécifiques
+  {name: 'SageMaker', url: `${imgDirectory}sagemaker.png`, alt: 'AWS SageMaker Logo'},
+  {name: 'Tock Studio', url: `${imgDirectory}tock.png`, alt: 'Tock Studio Logo'},
+
+// Testing
+  {name: 'Jest', url: `${imgDirectory}jest.png`, alt: 'Jest Logo'},
+  {name: 'Pytest', url: `${imgDirectory}pytest.png`, alt: 'Pytest Logo'},
+
+// Front / Libs
+  {name: 'Chart.js', url: `${imgDirectory}chartjs.png`, alt: 'Chart.js Logo'},
+
+// CMS
+  {name: 'WordPress', url: `${imgDirectory}wordpress.png`, alt: 'WordPress Logo'},
+
+// Concepts / Tools
+  {name: 'UML', url: `${imgDirectory}uml.png`, alt: 'UML Diagram Logo'},
+  {name: 'Linux', url: `${imgDirectory}linux.png`, alt: 'Linux Logo'},
 
   // Tools & Utilities
   {name: 'Figma', url: `${imgDirectory}figma.png`, alt: 'Figma Logo'},
@@ -134,7 +165,7 @@ export const COMPETENCES: Competence[] = [
     description: "Implémentation de mesures de sécurité robustes et de pratiques de qualité logicielle. " +
       "Expertise en authentification OAuth2/JWT, tests automatisés (unitaires, intégration, E2E), " +
       "analyse statique du code et conformité aux standards OWASP.",
-    technologies: ['JWT', 'Spring Security', 'JUnit', 'Mockito', 'Quodana'],
+    technologies: ['JWT', 'Spring Security', 'JUnit', 'Mockito', 'Qodana'],
   },
   {
     icon: 'project-diagram',
@@ -161,7 +192,7 @@ export const PROJECTS: Project[] = [
     title: "QCMPLUS",
     description: "QCMPLUS est une plateforme complète conçue pour gérer efficacement les quiz et les questionnaires. " +
       "La structure du projet comprend divers composants pour les contrôleurs, les modèles, les dépôts et les services, permettant une architecture robuste et évolutive.",
-    technologies: [  "Java 17", "Spring Boot 3", "Spring Security", "MySQL", "JWT", "JUnit", "Mockito", "Docker", "GitHub Actions", "CI/CD", "Quodana"],
+    technologies: [  "Java 17", "Spring Boot 3", "Spring Security", "MySQL", "JWT", "JUnit", "Mockito", "Docker", "GitHub Actions", "CI/CD", "Qodana"],
     image: "assets/qcmplus.png",
     link: "https://qcmplus.vercel.app/"
   },
@@ -192,14 +223,14 @@ export const PROJECTS: Project[] = [
     description: "Conception d'une interface web pour générer et gérer des QR codes dynamiques.",
     technologies: [ "jQuery", "Bootstrap", "PHP", "SQL", "MySQL", "Chart.JS"],
     image: "assets/les-rives-droite.png",
-    link: "http://rivesqr.web-interactive.fr/"
+    link: "https://rivesqr.web-interactive.fr/"
   },
   {
     title: "Site Vitrine",
     description: "Développement d'un site web moderne pour présenter des services professionnels.",
     technologies: ["WordPress", "HTML", "CSS", "JS", "PHP" ],
     image: "assets/la-petite-boutique-de-fleurs.png",
-    link: "http://www.la-petite-boutique-de-fleurs.fr/"
+    link: "https://www.la-petite-boutique-de-fleurs.fr/"
   }
 ];
 
