@@ -85,8 +85,8 @@ export const ProfileSchema = z.object({
       linkedin: z.url(),
       email: z.email(),
       cvOnline: z.url(),
-      /** Chemin du CV PDF dans `public/` (null tant que le fichier n'est pas fourni). */
-      cvPdf: assetPath.nullable(),
+      /** CV PDF : chemin dans `public/` ou URL externe (null tant que non fourni). */
+      cvPdf: z.union([assetPath, z.url()]).nullable(),
     }),
     /** Intitulés animés du hero (le premier est rendu côté serveur). */
     roles: z.array(nonEmpty).min(1),

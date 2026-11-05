@@ -21,7 +21,14 @@ import { CardComponent } from '../../shared/ui/card.component';
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
           @if (cvPdf) {
-            <a appButton [href]="'/' + cvPdf" [attr.download]="cvPdfName" data-testid="cv-download">
+            <a
+              appButton
+              [href]="cvPdfHref"
+              [attr.download]="cvPdfExternal ? null : cvPdfName"
+              [attr.target]="cvPdfExternal ? '_blank' : null"
+              [attr.rel]="cvPdfExternal ? 'noopener noreferrer' : null"
+              data-testid="cv-download"
+            >
               <app-icon name="download" [size]="18" /> Télécharger le PDF
             </a>
           }
@@ -123,7 +130,9 @@ export class CvPageComponent {
 
   protected readonly identity = this.content.identity;
   protected readonly cvPdf = this.identity.links.cvPdf;
-  protected readonly cvPdfName = `CV-${this.identity.firstName}-${this.identity.lastName}.pdf`;
+  protected readonly cvPdfExternal = /^https?:\/\//.test(this.cvPdf ?? '');
+  protected readonly cvPdfHref = this.cvPdfExternal ? this.cvPdf : `/${this.cvPdf}`;
+  protected readonly cvPdfName =`CV-${this.identity.firstName}-${this.identity.lastName}.pdf`;
 
   constructor() {
     inject(SeoService).update({

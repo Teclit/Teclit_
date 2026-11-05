@@ -66,8 +66,10 @@ describe('Pages', () => {
       expect(screen.getByRole('link', { name: /CV en ligne/ }).getAttribute('href')).toBe(
         PROFILE.identity.links.cvOnline,
       );
-      if (PROFILE.identity.links.cvPdf) {
-        expect(screen.getByTestId('cv-download').getAttribute('href')).toBe(`/${PROFILE.identity.links.cvPdf}`);
+      const cvPdf = PROFILE.identity.links.cvPdf;
+      if (cvPdf) {
+        const expected = /^https?:\/\//.test(cvPdf) ? cvPdf : `/${cvPdf}`;
+        expect(screen.getByTestId('cv-download').getAttribute('href')).toBe(expected);
       }
       expect(screen.getAllByTestId('resume-experience').length).toBe(PROFILE.experiences.length);
       const print = vi.spyOn(window, 'print').mockReturnValue(undefined);
