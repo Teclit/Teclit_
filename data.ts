@@ -12,7 +12,7 @@ const COMPANY_NAME = 'Teklit Te...';
 const SOCIAL_LINKS: SocialLinks = {
   linkedIn: 'https://www.linkedin.com/in/teklittewolde/',
   github: 'https://github.com/Teclit',
-  cvdesignr: 'https://cvdesignr.com/p/5ca9b929ed8c4'
+  cvdesignr: 'https://cvdesignr.com/p/RBGwWn8kzA75G8j'
 };
 
 // Exportation centralisée pour faciliter l'importation ailleurs
@@ -56,13 +56,13 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'Laravel', url: `${imgDirectory}laraval.png`, alt: 'Laravel Logo'},
   {name: 'Symfony', url: `${imgDirectory}symfony.png`, alt: 'Symfony Logo'},
   {name: 'Tomcat', url: `${imgDirectory}tomcat.png`, alt: 'Tomcat Logo'},
-  {name: 'NestJS', url: `${imgDirectory}nestjs.png`, alt: 'NestJS Logo'},
-  {name: 'Spring Security', url: `${imgDirectory}spring-security.png`, alt: 'Spring Security Logo'},
-  {name: 'JWT', url: `${imgDirectory}jwt.png`, alt: 'JWT Logo'},
-  {name: 'OAuth2', url: `${imgDirectory}oauth2.png`, alt: 'OAuth2 Logo'},
-  {name: 'Microservices', url: `${imgDirectory}microservices.png`, alt: 'Microservices Architecture'},
+  {name: 'NestJS', url: `${imgDirectory}nestjs.svg`, alt: 'NestJS Logo'},
+  {name: 'Spring Security', url: `${imgDirectory}spring-security.svg`, alt: 'Spring Security Logo'},
+  {name: 'JWT', url: `${imgDirectory}jwt.svg`, alt: 'JWT Logo'},
+  {name: 'OAuth2', url: `${imgDirectory}oauth2.svg`, alt: 'OAuth2 Logo'},
+  {name: 'Microservices', url: `${imgDirectory}microservices.svg`, alt: 'Microservices Architecture'},
   {name: 'Node.js', url: `${imgDirectory}nodejs.png`, alt: 'Node.js Logo'},
-  {name: 'NestJS', url: `${imgDirectory}nestjs.png`, alt: 'NestJS Logo'},
+  {name: 'NestJS', url: `${imgDirectory}nestjs.svg`, alt: 'NestJS Logo'},
   {name: 'Express.js', url: `${imgDirectory}express.png`, alt: 'Express.js Logo'},
 
 
@@ -75,9 +75,9 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'Kubernetes', url: `${imgDirectory}kubernetes.png`, alt: 'Kubernetes Logo'},
   {name: 'Jenkins', url: `${imgDirectory}jenkins.png`, alt: 'Jenkins Logo'},
   {name: 'Nginx', url: `${imgDirectory}nginx.png`, alt: 'Nginx Logo'},
-  {name: 'CI/CD', url: `${imgDirectory}cicd.png`, alt: 'CI/CD Logo'},
-  {name: 'GitHub Actions', url: `${imgDirectory}github-actions.png`, alt: 'GitHub Actions Logo'},
-  {name: 'Redis', url: `${imgDirectory}redis.png`, alt: 'Redis Logo'},
+  {name: 'CI/CD', url: `${imgDirectory}cicd.svg`, alt: 'CI/CD Logo'},
+  {name: 'GitHub Actions', url: `${imgDirectory}github-actions.svg`, alt: 'GitHub Actions Logo'},
+  {name: 'Redis', url: `${imgDirectory}redis.svg`, alt: 'Redis Logo'},
 
 
   // Databases
@@ -87,22 +87,22 @@ export const SKILL_IMAGES: SkillImage[] = [
   {name: 'Oracle', url: `${imgDirectory}oracle.png`, alt: 'Oracle Logo'},
 
   // AI / Tools spécifiques
-  {name: 'SageMaker', url: `${imgDirectory}sagemaker.png`, alt: 'AWS SageMaker Logo'},
+  {name: 'SageMaker', url: `${imgDirectory}sagemaker.svg`, alt: 'AWS SageMaker Logo'},
   {name: 'Tock Studio', url: `${imgDirectory}tock.png`, alt: 'Tock Studio Logo'},
 
 // Testing
-  {name: 'Jest', url: `${imgDirectory}jest.png`, alt: 'Jest Logo'},
-  {name: 'Pytest', url: `${imgDirectory}pytest.png`, alt: 'Pytest Logo'},
+  {name: 'Jest', url: `${imgDirectory}jest.svg`, alt: 'Jest Logo'},
+  {name: 'Pytest', url: `${imgDirectory}pytest.svg`, alt: 'Pytest Logo'},
 
 // Front / Libs
-  {name: 'Chart.js', url: `${imgDirectory}chartjs.png`, alt: 'Chart.js Logo'},
+  {name: 'Chart.js', url: `${imgDirectory}chartjs.svg`, alt: 'Chart.js Logo'},
 
 // CMS
-  {name: 'WordPress', url: `${imgDirectory}wordpress.png`, alt: 'WordPress Logo'},
+  {name: 'WordPress', url: `${imgDirectory}wordpress.svg`, alt: 'WordPress Logo'},
 
 // Concepts / Tools
-  {name: 'UML', url: `${imgDirectory}uml.png`, alt: 'UML Diagram Logo'},
-  {name: 'Linux', url: `${imgDirectory}linux.png`, alt: 'Linux Logo'},
+  {name: 'UML', url: `${imgDirectory}uml.svg`, alt: 'UML Diagram Logo'},
+  {name: 'Linux', url: `${imgDirectory}linux.svg`, alt: 'Linux Logo'},
 
   // Tools & Utilities
   {name: 'Figma', url: `${imgDirectory}figma.png`, alt: 'Figma Logo'},
