@@ -1,5 +1,5 @@
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+
+import { ChangeDetectionStrategy, Component, OnInit, inject, DOCUMENT } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SeoService } from '../../core/seo.service';
 import { PROFILE } from '../../data/profile.data';
