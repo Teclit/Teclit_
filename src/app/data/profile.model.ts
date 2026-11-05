@@ -82,7 +82,6 @@ export interface Project {
   solution: string;
   architecture: string[];
   stack: string[];
-  results: string[];
 }
 
 export interface SkillGroup {

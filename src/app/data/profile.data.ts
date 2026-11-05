@@ -325,7 +325,6 @@ export const PROFILE: Profile = {
         'API REST',
         'Jira',
       ],
-      results: ['TODO: résultats mesurables (trafic, nombre de canaux, délai de mise en production…)'],
     },
     {
       slug: 'bot-tgv-inoui',
@@ -364,7 +363,6 @@ export const PROFILE: Profile = {
         'API REST',
         'Jira',
       ],
-      results: ['TODO: résultats mesurables à compléter'],
     },
     {
       slug: 'chatbot-transilien',
@@ -402,7 +400,6 @@ export const PROFILE: Profile = {
         'API REST',
         'Jira',
       ],
-      results: ['TODO: résultats mesurables à compléter'],
     },
     {
       slug: 'cs-le-club',
@@ -428,7 +425,6 @@ export const PROFILE: Profile = {
         "TODO: préciser l'architecture (hébergement, déploiement, CI/CD)",
       ],
       stack: ['Next.js', 'TypeScript', 'Node.js', 'NestJS', 'MongoDB', 'PostgreSQL'],
-      results: ['TODO: résultats mesurables à compléter'],
     },
     {
       slug: 'tech-365',
@@ -452,7 +448,6 @@ export const PROFILE: Profile = {
         "TODO: préciser l'architecture (hébergement, déploiement, CI/CD)",
       ],
       stack: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB', 'PostgreSQL', 'Redis', 'API REST', 'GraphQL'],
-      results: ['TODO: résultats mesurables à compléter'],
     },
     {
       slug: 'qcmplus',
@@ -491,7 +486,6 @@ export const PROFILE: Profile = {
         'GitHub Actions',
         'Qodana',
       ],
-      results: ['TODO: résultats mesurables (couverture de tests, temps de pipeline…)'],
     },
     {
       slug: 'parking-qr-code',
@@ -516,7 +510,6 @@ export const PROFILE: Profile = {
         'Statistiques avec Chart.js.',
       ],
       stack: ['jQuery', 'Bootstrap', 'PHP', 'SQL', 'MySQL', 'Chart.js'],
-      results: ['TODO: résultats mesurables à compléter'],
     },
     {
       slug: 'boutique-de-fleurs',
@@ -535,7 +528,6 @@ export const PROFILE: Profile = {
       solution: 'Création d’un template WordPress et PHP responsive.',
       architecture: ['Thème WordPress personnalisé (PHP, HTML, CSS, JavaScript).'],
       stack: ['WordPress', 'HTML', 'CSS', 'JavaScript', 'PHP'],
-      results: ['TODO: résultats mesurables à compléter'],
     },
   ],
 

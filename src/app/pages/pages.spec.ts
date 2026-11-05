@@ -44,19 +44,25 @@ describe('Pages', () => {
   });
 
   describe('ProjectDetailComponent', () => {
-    it('affiche problème, solution, architecture, stack et résultats', () => {
+    it('affiche problème, solution, architecture et stack', () => {
       const fixture = TestBed.createComponent(ProjectDetailComponent);
       fixture.componentRef.setInput('slug', 'qcmplus');
       fixture.detectChanges();
       const el: HTMLElement = fixture.nativeElement;
       expect(el.querySelector('h1')?.textContent).toContain('QCMPLUS');
-      for (const id of ['d-problem', 'd-solution', 'd-archi', 'd-results', 'd-stack']) {
+      for (const id of ['d-problem', 'd-solution', 'd-archi', 'd-stack']) {
         expect(el.querySelector(`#${id}`))
           .withContext(id)
           .not.toBeNull();
       }
-      expect(el.querySelector('.todo')).not.toBeNull();
       expect(TestBed.inject(Meta).getTag('property="og:title"')?.content).toContain('QCMPLUS');
+    });
+
+    it('affiche les TODO en développement', () => {
+      const fixture = TestBed.createComponent(ProjectDetailComponent);
+      fixture.componentRef.setInput('slug', 'cs-le-club');
+      fixture.detectChanges();
+      expect(fixture.nativeElement.querySelector('[aria-labelledby="d-problem"] .todo')).not.toBeNull();
     });
 
     it('affiche la page 404 pour un slug inconnu', () => {
@@ -90,7 +96,7 @@ describe('Pages', () => {
       const el: HTMLElement = fixture.nativeElement;
       expect(el.textContent).not.toContain('TODO');
       expect(el.querySelector('#d-problem')).toBeNull();
-      expect(el.querySelector('#d-results')).toBeNull();
+      expect(el.querySelector('#d-results')).toBeNull(); // section Résultats supprimée
       expect(el.querySelector('#d-solution')).not.toBeNull();
       expect(el.querySelector('#d-archi')).not.toBeNull();
     });

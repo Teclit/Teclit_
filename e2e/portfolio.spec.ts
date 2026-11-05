@@ -59,7 +59,6 @@ test.describe('Projets', () => {
     for (const name of ['Problème', 'Solution', 'Architecture', 'Stack technique']) {
       await expect(page.getByRole('heading', { level: 2, name })).toBeVisible();
     }
-    // Résultats encore à compléter (TODO) : bloc masqué en production
     await expect(page.getByRole('heading', { level: 2, name: 'Résultats' })).toHaveCount(0);
     await expect(page).toHaveTitle(/QCMPLUS/);
   });
