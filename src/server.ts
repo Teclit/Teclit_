@@ -38,7 +38,10 @@ const app = createApp({
   inlineHashes,
   browserDistFolder,
   trustProxy: Number(process.env['TRUST_PROXY'] ?? 0),
-  contact: { mailer },
+  contact: {
+    mailer,
+    rateLimit: { windowMs: 10 * 60 * 1000, limit: Number(process.env['CONTACT_RATE_LIMIT'] ?? 5) },
+  },
   renderer: (req, res, next) => {
     angularApp
       .handle(req)

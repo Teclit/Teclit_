@@ -1,14 +1,17 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test } from '@playwright/test';
+import { type Page, expect, test } from '@playwright/test';
+
+/** Attend l’hydratation d’un bloc @defer (attribut posé par HydratedDirective). */
+const hydrated = (page: Page, selector: string) => expect(page.locator(`${selector}[data-hydrated]`)).toHaveCount(1);
 
 test.describe('Accueil', () => {
   test('affiche le hero, les sections et les CTA', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveTitle(/Teklit TEWOLDE/);
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Teklit TEWOLDE');
-    await expect(page.getByRole('link', { name: 'Voir les projets' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Télécharger le CV' })).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Me contacter' })).toBeVisible();
+    await expect(page.locator('#accueil').getByRole('link', { name: 'Voir les projets' })).toBeVisible();
+    await expect(page.locator('#accueil').getByRole('link', { name: 'Télécharger le CV' })).toBeVisible();
+    await expect(page.locator('#accueil').getByRole('link', { name: 'Me contacter' })).toBeVisible();
     for (const id of ['a-propos', 'parcours', 'competences', 'projets', 'formation', 'contact']) {
       await expect(page.locator(`section#${id}`)).toHaveCount(1);
     }
@@ -23,7 +26,8 @@ test.describe('Accueil', () => {
 
   test('filtre la timeline du parcours', async ({ page }) => {
     await page.goto('/#parcours');
-    const items = page.locator('.timeline__item');
+    await hydrated(page, 'app-experiences');
+    const items = page.getByTestId('timeline-entry');
     const total = await items.count();
     await page.getByRole('button', { name: 'Formations' }).click();
     await expect(items).toHaveCount(5);
@@ -51,6 +55,19 @@ test.describe('Accueil', () => {
 });
 
 test.describe('Projets', () => {
+  test('filtre la grille par technologie', async ({ page }) => {
+    await page.goto('/#projets');
+    await hydrated(page, 'app-realisation');
+    const items = page.getByTestId('project-item');
+    const total = await items.count();
+    const filters = page.getByRole('group', { name: 'Filtrer les projets par technologie' });
+    await filters.getByRole('button').nth(1).click();
+    await expect(filters.getByRole('button').nth(1)).toHaveAttribute('aria-pressed', 'true');
+    expect(await items.count()).toBeLessThan(total);
+    await filters.getByRole('button', { name: /^Tous/ }).click();
+    await expect(items).toHaveCount(total);
+  });
+
   test('masque le bloc Problème quand il est vide', async ({ page }) => {
     await page.goto('/projets/cs-le-club');
     await expect(page.getByRole('heading', { level: 2, name: 'Problème' })).toHaveCount(0);
@@ -58,7 +75,8 @@ test.describe('Projets', () => {
   });
 
   test('ouvre la page détail depuis une carte', async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/#projets');
+    await hydrated(page, 'app-realisation');
     await page.locator('#projets').getByRole('link', { name: 'QCMPLUS' }).click();
     await expect(page).toHaveURL(/\/projets\/qcmplus$/);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('QCMPLUS');
@@ -84,8 +102,9 @@ test.describe('Projets', () => {
 test.describe('Contact', () => {
   test('valide les champs côté client', async ({ page }) => {
     await page.goto('/#contact');
+    await hydrated(page, 'app-contact');
     await page.getByRole('button', { name: 'Envoyer le message' }).click();
-    await expect(page.locator('.field__error')).toHaveCount(3);
+    await expect(page.getByTestId('field-error')).toHaveCount(3);
     await expect(page.getByLabel('Email')).toHaveAttribute('aria-invalid', 'true');
   });
 
@@ -96,22 +115,46 @@ test.describe('Contact', () => {
       await route.fulfill({ status: 200, json: { ok: true } });
     });
     await page.goto('/#contact');
+    await hydrated(page, 'app-contact');
     await page.getByLabel('Nom').fill('Ada Lovelace');
     await page.getByLabel('Email').fill('ada@example.com');
     await page.getByLabel('Message').fill('Bonjour, je souhaite échanger au sujet d’une mission backend.');
     await page.getByRole('button', { name: 'Envoyer le message' }).click();
-    await expect(page.getByRole('status')).toContainText('bien été envoyé');
+    await expect(page.getByTestId('contact-status')).toContainText('bien été envoyé');
     expect(body['website']).toBe('');
     expect(typeof body['startedAt']).toBe('number');
   });
 
+  test('l’API refuse un payload invalide et répond 503 sans clé Resend', async ({ request }) => {
+    const invalid = await request.post('/api/contact', {
+      data: { name: 'A', email: 'x', subject: '', message: 'court', website: '', startedAt: Date.now() - 10_000 },
+    });
+    expect(invalid.status()).toBe(400);
+    const valid = await request.post('/api/contact', {
+      data: {
+        name: 'Ada Lovelace',
+        email: 'ada@example.com',
+        subject: '',
+        message: 'Bonjour, je souhaite échanger au sujet d’une mission backend.',
+        website: '',
+        startedAt: Date.now() - 10_000,
+      },
+    });
+    expect(valid.status()).toBe(503);
+  });
+
   test('propose un repli email si l’API est indisponible', async ({ page }) => {
+    await page.route('**/api/contact', (route) => route.fulfill({ status: 503, json: { error: 'indisponible' } }));
     await page.goto('/#contact');
+    await hydrated(page, 'app-contact');
     await page.getByLabel('Nom').fill('Ada Lovelace');
     await page.getByLabel('Email').fill('ada@example.com');
     await page.getByLabel('Message').fill('Bonjour, je souhaite échanger au sujet d’une mission backend.');
     await page.getByRole('button', { name: 'Envoyer le message' }).click();
-    await expect(page.getByRole('status').getByRole('link')).toHaveAttribute('href', 'mailto:tewoldeteklit@gmail.com');
+    await expect(page.getByTestId('contact-status').getByRole('link')).toHaveAttribute(
+      'href',
+      'mailto:tewoldeteklit@gmail.com',
+    );
   });
 });
 
@@ -145,6 +188,31 @@ test.describe('CV et navigation', () => {
       .click();
     await expect(burger).toHaveAttribute('aria-expanded', 'false');
     await expect(page).toHaveURL(/#projets$/);
+  });
+});
+
+test.describe('Serveur SSR', () => {
+  test('envoie les en-têtes de sécurité', async ({ request }) => {
+    const res = await request.get('/');
+    const h = res.headers();
+    expect(h['content-security-policy']).toContain("script-src 'self' 'sha256-");
+    expect(h['content-security-policy']).not.toMatch(/script-src[^;]*unsafe-inline/);
+    expect(h['strict-transport-security']).toContain('max-age=');
+    expect(h['x-frame-options']).toBe('DENY');
+    expect(h['referrer-policy']).toBe('strict-origin-when-cross-origin');
+  });
+
+  test('renvoie un vrai statut 404 pour une page inconnue', async ({ request }) => {
+    expect((await request.get('/page-inconnue')).status()).toBe(404);
+  });
+
+  test('aucune violation CSP ni erreur console', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('console', (m) => m.type() === 'error' && errors.push(m.text()));
+    await page.goto('/');
+    await page.mouse.wheel(0, 4000);
+    await page.waitForTimeout(500);
+    expect(errors.filter((e) => !e.includes('/api/contact'))).toEqual([]);
   });
 });
 
