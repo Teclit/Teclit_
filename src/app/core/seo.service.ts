@@ -1,28 +1,65 @@
 import { Injectable, inject, DOCUMENT } from '@angular/core';
-import { Meta, Title } from '@angular/platform-browser';
+import { Meta, MetaDefinition, Title } from '@angular/platform-browser';
 import { PROFILE } from './content/content.service';
 import { filledUrl } from '../data/profile.utils';
+import { OG_IMAGE_FILE } from './og-image.generated';
+
+/**
+ * Image de partage. Les dimensions sont obligatoires : sans `og:image:width/height`,
+ * WhatsApp, LinkedIn, Messenger ou Teams retombent sur la vignette compacte (image à gauche)
+ * tant qu'ils n'ont pas téléchargé l'image ; avec, ils affichent d'emblée la grande carte
+ * (image pleine largeur en haut, titre + description en dessous).
+ */
+export interface SeoImage {
+  /** Chemin local (`/og-image.png`) ou URL absolue. */
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
+  type?: string;
+}
 
 export interface PageSeo {
   title: string;
   description: string;
   /** Chemin de la page, ex. `/projets/qcmplus`. */
   path: string;
-  image?: string;
+  /** Image propre à la page ; par défaut `public/og-image.png`. */
+  image?: SeoImage;
   type?: 'website' | 'profile' | 'article';
   noindex?: boolean;
 }
 
-const SITE_NAME = `${PROFILE.identity.fullName} — Portfolio`;
-const JSON_LD_ID = 'jsonld-page';
-/** Image de partage par défaut (`public/og-image.png`), au format recommandé 1,91:1. */
-const OG_IMAGE = {
-  /** `?v=` : à incrémenter quand l'image change, les plateformes la mettent en cache par URL. */
-  path: '/og-image.png?v=2',
-  width: 1200,
-  height: 630,
+/** Image de partage par défaut (1200x630, ratio 1,91:1), générée par `npm run og-image`. */
+export const DEFAULT_OG_IMAGE: SeoImage = {
+  url: OG_IMAGE_FILE.path,
+  width: OG_IMAGE_FILE.width,
+  height: OG_IMAGE_FILE.height,
+  type: OG_IMAGE_FILE.type,
   alt: `${PROFILE.identity.fullName} — ${PROFILE.identity.title}`,
 };
+
+const SITE_NAME = `${PROFILE.identity.fullName} — Portfolio`;
+const JSON_LD_ID = 'jsonld-page';
+/** Longueur au-delà de laquelle les cartes tronquent la description (Facebook, LinkedIn, X). */
+const SOCIAL_DESCRIPTION_MAX = 200;
+
+/** Attribut de sélection d'une balise : `property` pour Open Graph, `name` pour le reste. */
+type MetaTag = { name: string; content: string } | { property: string; content: string };
+
+/**
+ * Balises conditionnelles (type de page, domaine) : retirées avant chaque mise à jour
+ * (navigation côté client), sinon une page projet hériterait de `profile:*`.
+ */
+const CONDITIONAL_TAGS = ['profile:first_name', 'profile:last_name', 'article:author', 'og:url'];
+
+/** Tronque sur une frontière de mot, avec points de suspension. */
+export function truncate(text: string, max: number): string {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= max) return clean;
+  const cut = clean.slice(0, max - 1);
+  return `${cut.slice(0, Math.max(cut.lastIndexOf(' '), max / 2)).replace(/[\s,;:.—-]+$/, '')}…`;
+}
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -32,6 +69,7 @@ export class SeoService {
 
   /** URL absolue si le domaine est configuré (`identity.siteUrl`), sinon null. */
   absoluteUrl(path: string): string | null {
+    if (/^https?:\/\//.test(path)) return path;
     const base = filledUrl(PROFILE.identity.siteUrl);
     return base ? `${base.replace(/\/$/, '')}${path.startsWith('/') ? path : `/${path}`}` : null;
   }
@@ -40,33 +78,14 @@ export class SeoService {
     const fullTitle = page.path === '/' ? page.title : `${page.title} | ${PROFILE.identity.fullName}`;
     // Tant que le domaine n'est pas configuré, on n'émet pas d'URL relative (invalide pour canonical / og:url).
     const url = this.absoluteUrl(page.path);
-    const image = this.absoluteUrl(page.image ?? OG_IMAGE.path) ?? page.image ?? OG_IMAGE.path;
 
     this.title.setTitle(fullTitle);
-    this.setName('description', page.description);
-    this.setName('robots', page.noindex ? 'noindex, nofollow' : 'index, follow');
-    this.setProperty('og:title', fullTitle);
-    this.setProperty('og:description', page.description);
-    this.setProperty('og:type', page.type ?? 'website');
-    if (url) this.setProperty('og:url', url);
-    this.setProperty('og:image', image);
-    // Dimensions explicites : WhatsApp, LinkedIn, Facebook affichent alors la grande carte
-    // (image pleine largeur) dès le premier partage, au lieu d'une vignette.
-    if (!page.image) {
-      this.setProperty('og:image:secure_url', image);
-      this.setProperty('og:image:type', 'image/png');
-      this.setProperty('og:image:width', String(OG_IMAGE.width));
-      this.setProperty('og:image:height', String(OG_IMAGE.height));
+    for (const property of CONDITIONAL_TAGS) this.meta.removeTag(`property="${property}"`);
+    for (const tag of this.buildTags(page, fullTitle, url)) {
+      const selector = 'property' in tag ? `property="${tag.property}"` : `name="${tag.name}"`;
+      this.meta.updateTag(tag as MetaDefinition, selector);
     }
-    this.setProperty('og:image:alt', OG_IMAGE.alt);
-    this.setName('twitter:image:alt', OG_IMAGE.alt);
-    this.setProperty('og:site_name', SITE_NAME);
-    this.setProperty('og:locale', 'fr_FR');
-    this.setName('twitter:card', 'summary_large_image');
-    this.setName('twitter:title', fullTitle);
-    this.setName('twitter:description', page.description);
-    this.setName('twitter:image', image);
-    if (url) this.setCanonical(url);
+    this.setCanonical(url);
   }
 
   /** Remplace les données structurées JSON-LD propres à la page. */
@@ -81,16 +100,58 @@ export class SeoService {
     head.appendChild(script);
   }
 
-  private setName(name: string, content: string): void {
-    this.meta.updateTag({ name, content }, `name="${name}"`);
+  /** Ensemble complet des balises d'une page, dans l'ordre attendu par les robots. */
+  private buildTags(page: PageSeo, fullTitle: string, url: string | null): MetaTag[] {
+    const image = page.image ?? DEFAULT_OG_IMAGE;
+    const imageUrl = this.absoluteUrl(image.url) ?? image.url;
+    const type = page.type ?? 'website';
+    const social = truncate(page.description, SOCIAL_DESCRIPTION_MAX);
+    const og = (property: string, content: string): MetaTag => ({ property, content });
+    const named = (name: string, content: string): MetaTag => ({ name, content });
+
+    const tags: MetaTag[] = [
+      named('description', page.description),
+      named('robots', page.noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'),
+
+      og('og:type', type),
+      og('og:site_name', SITE_NAME),
+      og('og:locale', 'fr_FR'),
+      og('og:title', fullTitle),
+      og('og:description', social),
+      ...(url ? [og('og:url', url)] : []),
+
+      // Grande carte : image pleine largeur en haut, titre et description en dessous.
+      og('og:image', imageUrl),
+      ...(imageUrl.startsWith('https://') ? [og('og:image:secure_url', imageUrl)] : []),
+      og('og:image:type', image.type ?? 'image/png'),
+      og('og:image:width', String(image.width)),
+      og('og:image:height', String(image.height)),
+      og('og:image:alt', image.alt),
+
+      named('twitter:card', 'summary_large_image'),
+      named('twitter:title', fullTitle),
+      named('twitter:description', social),
+      named('twitter:image', imageUrl),
+      named('twitter:image:alt', image.alt),
+    ];
+
+    if (type === 'profile') {
+      tags.push(
+        og('profile:first_name', PROFILE.identity.firstName),
+        og('profile:last_name', PROFILE.identity.lastName),
+      );
+    }
+    const home = this.absoluteUrl('/');
+    if (type === 'article' && home) tags.push(og('article:author', home));
+    return tags;
   }
 
-  private setProperty(property: string, content: string): void {
-    this.meta.updateTag({ property, content }, `property="${property}"`);
-  }
-
-  private setCanonical(url: string): void {
+  private setCanonical(url: string | null): void {
     let link = this.document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!url) {
+      link?.remove();
+      return;
+    }
     if (!link) {
       link = this.document.createElement('link');
       link.rel = 'canonical';

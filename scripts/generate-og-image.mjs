@@ -1,8 +1,12 @@
 // Génère l'image de partage `public/og-image.png` (1200x630, ratio 1,91:1).
 // Mise en page centrée : la photo et le nom restent visibles même quand une plateforme
 // recadre l'image en carré pour sa vignette compacte (LinkedIn, WhatsApp, Messenger…).
+// Écrit aussi `src/app/core/og-image.generated.ts` : dimensions + version (empreinte du PNG)
+// utilisée en `?v=` — les plateformes cachent l'image par URL, toute modification de l'image
+// change donc l'URL et force un nouveau scraping, sans incrément manuel.
 // Usage : npm run og-image  (à relancer après changement de photo ou de titre)
-import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
@@ -44,4 +48,16 @@ const info = await sharp(background)
   .composite([{ input: photo, left: (W - PHOTO) / 2, top: PHOTO_TOP }])
   .png({ compressionLevel: 9 })
   .toFile(out);
-console.log(`public/og-image.png ${info.width}x${info.height} ${(info.size / 1024).toFixed(1)} kB`);
+const version = createHash('sha256').update(readFileSync(out)).digest('hex').slice(0, 8);
+writeFileSync(
+  resolve(root, 'src/app/core/og-image.generated.ts'),
+  `// Généré par scripts/generate-og-image.mjs — ne pas modifier à la main.
+export const OG_IMAGE_FILE = {
+  path: '/og-image.png?v=${version}',
+  width: ${info.width},
+  height: ${info.height},
+  type: 'image/png',
+} as const;
+`,
+);
+console.log(`public/og-image.png ${info.width}x${info.height} ${(info.size / 1024).toFixed(1)} kB (v=${version})`);
