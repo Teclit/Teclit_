@@ -15,6 +15,7 @@ const ICONS: Record<IconName, Shape[]> = {
   'arrow-left': [p('m12 19-7-7 7-7'), p('M19 12H5')],
   briefcase: [{ t: 'rect', x: 2, y: 7, w: 20, h: 14, rx: 2 }, p('M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16')],
   check: [p('M20 6 9 17l-5-5')],
+  'chevron-down': [p('m6 9 6 6 6-6')],
   close: [p('M18 6 6 18'), p('m6 6 12 12')],
   cloud: [p('M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z')],
   code: [p('m16 18 6-6-6-6'), p('m8 6-6 6 6 6')],
@@ -82,7 +83,7 @@ const ICONS: Record<IconName, Shape[]> = {
 @Component({
   selector: 'app-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'icon', 'aria-hidden': 'true' },
+  host: { class: 'inline-flex shrink-0 leading-none', 'aria-hidden': 'true' },
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -113,13 +114,6 @@ const ICONS: Record<IconName, Shape[]> = {
         }
       }
     </svg>
-  `,
-  styles: `
-    :host {
-      display: inline-flex;
-      flex-shrink: 0;
-      line-height: 0;
-    }
   `,
 })
 export class IconComponent {

@@ -1,39 +1,36 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Directive, ElementRef, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { Directive, ElementRef, PLATFORM_ID, afterNextRender, inject } from '@angular/core';
+import { DestroyRef } from '@angular/core';
 
 /**
- * Animation d'apparition légère au défilement.
- * Le contenu reste visible sans JavaScript ; l'animation est désactivée
- * côté CSS quand `prefers-reduced-motion: reduce` est actif.
+ * Apparition au défilement (IntersectionObserver). Le contenu reste visible
+ * sans JavaScript et côté serveur ; l'animation (opacity / transform) est
+ * neutralisée en CSS sous `prefers-reduced-motion: reduce`.
+ * Les éléments déjà visibles au chargement ne sont pas masqués (pas de flash ni de CLS).
  */
-@Directive({
-  selector: '[appReveal]',
-  host: { class: 'reveal' },
-})
-export class RevealDirective implements OnInit, OnDestroy {
-  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
-  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
-  private observer?: IntersectionObserver;
+@Directive({ selector: '[appReveal]' })
+export class RevealDirective {
+  constructor() {
+    const node = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
+    const destroyRef = inject(DestroyRef);
+    if (!isPlatformBrowser(inject(PLATFORM_ID))) return;
 
-  ngOnInit(): void {
-    if (!this.isBrowser || typeof IntersectionObserver === 'undefined') return;
-    const node = this.el.nativeElement;
-    node.classList.add('reveal--pending');
-    this.observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            node.classList.add('reveal--visible');
-            this.observer?.disconnect();
+    afterNextRender(() => {
+      if (typeof IntersectionObserver === 'undefined') return;
+      const rect = node.getBoundingClientRect();
+      if (rect.top < window.innerHeight) return; // déjà à l'écran
+      node.classList.add('reveal-pending');
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry?.isIntersecting) {
+            node.classList.add('reveal-visible');
+            observer.disconnect();
           }
-        }
-      },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 },
-    );
-    this.observer.observe(node);
-  }
-
-  ngOnDestroy(): void {
-    this.observer?.disconnect();
+        },
+        { rootMargin: '0px 0px -8% 0px' },
+      );
+      observer.observe(node);
+      destroyRef.onDestroy(() => observer.disconnect());
+    });
   }
 }
