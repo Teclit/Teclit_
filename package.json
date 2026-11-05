@@ -20,7 +20,8 @@
     "prebuild": "npm run generate:seo",
     "images": "node scripts/optimize-images.mjs",
     "lhci": "npx -y @lhci/cli@0.16.0 autorun",
-    "validate": "npm run format:check && npm run lint && npm run typecheck && npm run test:ci && npm run build"
+    "validate": "npm run format:check && npm run lint && npm run typecheck && npm run test:ci && npm run build",
+    "cv:pdf": "node scripts/generate-cv-pdf.mjs"
   },
   "private": true,
   "dependencies": {
