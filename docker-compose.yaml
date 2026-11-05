@@ -13,32 +13,20 @@ services:
       - NODE_ENV=development
     restart: unless-stopped
 
-  # Production : build pré-rendu servi par Nginx non-root — http://localhost
+  # Production : serveur SSR Node (Express) non-root — http://localhost:4000
   prod:
     build:
       context: .
       dockerfile: Dockerfile
     image: teclit-portfolio:latest
     ports:
-      - '80:8080'
+      - '4000:4000'
+    env_file:
+      - path: .env
+        required: false
     restart: unless-stopped
     read_only: true
     tmpfs:
       - /tmp
-    healthcheck:
-      test: ['CMD', 'wget', '-q', '--spider', 'http://127.0.0.1:8080/']
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-
-  # Tests unitaires (Chrome headless requis dans l'image ; à défaut, lancer `npm run test:ci` en local)
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
-    command: npm run test:ci
-    volumes:
-      - ./:/app
-      - /app/node_modules
-    profiles: ['test']
+    security_opt:
+      - no-new-privileges:true

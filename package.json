@@ -19,7 +19,7 @@
     "generate:seo": "node --experimental-strip-types --no-warnings scripts/generate-seo.mjs",
     "prebuild": "npm run generate:seo",
     "images": "node scripts/optimize-images.mjs",
-    "lhci": "lhci autorun",
+    "lhci": "npx -y @lhci/cli@0.16.0 autorun",
     "validate": "npm run format:check && npm run lint && npm run typecheck && npm run test:ci && npm run build"
   },
   "private": true,
@@ -46,7 +46,6 @@
     "@angular/cli": "^22.2.6",
     "@angular/compiler-cli": "^22.2.4",
     "@axe-core/playwright": "^4.14.0",
-    "@lhci/cli": "^0.16.0",
     "@playwright/test": "^1.64.1",
     "@tailwindcss/postcss": "^4.3.4",
     "@testing-library/angular": "^19.6.0",

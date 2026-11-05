@@ -6,18 +6,24 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN --mount=type=cache,target=/root/.npm npm ci --no-audit --no-fund
 
-# ---- Étape 2 : build Angular (pré-rendu statique de toutes les pages) ----
+# ---- Étape 2 : build Angular (SSR + pré-rendu) ----
 FROM node:22-alpine AS build
 WORKDIR /app
+ARG SITE_URL=""
+ENV SITE_URL=$SITE_URL
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
-# ---- Étape 3 : image d'exécution Nginx non-root ----
-FROM nginxinc/nginx-unprivileged:1.27-alpine AS runtime
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist/teclit/browser /usr/share/nginx/html
-EXPOSE 8080
+# ---- Étape 3 : runtime Node minimal, utilisateur non-root ----
+# Le serveur SSR (server.mjs) embarque Express, helmet, Resend… : aucun node_modules requis.
+FROM node:22-alpine AS runtime
+ENV NODE_ENV=production \
+    PORT=4000
+WORKDIR /app
+COPY --from=build --chown=node:node /app/dist/teclit ./dist/teclit
+USER node
+EXPOSE 4000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD wget -q --spider http://127.0.0.1:8080/ || exit 1
-CMD ["nginx", "-g", "daemon off;"]
+  CMD wget -qO- http://127.0.0.1:4000/healthz || exit 1
+CMD ["node", "dist/teclit/server/server.mjs"]
