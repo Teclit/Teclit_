@@ -1,15 +1,16 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {COMPETENCES, Competence} from '../../../data';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { PROFILE } from '../data/profile.data';
+import { IconComponent } from '../shared/icon/icon.component';
+import { RevealDirective } from '../shared/reveal.directive';
 
 @Component({
   selector: 'app-competences',
-  imports: [CommonModule],
+  imports: [IconComponent, RevealDirective],
   templateUrl: './competences.component.html',
-  styleUrls: ['./competences.component.css'],
-  standalone: true
+  styleUrl: './competences.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CompetencesComponent {
-  competences: Competence[] = COMPETENCES;
-
+  protected readonly groups = PROFILE.skillGroups;
+  protected readonly logos = PROFILE.techLogos;
 }

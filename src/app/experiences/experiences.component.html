@@ -1,12 +1,111 @@
-<div class="experiences-container">
-  <h2 class="title">Expériences</h2>
+<section class="section" id="parcours" aria-labelledby="parcours-title">
+  <div class="container">
+    <header class="section__header" appReveal>
+      <span class="eyebrow">Parcours</span>
+      <h2 id="parcours-title" class="section__title">Expériences et formations</h2>
+      <p class="section__lead">
+        De mes premiers stages web à Caen jusqu'au développement backend chez SNCF Connect & Tech et Tx-Studio.
+      </p>
+    </header>
 
-  <div class="experiences-grid">
-    <div *ngFor="let exp of experiences" class="experience-card">
-      <h3>{{ exp.title }}</h3>
-      <p>{{ exp.description }}</p>
-      <p><em>{{ exp.location }}</em></p>
-      <a [href]="exp.link" class="discover-link">Découvrir →</a>
+    <div class="filters" role="group" aria-label="Filtrer le parcours">
+      @for (f of filters; track f.value) {
+        <button
+          type="button"
+          class="filters__btn"
+          [class.is-active]="filter() === f.value"
+          [attr.aria-pressed]="filter() === f.value"
+          (click)="filter.set(f.value)"
+        >
+          {{ f.label }}
+        </button>
+      }
     </div>
+
+    <ol class="timeline" role="list">
+      @for (entry of entries(); track entry.key) {
+        <li class="timeline__item" appReveal>
+          <span class="timeline__marker" aria-hidden="true">
+            <app-icon [name]="entry.kind === 'experience' ? 'briefcase' : 'graduation'" [size]="16" />
+          </span>
+
+          @switch (entry.kind) {
+            @case ('experience') {
+              <article class="card timeline__card">
+                <header class="timeline__head">
+                  <div>
+                    <h3 class="timeline__title">{{ entry.item.role }}</h3>
+                    <p class="timeline__org">{{ entry.item.company }} · {{ entry.item.location }}</p>
+                  </div>
+                  <div class="timeline__meta">
+                    <span class="chip">{{ kindLabels[entry.item.kind] }}</span>
+                    <span class="muted timeline__period">{{ entry.item.period }}</span>
+                  </div>
+                </header>
+
+                <p class="timeline__context">{{ entry.item.context }}</p>
+
+                <details class="timeline__details">
+                  <summary>Objectifs, missions et stack</summary>
+                  <h4>Objectifs et enjeux</h4>
+                  <p>{{ entry.item.goals }}</p>
+                  <h4>Missions et réalisations</h4>
+                  <ul class="bullets">
+                    @for (mission of entry.item.missions; track $index) {
+                      <li>{{ mission }}</li>
+                    }
+                  </ul>
+                  @if (entry.item.achievements.length) {
+                    <h4>Réalisations chiffrées</h4>
+                    <ul class="bullets">
+                      @for (a of entry.item.achievements; track $index) {
+                        <li [class.todo]="a | isTodo">{{ a }}</li>
+                      }
+                    </ul>
+                  }
+                  <h4>Compétences démontrées</h4>
+                  <p class="muted">{{ entry.item.demonstratedSkills.join(' · ') }}</p>
+                </details>
+
+                <ul class="chips timeline__stack" role="list" aria-label="Stack technique">
+                  @for (tech of entry.item.stack; track tech) {
+                    <li class="chip chip--outline">{{ tech }}</li>
+                  }
+                </ul>
+
+                @if (entry.item.projectSlugs.length) {
+                  <p class="timeline__projects">
+                    Projets :
+                    @for (slug of entry.item.projectSlugs; track slug; let last = $last) {
+                      <a [routerLink]="['/projets', slug]">{{ projectTitle(slug) }}</a
+                      >{{ last ? '' : ', ' }}
+                    }
+                  </p>
+                }
+              </article>
+            }
+            @case ('education') {
+              <article class="card timeline__card timeline__card--edu">
+                <header class="timeline__head">
+                  <div>
+                    <h3 class="timeline__title">{{ entry.item.title }}</h3>
+                    <p class="timeline__org">
+                      {{ entry.item.school }}{{ entry.item.location ? ' · ' + entry.item.location : '' }}
+                    </p>
+                  </div>
+                  <div class="timeline__meta">
+                    <span class="chip chip--outline">Formation</span>
+                    <span class="muted timeline__period">{{ entry.item.period }}</span>
+                  </div>
+                </header>
+                @if (entry.item.level) {
+                  <p class="muted">{{ entry.item.level }}</p>
+                }
+              </article>
+            }
+          }
+        </li>
+      }
+    </ol>
   </div>
-</div>
+</section>

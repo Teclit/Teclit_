@@ -1,12 +1,6 @@
-<app-navbar [title]="title"></app-navbar>
-
-<app-home [title]="title"></app-home>
-<app-skills></app-skills>
-<!--<app-portfolio></app-portfolio>-->
-<app-competences></app-competences>
-<app-realisation></app-realisation>
-<app-experiences></app-experiences>
-<app-apropos></app-apropos>
-<app-contact></app-contact>
-
-<app-footer [title]="title"></app-footer>
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+<app-navbar />
+<main id="contenu" tabindex="-1">
+  <router-outlet />
+</main>
+<app-footer />

@@ -1,8 +1,47 @@
-<div class="about-container">
-  <h2 class="title">À propos de moi</h2>
+<section class="section section--alt" id="a-propos" aria-labelledby="about-title">
+  <div class="container about">
+    <div class="about__text" appReveal>
+      <span class="eyebrow">À propos</span>
+      <h2 id="about-title" class="section__title">Un développeur Full Stack orienté qualité</h2>
+      <div class="stack about__bio">
+        @for (paragraph of identity.longBio; track $index) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+    </div>
 
-  <div class="about-content">
-    <img [src]="imageUrl" alt="Profile" class="profile-image">
-    <p class="description">{{ description }}</p>
+    <aside class="about__aside" appReveal aria-label="En bref">
+      <dl class="facts">
+        @for (fact of facts; track fact.label) {
+          <div class="facts__item card">
+            <dt class="muted">{{ fact.label }}</dt>
+            <dd>{{ fact.value }}</dd>
+          </div>
+        }
+      </dl>
+
+      <div class="card">
+        <h3 class="about__h3">Atouts</h3>
+        <ul class="chips" role="list">
+          @for (quality of identity.qualities; track quality) {
+            <li class="chip">{{ quality }}</li>
+          }
+        </ul>
+        <h3 class="about__h3">Langues</h3>
+        <ul class="about__list" role="list">
+          @for (lang of languages; track lang.name) {
+            <li>
+              <strong>{{ lang.name }}</strong> — {{ lang.level }}
+            </li>
+          }
+        </ul>
+        <h3 class="about__h3">Infos pratiques</h3>
+        <ul class="about__list" role="list">
+          <li><app-icon name="map-pin" [size]="16" /> {{ identity.location }}</li>
+          <li><app-icon name="check" [size]="16" /> {{ identity.availability }}</li>
+          <li><app-icon name="check" [size]="16" /> Permis B et véhicule personnel</li>
+        </ul>
+      </div>
+    </aside>
   </div>
-</div>
+</section>

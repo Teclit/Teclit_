@@ -1,29 +1,38 @@
-<!-- Footer -->
-<div class="footer py-5">
-  <div class="container grid grid-3">
+<footer class="footer">
+  <div class="container footer__inner">
     <div>
-      <h1>{{ title }}</h1>
-      <p>Copyright &copy; {{ startingYear }} - {{ year }}</p>
+      <p class="footer__name">{{ identity.fullName }}</p>
+      <p class="muted">Développeur Full Stack · {{ identity.location }}</p>
+      <p class="muted footer__copy">&copy; {{ startingYear }} – {{ year }} {{ identity.fullName }}</p>
     </div>
-    <nav>
-      <ul>
-        <li><a routerLink="/" fragment="accueil" [class.active]="activeLink === 'accueil'"
-               (click)="setActiveLink('accueil', $event)">Accueil</a></li>
-        <li><a routerLink="/" fragment="competences" [class.active]="activeLink === 'competences'"
-               (click)="setActiveLink('competences', $event)">Compétences</a></li>
-        <li><a routerLink="/" fragment="portfolio" [class.active]="activeLink === 'portfolio'"
-               (click)="setActiveLink('portfolio', $event)">Portfolio</a></li>
-        <li><a routerLink="/" fragment="experiences" [class.active]="activeLink === 'experiences'"
-               (click)="setActiveLink('experiences', $event)">Expériences</a></li>
-        <li><a routerLink="/" fragment="apropos" [class.active]="activeLink === 'apropos'"
-               (click)="setActiveLink('apropos', $event)">À propos</a></li>
-        <li><a routerLink="/" fragment="contact" [class.active]="activeLink === 'contact'"
-               (click)="setActiveLink('contact', $event)">Contact</a></li>
+
+    <nav aria-label="Navigation de pied de page">
+      <ul class="footer__links" role="list">
+        @for (link of links; track link.fragment) {
+          <li>
+            <a routerLink="/" [fragment]="link.fragment">{{ link.label }}</a>
+          </li>
+        }
+        <li><a routerLink="/cv">CV</a></li>
       </ul>
     </nav>
-    <div class="social">
-      <a [href]="githubUrl"><i class="fa-brands fa-github fa-2xl"></i></a>
-      <a [href]="linkedInUrl"><i class="fa-brands fa-linkedin fa-2xl"></i></a>
-    </div>
+
+    <ul class="footer__social" role="list">
+      <li>
+        <a class="icon-btn" [href]="identity.links.github" target="_blank" rel="noopener noreferrer">
+          <app-icon name="github" /><span class="sr-only">GitHub (nouvel onglet)</span>
+        </a>
+      </li>
+      <li>
+        <a class="icon-btn" [href]="identity.links.linkedin" target="_blank" rel="noopener noreferrer">
+          <app-icon name="linkedin" /><span class="sr-only">LinkedIn (nouvel onglet)</span>
+        </a>
+      </li>
+      <li>
+        <a class="icon-btn" [href]="'mailto:' + identity.links.email">
+          <app-icon name="mail" /><span class="sr-only">Envoyer un email</span>
+        </a>
+      </li>
+    </ul>
   </div>
-</div>
+</footer>

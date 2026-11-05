@@ -1,36 +1,46 @@
-import { Component, Input, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, HostListener, inject, signal } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { ThemeService } from '../core/theme.service';
+import { PROFILE } from '../data/profile.data';
+import { IconComponent } from '../shared/icon/icon.component';
+
+export interface NavLink {
+  label: string;
+  fragment: string;
+}
+
+export const NAV_LINKS: readonly NavLink[] = [
+  { label: 'À propos', fragment: 'a-propos' },
+  { label: 'Parcours', fragment: 'parcours' },
+  { label: 'Compétences', fragment: 'competences' },
+  { label: 'Projets', fragment: 'projets' },
+  { label: 'Formation', fragment: 'formation' },
+  { label: 'Contact', fragment: 'contact' },
+];
 
 @Component({
   selector: 'app-navbar',
+  imports: [RouterLink, RouterLinkActive, IconComponent],
   templateUrl: './navbar.component.html',
-  imports: [
-    RouterLink
-  ],
-  styleUrls: ['./navbar.component.css']
+  styleUrl: './navbar.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent {
-  @Input() title!: string;
-  activeLink = 'accueil';
-  menuOpen = false;
-
-  setActiveLink(link: string, event: Event): void {
-    event.preventDefault();
-    this.activeLink = link;
-
-    if (window.innerWidth <= 730) {
-      this.menuOpen = false;
-    }
-  }
+  protected readonly theme = inject(ThemeService);
+  protected readonly brand = PROFILE.identity.brand;
+  protected readonly links = NAV_LINKS;
+  readonly menuOpen = signal(false);
 
   toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
+    this.menuOpen.update((open) => !open);
   }
 
-  @HostListener('window:resize')
-  onResize(): void {
-    if (window.innerWidth > 730) {
-      this.menuOpen = false;
-    }
+  closeMenu(): void {
+    this.menuOpen.set(false);
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.closeMenu();
   }
 }

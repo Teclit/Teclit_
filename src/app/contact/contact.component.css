@@ -1,166 +1,93 @@
-.contact-container {
-  padding: 20px;
+.contact {
+  display: grid;
+  gap: var(--sp-6);
+}
+
+@media (min-width: 960px) {
+  .contact {
+    grid-template-columns: 1fr 1.3fr;
+    align-items: start;
+  }
+}
+
+.contact__info {
+  display: grid;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+
+.contact__info li {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
-  box-sizing: border-box;
+  gap: var(--sp-3);
+  color: var(--text-muted);
 }
 
-
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 40px;
+.contact__form {
+  display: grid;
+  gap: var(--sp-4);
 }
 
-.contact-wrapper {
-  display: flex;
-  justify-content: space-between;
-  gap: 30px;
-  align-items: center;
-  flex-wrap: wrap;
+.field {
+  display: grid;
+  gap: var(--sp-1);
+}
+
+.field label {
+  font-weight: 600;
+  font-size: var(--fs-sm);
+}
+
+.field input,
+.field textarea {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
+  min-height: 44px;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
 }
 
-.contact-form, .contact-info {
-  flex: 1;
-  min-width: 280px; /* permet d'assurer une largeur minimale pour les petits écrans */
-  box-sizing: border-box;
+.field textarea {
+  resize: vertical;
 }
 
-.contact-form {
-  padding: 50px 70px;
-  background: var(--white-color);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline-offset: 0;
+  border-color: var(--primary);
 }
 
-.contact-image {
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-  margin-bottom: 20px;
+.field [aria-invalid='true'] {
+  border-color: var(--error);
 }
 
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
+.field__hint {
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
 }
 
-.contact-form .form-control {
-  border: none;
-  border-bottom: 1px solid #b4becb;
-  width: 100%;
-  padding: 5px 2px;
-  transition: border-bottom 0.2s ease-in-out;
+.field__error,
+.contact__ko {
+  color: var(--error);
+  font-size: var(--fs-sm);
+  font-weight: 600;
 }
 
-.contact-form .form-control::placeholder {
-  color: #d1cece;
-  font-style: italic;
+.contact__ok {
+  color: var(--success);
+  font-weight: 600;
 }
 
-.contact-form .form-control:focus {
-  border-bottom: 1px solid var(--primary-color);
-  outline: none;
+.hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
-.contact-form .form-control:hover {
-  border-bottom: 2px solid var(--primary-color);
+.contact__form .btn {
+  justify-self: start;
 }
-
-
-.submit-btn {
-  width: 100%;
-  background: var(--primary-color);
-  color: var(--white-color);
-  padding: 12px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 5px;
-}
-
-.submit-btn:hover {
-  background: var(--success-color);
-}
-
-.error-text {
-  color: var(--error-color);
-  font-size: 12px;
-}
-
-.contact-info {
-  width: 40%;
-  text-align: center;
-}
-
-.contact-image {
-  width: 100%;
-  max-width: 300px;
-  margin-bottom: 20px;
-}
-
-.info  {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  margin: 5px 0;
-}
-
-.info p {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  margin: 5px 0;
-}
-
-.info p:hover {
-  text-decoration: underline;
-  font-weight: bold;
-  color: var(--primary-color);
-  cursor: pointer;
-}
-
-.info i {
-  font-size: 18px;
-  color: var(--primary-color);
-}
-
-/* Responsive media queries pour ajustements supplémentaires sur mobile/tablette */
-@media screen and (max-width: 768px) {
-  .contact-wrapper {
-    flex-direction: column;
-  }
-
-  .contact-form, .contact-info {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .contact-form {
-    order: 2;
-  }
-
-  .contact-info {
-    order: 1;
-  }
-
-  .title {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
-}
-
-
-
