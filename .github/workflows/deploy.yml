@@ -4,17 +4,19 @@ on:
   push:
     branches: [develop, staging, master]
   pull_request:
-    branches: [develop, staging, master]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 env:
   NODE_VERSION: 22
 
 jobs:
-  # 1. Qualité : format, lint, typecheck, tests unitaires
+  # 1. Qualité : format, lint, typecheck, tests unitaires (Angular + serveur)
   quality:
     name: ✅ Lint, typecheck & tests unitaires
     runs-on: ubuntu-latest
@@ -29,9 +31,9 @@ jobs:
         run: npm run format:check
       - name: ESLint (0 warning)
         run: npm run lint
-      - name: Typecheck
+      - name: Typecheck (app, specs, serveur, api)
         run: npm run typecheck
-      - name: Tests unitaires (Karma / ChromeHeadless)
+      - name: Tests unitaires (Vitest)
         run: npm run test:ci
       - uses: actions/upload-artifact@v4
         if: always()
@@ -40,7 +42,7 @@ jobs:
           path: coverage/
           retention-days: 7
 
-  # 2. Build de production (pré-rendu)
+  # 2. Build de production (SSR + pré-rendu, budgets bloquants)
   build:
     name: ⚙️ Build
     runs-on: ubuntu-latest
@@ -52,15 +54,17 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
       - uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
           retention-days: 7
 
-  # 3. Tests e2e Playwright sur le build
+  # 3. Tests e2e Playwright sur le serveur SSR
   e2e:
-    name: 🎭 Tests e2e
+    name: 🎭 Tests e2e (Playwright)
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -83,14 +87,33 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
-  # 4. Image Docker (push uniquement)
-  docker-build-push:
-    name: 🐳 Build & push de l'image Docker
+  # 4. Lighthouse CI (à chaque PR et push)
+  lighthouse:
+    name: 🔦 Lighthouse CI
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Lighthouse CI (seuils dans lighthouserc.json)
+        run: npx -y @lhci/cli@0.16.0 autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+  # 5. Image Docker : build à chaque PR, push sur les branches
+  docker:
+    name: 🐳 Image Docker
     needs: [quality, e2e]
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
     env:
       IMAGE_NAME: ${{ secrets.DOCKER_USERNAME }}/teclit-angular-app
+      PUSH: ${{ github.event_name == 'push' && secrets.DOCKER_USERNAME != '' }}
     steps:
       - uses: actions/checkout@v4
       - name: Tag selon la branche
@@ -99,27 +122,29 @@ jobs:
             develop) echo "TAG=dev" >> $GITHUB_ENV ;;
             staging) echo "TAG=staging" >> $GITHUB_ENV ;;
             master) echo "TAG=prod" >> $GITHUB_ENV ;;
-            *) echo "Branche inconnue." && exit 1 ;;
+            *) echo "TAG=pr" >> $GITHUB_ENV ;;
           esac
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3
+        if: env.PUSH == 'true'
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - uses: docker/build-push-action@v6
         with:
           context: .
-          push: true
+          push: ${{ env.PUSH == 'true' }}
+          build-args: SITE_URL=${{ vars.SITE_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ env.TAG }}
-            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ env.IMAGE_NAME || 'teclit' }}:${{ env.TAG }}
+            ${{ env.IMAGE_NAME || 'teclit' }}:${{ github.sha }}
 
-  # 5. Déploiement Vercel (production, branche master)
+  # 6. Déploiement Vercel (production, branche master)
   deploy:
     name: 🚀 Déploiement Vercel (production)
-    needs: docker-build-push
+    needs: [docker, lighthouse]
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     env:
