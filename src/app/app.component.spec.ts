@@ -27,7 +27,8 @@ describe('Mise en page', () => {
   describe('NavbarComponent', () => {
     it('affiche le logo « Te. » et les liens de section', async () => {
       await render(NavbarComponent, { providers: router });
-      expect(screen.getByRole('link', { name: /Accueil/ }).textContent?.replace(/\s/g, '')).toBe('Te.');
+      const logo = screen.getByRole('link', { name: /TEWOLDE, accueil$/ });
+      expect(logo.getAttribute('href')).toBe('/');
       const nav = screen.getByRole('navigation', { name: 'Navigation principale' });
       expect(within(nav).getByRole('link', { name: 'Projets' }).getAttribute('href')).toBe('/#projets');
     });

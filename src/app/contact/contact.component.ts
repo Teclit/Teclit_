@@ -12,6 +12,7 @@ import {
 import { ContactService } from '../core/contact/contact.service';
 import { IconComponent } from '../shared/icon/icon.component';
 import { ButtonComponent } from '../shared/ui/button.component';
+import { HydratedDirective } from '../shared/hydrated.directive';
 import { CardComponent } from '../shared/ui/card.component';
 
 export type ContactStatus = 'idle' | 'sending' | 'sent' | 'error';
@@ -31,6 +32,7 @@ const FIELD =
   selector: 'app-contact',
   imports: [ReactiveFormsModule, RouterLink, IconComponent, ButtonComponent, CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [HydratedDirective],
   host: { class: 'block' },
   template: `
     <div class="grid gap-10 lg:grid-cols-[1fr_1.4fr]">

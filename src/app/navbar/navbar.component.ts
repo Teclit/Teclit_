@@ -32,9 +32,8 @@ export const NAV_LINKS: readonly NavLink[] = [
       <a
         routerLink="/"
         class="rounded-md text-2xl font-extrabold tracking-tight text-fg no-underline"
-        aria-label="Accueil — Teklit TEWOLDE"
         (click)="closeMenu()"
-        >Te<span class="text-accent">.</span></a
+        >Te<span class="text-accent">.</span><span class="sr-only"> Teklit TEWOLDE, accueil</span></a
       >
 
       <nav aria-label="Navigation principale" class="contents">

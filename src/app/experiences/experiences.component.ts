@@ -4,6 +4,7 @@ import { ContentService } from '../core/content/content.service';
 import type { ExperienceKind } from '../data/profile.model';
 import { WithContentPipe } from '../shared/content.pipe';
 import { TagComponent } from '../shared/ui/tag.component';
+import { HydratedDirective } from '../shared/hydrated.directive';
 import { TimelineItemComponent } from '../shared/ui/timeline-item.component';
 
 export type TimelineFilter = 'tout' | 'experience' | 'education';
@@ -20,6 +21,7 @@ export const KIND_LABELS: Record<ExperienceKind, string> = {
   selector: 'app-experiences',
   imports: [RouterLink, TagComponent, TimelineItemComponent, WithContentPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [HydratedDirective],
   host: { class: 'block' },
   template: `
     <div

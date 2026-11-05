@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ContentService } from '../core/content/content.service';
+import { HydratedDirective } from '../shared/hydrated.directive';
 import { ProjectCardComponent } from '../shared/project-card/project-card.component';
 
 /** Grille de projets filtrable par technologie (signal + computed), entrées animées. */
@@ -7,6 +8,7 @@ import { ProjectCardComponent } from '../shared/project-card/project-card.compon
   selector: 'app-realisation',
   imports: [ProjectCardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  hostDirectives: [HydratedDirective],
   host: { class: 'block' },
   template: `
     <div class="mb-8 flex flex-wrap items-center gap-2" role="group" aria-label="Filtrer les projets par technologie">
@@ -17,7 +19,7 @@ import { ProjectCardComponent } from '../shared/project-card/project-card.compon
         [attr.aria-pressed]="tech() === null"
         (click)="tech.set(null)"
       >
-        Tous <span class="opacity-70">({{ content.projects.length }})</span>
+        Tous ({{ content.projects.length }})
       </button>
       @for (t of technologies; track t) {
         <button

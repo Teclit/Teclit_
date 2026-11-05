@@ -71,7 +71,8 @@ import { SectionComponent } from '../../shared/ui/section.component';
     </app-section>
 
     <app-section anchor="contact" [copy]="content.section('contact')">
-      @defer (on viewport; prefetch on idle; hydrate on viewport) {
+      @defer (on viewport; prefetch on idle; hydrate on idle) {
+        <!-- hydratation dès que le navigateur est inactif : formulaire prêt avant toute saisie -->
         <app-contact />
       } @placeholder {
         <div class="min-h-[36rem]"></div>
