@@ -2,8 +2,8 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/api",
-    "types": ["node"],
-    "lib": ["ES2022", "DOM"]
+    "rootDir": "..",
+    "types": ["node"]
   },
   "include": ["./**/*.ts"]
 }

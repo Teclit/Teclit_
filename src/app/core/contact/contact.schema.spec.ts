@@ -1,4 +1,4 @@
-import { CONTACT_LIMITS, isValidEmail, validateContactPayload } from './contact-validation';
+import { CONTACT_LIMITS, contactFieldError, validateContactPayload } from './contact.schema';
 
 describe('validateContactPayload', () => {
   const now = 1700000000000;
@@ -62,15 +62,22 @@ describe('validateContactPayload', () => {
   });
 });
 
-describe('isValidEmail', () => {
-  it('valide les formats usuels', () => {
-    expect(isValidEmail('prenom.nom@domaine.fr')).toBe(true);
-    expect(isValidEmail('a+b@sub.domaine.io')).toBe(true);
+describe('contactFieldError (validateurs du formulaire client)', () => {
+  it('valide les formats d’email usuels', () => {
+    expect(contactFieldError('email', 'prenom.nom@domaine.fr')).toBeNull();
+    expect(contactFieldError('email', 'a+b@sub.domaine.io')).toBeNull();
   });
 
-  it('rejette les formats invalides', () => {
-    for (const email of ['', 'a@b', 'a b@c.fr', '@domaine.fr', 'a@domaine.', `${'a'.repeat(250)}@d.fr`]) {
-      expect(isValidEmail(email), email).toBe(false);
+  it('rejette les formats d’email invalides', () => {
+    for (const email of ['a@b', 'a b@c.fr', '@domaine.fr', 'a@domaine.', `${'a'.repeat(250)}@d.fr`]) {
+      expect(contactFieldError('email', email), email).toBe('Adresse email invalide.');
     }
+    expect(contactFieldError('email', '')).toBe('Ce champ est obligatoire.');
+  });
+
+  it('applique les mêmes bornes que le serveur', () => {
+    expect(contactFieldError('message', 'a'.repeat(CONTACT_LIMITS.messageMin - 1))).toContain('entre');
+    expect(contactFieldError('message', 'a'.repeat(CONTACT_LIMITS.messageMin))).toBeNull();
+    expect(contactFieldError('subject', '')).toBeNull();
   });
 });

@@ -1,18 +1,16 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, of } from 'rxjs';
-import type { ContactField, ContactPayload } from './contact-validation';
+import type { ContactErrors, ContactPayload } from './contact.schema';
 
 export const CONTACT_ENDPOINT = '/api/contact';
 
 export type ContactSendResult =
-  | { status: 'sent' }
-  | { status: 'invalid'; errors: Partial<Record<ContactField, string>> }
-  | { status: 'error'; message: string };
+  { status: 'sent' } | { status: 'invalid'; errors: ContactErrors } | { status: 'error'; message: string };
 
 interface ContactApiError {
   error?: string;
-  errors?: Partial<Record<ContactField, string>>;
+  errors?: ContactErrors;
 }
 
 @Injectable({ providedIn: 'root' })
