@@ -16,7 +16,6 @@
             "outputPath": "dist/teclit",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -24,7 +23,9 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles.css"
+            ],
             "scripts": [],
             "server": "src/main.server.ts",
             "outputMode": "static"
@@ -53,8 +54,7 @@
             "testing": {
               "aot": false,
               "optimization": false,
-              "extractLicenses": false,
-              "polyfills": ["zone.js", "zone.js/testing"]
+              "extractLicenses": false
             }
           },
           "defaultConfiguration": "production"
@@ -85,7 +85,11 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html", "api/**/*.ts"],
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html",
+              "api/**/*.ts"
+            ],
             "maxWarnings": 0
           }
         }
@@ -94,7 +98,9 @@
   },
   "cli": {
     "analytics": false,
-    "schematicCollections": ["angular-eslint"]
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   },
   "schematics": {
     "@schematics/angular:component": {
