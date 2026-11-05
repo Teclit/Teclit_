@@ -1,5 +1,16 @@
 import type { Education, Experience, Profile, Project } from './profile.model';
 
+/** Technologies les plus fréquentes dans les projets (ex aequo : ordre alphabétique). */
+export function rankTechnologies(projects: readonly Project[], limit: number): string[] {
+  const counts = new Map<string, number>();
+  for (const p of projects) for (const tech of p.stack) counts.set(tech, (counts.get(tech) ?? 0) + 1);
+  return [...counts.entries()]
+    .filter(([, n]) => n > 1)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'fr'))
+    .slice(0, limit)
+    .map(([tech]) => tech);
+}
+
 /** Retourne la valeur si elle est renseignée (non vide), sinon null. */
 export function filledUrl(value: string | null | undefined): string | null {
   return value?.trim() ? value.trim() : null;

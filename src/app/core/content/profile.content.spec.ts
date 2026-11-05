@@ -1,9 +1,22 @@
-import { PROFILE } from './profile.data';
-import { buildPersonJsonLd, buildTimeline, filledUrl, findProject, sortExperiences } from './profile.utils';
+import {
+  buildPersonJsonLd,
+  buildTimeline,
+  filledUrl,
+  findProject,
+  rankTechnologies,
+  sortExperiences,
+} from '../../data/profile.utils';
+import { PROFILE } from './content.service';
+import { ProfileWithRefsSchema } from './profile.schema';
 
 const YEAR_MONTH = /^\d{4}-(0[1-9]|1[0-2])$/;
 
-describe('PROFILE (intégrité de la source de données)', () => {
+describe('PROFILE (intégrité de src/content/profile.json)', () => {
+  it('respecte le schéma Zod (types, formats, références croisées)', () => {
+    const result = ProfileWithRefsSchema.safeParse(PROFILE);
+    expect(result.error?.issues ?? []).toEqual([]);
+  });
+
   it('ne contient aucun placeholder TODO', () => {
     expect(JSON.stringify(PROFILE)).not.toContain('TODO');
   });
@@ -86,6 +99,13 @@ describe('profile.utils', () => {
     for (let i = 1; i < timeline.length; i++) {
       expect(timeline[i - 1].sortKey >= timeline[i].sortKey).toBe(true);
     }
+  });
+
+  it('classe les technologies des projets par fréquence', () => {
+    const ranked = rankTechnologies(PROFILE.projects, 5);
+    expect(ranked.length).toBeLessThanOrEqual(5);
+    const count = (t: string) => PROFILE.projects.filter((p) => p.stack.includes(t)).length;
+    for (let i = 1; i < ranked.length; i++) expect(count(ranked[i - 1])).toBeGreaterThanOrEqual(count(ranked[i]));
   });
 
   it('génère un JSON-LD Person valide', () => {

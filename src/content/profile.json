@@ -1,0 +1,889 @@
+{
+  "sections": {
+    "about": {
+      "eyebrow": "À propos",
+      "title": "Un développeur Full Stack orienté qualité",
+      "lead": ""
+    },
+    "career": {
+      "eyebrow": "Parcours",
+      "title": "Expériences et formations",
+      "lead": "De mes premiers stages web à Caen jusqu'au développement backend chez SNCF Connect & Tech et Tx-Studio."
+    },
+    "skills": {
+      "eyebrow": "Compétences",
+      "title": "Tout le cycle de delivery",
+      "lead": "Conception, développement, tests, CI/CD et déploiement conteneurisé."
+    },
+    "projects": {
+      "eyebrow": "Projets",
+      "title": "Réalisations",
+      "lead": "Projets professionnels, académiques et de stage : problème, solution, architecture et stack."
+    },
+    "education": {
+      "eyebrow": "Formation",
+      "title": "Formation",
+      "lead": "Un cursus progressif, du Bac+2 au Bac+5 (Niveau 7), orienté développement logiciel."
+    },
+    "contact": {
+      "eyebrow": "Contact",
+      "title": "Travaillons ensemble",
+      "lead": "Un poste, une mission ou une question technique ? Écrivez-moi, je réponds rapidement."
+    }
+  },
+  "identity": {
+    "firstName": "Teklit",
+    "lastName": "TEWOLDE",
+    "fullName": "Teklit TEWOLDE",
+    "brand": "Teklit T.",
+    "title": "Développeur Full Stack — Java / Kotlin, Spring Boot, Node.js / NestJS",
+    "tagline": "Je conçois, teste et déploie des applications web de bout en bout : API REST et GraphQL, interfaces React / Next.js, CI/CD et conteneurs Docker / Kubernetes.",
+    "shortBio": "Développeur Full Stack à dominante backend, plus de trois ans d'expérience en Java, Kotlin, Spring Boot, Node.js et NestJS, sur l'ensemble du cycle de vie applicatif.",
+    "longBio": [
+      "Développeur Full Stack à dominante backend, fort de plus de trois ans d'expérience en conception et développement d'applications avec Java, Kotlin, Spring Boot, Node.js et NestJS. J'interviens sur l'ensemble du cycle de vie applicatif : conception d'API REST et GraphQL, sécurisation des accès (JWT, OAuth2), modélisation et exploitation de données SQL et NoSQL, mise en cache avec Redis, tests automatisés, intégration continue avec GitLab et déploiement conteneurisé avec Docker et Kubernetes.",
+      "Mon expérience chez SNCF Connect & Tech, au sein d'une équipe pouvant compter jusqu'à dix développeurs sur un produit conversationnel multicanal à fort trafic, m'a confronté à des enjeux de robustesse, de volumétrie et de rythme de livraison soutenu. Chez Tx-Studio, j'ai conçu des services backend Node.js / NestJS avec une architecture de données combinant PostgreSQL, MongoDB et Redis, avec une attention particulière portée à la sécurité et à la réactivité.",
+      "Autonome, rigoureux et curieux, je m'investis pleinement dans les échanges techniques et les comités d'architecture, et j'apprécie les environnements Agile fondés sur la qualité du code, les revues de code et l'amélioration continue."
+    ],
+    "location": "Vaires-sur-Marne (77), Île-de-France",
+    "phone": "06 95 58 33 63",
+    "availability": "Disponibilité immédiate",
+    "qualities": ["Curiosité", "Autonomie", "Rigueur", "Esprit d'équipe"],
+    "photo": {
+      "src": "assets/images/profile-640.webp",
+      "alt": "Portrait de Teklit TEWOLDE",
+      "width": 640,
+      "height": 640
+    },
+    "siteUrl": "",
+    "links": {
+      "github": "https://github.com/Teclit",
+      "linkedin": "https://www.linkedin.com/in/teklittewolde/",
+      "email": "tewoldeteklit@gmail.com",
+      "cvOnline": "https://cvdesignr.com/p/RBGwWn8kzA75G8j",
+      "cvPdf": null
+    },
+    "roles": [
+      "Développeur Full Stack",
+      "Backend Java / Kotlin",
+      "Spring Boot & Node.js",
+      "Angular / React / Next.js",
+      "Docker & CI/CD"
+    ],
+    "highlights": ["Java", "Kotlin", "Spring Boot", "Node.js", "NestJS", "React", "Next.js", "Docker"],
+    "facts": [
+      {
+        "label": "Expérience",
+        "value": "Plus de 3 ans"
+      },
+      {
+        "label": "Équipe max.",
+        "value": "10 développeurs"
+      },
+      {
+        "label": "Formation",
+        "value": "Bac+5 — Niveau 7"
+      }
+    ],
+    "practicalInfo": ["Permis B et véhicule personnel"]
+  },
+  "experiences": [
+    {
+      "id": "tx-studio",
+      "company": "Tx-Studio",
+      "role": "Développeur Full Stack",
+      "kind": "emploi",
+      "start": "2025-04",
+      "end": "2026-09",
+      "period": "Avril 2025 — Septembre 2026",
+      "location": "Asnières-sur-Seine",
+      "context": "Développement d'une application web full stack intégrant un système de gestion de contenu, une authentification sécurisée et plusieurs services de données. Le frontend s'appuie sur Next.js et TypeScript ; le backend utilise Node.js et NestJS.",
+      "goals": "Faire évoluer une application maintenable et sécurisée, structurer les échanges entre le frontend et le backend, et améliorer la réactivité des accès aux données grâce à une utilisation adaptée de PostgreSQL, MongoDB et Redis.",
+      "missions": [
+        "Concevoir et développer des services backend REST et GraphQL avec Node.js et NestJS.",
+        "Sécuriser les accès applicatifs avec des mécanismes d'authentification JWT et OAuth2.",
+        "Mettre en place Redis pour le cache des données fréquemment consultées et la gestion des sessions et tokens, afin de réduire la charge sur les bases de données.",
+        "Modéliser et gérer les données structurées dans PostgreSQL et les contenus dynamiques dans MongoDB.",
+        "Développer des tests automatisés et participer aux revues de code et au pipeline CI/CD.",
+        "Collaborer avec l'équipe projet en développement itératif via Git et GitLab."
+      ],
+      "achievements": [],
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "Node.js",
+        "NestJS",
+        "Python",
+        "PostgreSQL",
+        "MongoDB",
+        "Redis",
+        "API REST",
+        "GraphQL",
+        "JWT",
+        "OAuth2",
+        "Git",
+        "GitLab",
+        "CI/CD"
+      ],
+      "demonstratedSkills": [
+        "Conception backend",
+        "Sécurité applicative",
+        "Gestion de données hétérogènes",
+        "Optimisation par le cache",
+        "Rigueur",
+        "Autonomie",
+        "Collaboration"
+      ],
+      "projectSlugs": []
+    },
+    {
+      "id": "sncf-connect-tech",
+      "company": "SNCF Connect & Tech",
+      "role": "Développeur Full Stack Java (alternance)",
+      "kind": "alternance",
+      "start": "2022-09",
+      "end": "2024-10",
+      "period": "Septembre 2022 — Octobre 2024",
+      "location": "Puteaux",
+      "context": "Projet conversationnel consacré au chatbot Information Voyageurs de SNCF Voyageurs. La solution diffuse des informations sur plusieurs canaux, notamment le web, WhatsApp et Messenger, en s'appuyant sur la plateforme open source Tock et des composants de traitement du langage naturel. L'équipe a compté jusqu'à dix développeurs.",
+      "goals": "Développer et livrer des fonctionnalités multicanales fiables, maintenir la qualité des livrables, corriger rapidement les anomalies et soutenir un rythme de mise en production élevé, notamment pendant les Jeux Olympiques de Paris 2024.",
+      "missions": [
+        "Concevoir et développer des fonctionnalités backend en Java et Kotlin, exposées via des API REST.",
+        "Contribuer aux pipelines CI/CD avec GitLab CI et Jenkins ainsi qu’aux déploiements conteneurisés avec Docker et Kubernetes.",
+        "Gérer des données NoSQL avec MongoDB et contribuer à la sécurisation des échanges et des accès.",
+        "Participer à l'élaboration des spécifications fonctionnelles et à la définition de choix d'architecture logicielle en comité technique.",
+        "Identifier des goulots d'étranglement et optimiser certaines parties du code par réécriture ciblée.",
+        "Analyser et corriger les anomalies remontées par l'équipe QA, exploiter les logs et déboguer les services.",
+        "Développer les interfaces web associées en React.js et intégrer les parcours conversationnels avec Tock Studio.",
+        "Participer aux revues de code, au pair programming et aux mises en production ponctuelles en Agile / Kanban."
+      ],
+      "achievements": [],
+      "stack": [
+        "Java",
+        "Kotlin 2",
+        "Spring Boot",
+        "React",
+        "MongoDB",
+        "Tock Studio",
+        "NLP",
+        "API REST",
+        "Git",
+        "GitLab",
+        "GitLab CI",
+        "Jenkins",
+        "Docker",
+        "Kubernetes",
+        "AWS",
+        "SageMaker",
+        "Jira"
+      ],
+      "demonstratedSkills": [
+        "Travail en équipe",
+        "Partage de connaissances",
+        "Qualité logicielle",
+        "Analyse de problèmes",
+        "Rythme de livraison soutenu",
+        "Conception technique"
+      ],
+      "projectSlugs": ["assistant-virtuel-sncf", "bot-tgv-inoui", "chatbot-transilien"]
+    },
+    {
+      "id": "projet-academique",
+      "company": "Projet académique — Ingetis / École PMN",
+      "role": "Développeur Full Stack Java",
+      "kind": "projet",
+      "start": "2022-09",
+      "end": "2024-09",
+      "period": "Pendant le cursus Bac+5",
+      "location": "Ingetis / École PMN",
+      "context": "Conception d'une application web sécurisée associant un backend Java Spring Boot et un frontend React, avec automatisation du contrôle qualité et de la livraison.",
+      "goals": "Mettre en pratique une architecture full stack, sécuriser les API, automatiser les tests et produire une image Docker à chaque évolution validée.",
+      "missions": [
+        "Développer et maintenir des API REST sécurisées avec Java 17, Spring Boot 3 et Spring Security (JWT).",
+        "Conteneuriser l'application et automatiser le build, les tests et le déploiement avec GitHub Actions.",
+        "Créer des tests unitaires et d'intégration avec JUnit et Mockito, et contrôler la qualité du code avec Qodana.",
+        "Développer l'interface utilisateur avec React."
+      ],
+      "achievements": [],
+      "stack": [
+        "Java 17",
+        "Spring Boot 3",
+        "Spring Security",
+        "React",
+        "MySQL",
+        "JWT",
+        "JUnit",
+        "Mockito",
+        "Docker",
+        "GitHub Actions",
+        "Qodana"
+      ],
+      "demonstratedSkills": ["Rigueur", "Architecture full stack", "Automatisation", "Qualité logicielle", "Sécurité"],
+      "projectSlugs": ["qcmplus"]
+    },
+    {
+      "id": "dgicotek",
+      "company": "Dgicotek",
+      "role": "Développeur d'application web (stage)",
+      "kind": "stage",
+      "start": "2022-04",
+      "end": "2022-06",
+      "period": "Avril 2022 — Juin 2022",
+      "location": "Émerainville",
+      "context": "Conception d'une application web dynamique avec tableau de bord interactif, associant une interface responsive et une base de données MySQL.",
+      "goals": "Proposer une interface utilisable sur différents appareils, permettre la consultation et la mise à jour des données, et sécuriser les opérations d'administration.",
+      "missions": [
+        "Définir le schéma MySQL, créer les tables et développer les opérations CRUD.",
+        "Écrire les traitements PHP pour les requêtes utilisateur, l'authentification et l'accès aux données.",
+        "Structurer et mettre en forme les pages avec HTML, CSS et Bootstrap, et développer des comportements dynamiques en JavaScript.",
+        "Exécuter des tests de fonctionnement et corriger les anomalies identifiées."
+      ],
+      "achievements": [],
+      "stack": ["HTML5", "CSS3", "JavaScript", "Bootstrap", "PHP", "SQL", "MySQL"],
+      "demonstratedSkills": ["Polyvalence full stack", "Organisation", "Ergonomie", "Résolution d'anomalies"],
+      "projectSlugs": []
+    },
+    {
+      "id": "le-klub",
+      "company": "Le Klub",
+      "role": "Développeur Web et Web Mobile (stage)",
+      "kind": "stage",
+      "start": "2021-04",
+      "end": "2021-06",
+      "period": "Avril 2021 — Juin 2021",
+      "location": "Hérouville-Saint-Clair",
+      "context": "Développement de deux réalisations web : une solution d'accès à un parking par QR code avec back-office d'administration, et un template responsive pour une boutique de fleurs en ligne.",
+      "goals": "Simplifier et sécuriser l'accès au parking, permettre aux administrateurs de gérer les utilisateurs et les droits, et proposer une interface responsive adaptée à la présentation de produits en ligne.",
+      "missions": [
+        "Modéliser la base MySQL pour les utilisateurs, les historiques d'accès et les droits d'administration.",
+        "Développer avec PHP et JavaScript les fonctions de gestion des QR codes et des accès, ainsi qu’un back-office de gestion des droits et statistiques.",
+        "Concevoir l'interface permettant l'inscription des utilisateurs et la génération d'un QR code personnel.",
+        "Créer un template WordPress et PHP responsive pour une boutique de fleurs."
+      ],
+      "achievements": [],
+      "stack": ["WordPress", "HTML5", "CSS3", "JavaScript", "jQuery", "Bootstrap", "PHP", "SQL", "MySQL", "Chart.js"],
+      "demonstratedSkills": ["Conception orientée utilisateur", "Sécurité des accès", "Polyvalence web", "Ergonomie"],
+      "projectSlugs": ["parking-qr-code", "boutique-de-fleurs"]
+    },
+    {
+      "id": "net-conception",
+      "company": "Net Conception",
+      "role": "Développeur Web (stage)",
+      "kind": "stage",
+      "start": "2019-12",
+      "end": "2019-12",
+      "period": "Décembre 2019",
+      "location": "Caen",
+      "context": "Participation au développement et à la modernisation de sites web dynamiques à partir de HTML, CSS, JavaScript et jQuery.",
+      "goals": "Améliorer l'interactivité et l'expérience utilisateur tout en maintenant la compatibilité des fonctions sur différents navigateurs.",
+      "missions": [
+        "Ajouter des animations, des menus interactifs et d’autres fonctionnalités dynamiques en JavaScript et jQuery.",
+        "Déboguer et corriger les anomalies affectant les interactions et la compatibilité navigateur.",
+        "Personnaliser des composants existants pour améliorer l'ergonomie et l'apparence des pages."
+      ],
+      "achievements": [],
+      "stack": ["HTML5", "CSS3", "JavaScript", "jQuery"],
+      "demonstratedSkills": ["Analyse de bugs", "Précision", "Compatibilité navigateurs"],
+      "projectSlugs": []
+    },
+    {
+      "id": "webbel",
+      "company": "WEBBEL",
+      "role": "Développeur Web (stage)",
+      "kind": "stage",
+      "start": "2019-06",
+      "end": "2019-06",
+      "period": "Juin 2019",
+      "location": "Caen",
+      "context": "Conception et développement d'un blog avec Laravel et MySQL, comprenant un espace de gestion de contenu et des fonctions d'authentification.",
+      "goals": "Permettre aux utilisateurs autorisés de publier, modifier et supprimer des articles, sécuriser l'espace d'administration et proposer une consultation responsive.",
+      "missions": [
+        "Concevoir la structure de l'application et les principales fonctions CRUD des articles.",
+        "Mettre en place l'authentification et le contrôle d'accès aux zones d'administration.",
+        "Créer les tables nécessaires aux articles, aux utilisateurs et aux commentaires, et développer les requêtes SQL associées.",
+        "Mettre en forme l'interface responsive avec Bootstrap."
+      ],
+      "achievements": [],
+      "stack": ["Laravel", "PHP", "MySQL", "SQL", "HTML5", "CSS3", "Bootstrap"],
+      "demonstratedSkills": ["Apprentissage rapide", "Structuration d'une application web", "Sécurité des accès"],
+      "projectSlugs": []
+    }
+  ],
+  "projects": [
+    {
+      "slug": "assistant-virtuel-sncf",
+      "title": "Assistant Virtuel SNCF",
+      "summary": "Chatbot d'information voyageurs : l'agent virtuel communique les arrêts et les éventuelles perturbations à partir d'un numéro de train ou de car TER et LEX (Léman Express).",
+      "image": {
+        "src": "assets/projects/assistant-virtuel-sncf.webp",
+        "alt": "Logo de l'Assistant Virtuel SNCF",
+        "width": 251,
+        "height": 201
+      },
+      "link": "https://bot.assistant.sncf/index.html",
+      "experienceId": "sncf-connect-tech",
+      "featured": true,
+      "problem": "Diffuser une information voyageurs fiable et à jour sur plusieurs canaux (web, WhatsApp, Messenger), avec un rythme de mise en production élevé — notamment pendant les Jeux Olympiques de Paris 2024.",
+      "solution": "Un assistant conversationnel bâti sur la plateforme open source Tock et des composants NLP, avec des fonctionnalités backend en Java / Kotlin exposées via des API REST et des interfaces web en React.",
+      "architecture": [
+        "Plateforme conversationnelle Tock (Tock Studio) et traitement du langage naturel.",
+        "Services backend Java / Kotlin exposant des API REST.",
+        "Données NoSQL dans MongoDB.",
+        "Pipelines CI/CD GitLab CI et Jenkins, déploiements conteneurisés Docker / Kubernetes sur AWS."
+      ],
+      "stack": [
+        "Java",
+        "Kotlin",
+        "React",
+        "MongoDB",
+        "Nginx",
+        "Kubernetes",
+        "AWS",
+        "GitLab",
+        "Jenkins",
+        "Tock",
+        "NLP",
+        "API REST",
+        "Jira"
+      ]
+    },
+    {
+      "slug": "bot-tgv-inoui",
+      "title": "Bot TGV INOUI",
+      "summary": "Chatbot fournissant des informations en temps réel aux voyageurs TGV INOUI.",
+      "image": {
+        "src": "assets/projects/bot-tgv-inoui.webp",
+        "alt": "Mascotte du Bot TGV INOUI",
+        "width": 477,
+        "height": 541
+      },
+      "link": "https://bot.tgvinoui.sncf/",
+      "experienceId": "sncf-connect-tech",
+      "featured": true,
+      "problem": "Fournir aux voyageurs une information en temps réel, accessible à tout moment via un canal conversationnel.",
+      "solution": "Chatbot développé dans le cadre du produit conversationnel Information Voyageurs de SNCF Connect & Tech, sur la plateforme Tock.",
+      "architecture": [
+        "Plateforme conversationnelle Tock et composants NLP.",
+        "Backend Java / Kotlin, API REST, MongoDB.",
+        "Déploiement conteneurisé Kubernetes sur AWS, CI/CD GitLab et Jenkins."
+      ],
+      "stack": [
+        "Java",
+        "Kotlin",
+        "React",
+        "MongoDB",
+        "Nginx",
+        "Kubernetes",
+        "AWS",
+        "GitLab",
+        "Jenkins",
+        "Tock",
+        "NLP",
+        "API REST",
+        "Jira"
+      ]
+    },
+    {
+      "slug": "chatbot-transilien",
+      "title": "Chatbot SNCF Transilien",
+      "summary": "Chatbot fournissant des informations en temps réel aux voyageurs Transilien.",
+      "image": {
+        "src": "assets/projects/chatbot-transilien.webp",
+        "alt": "Visuel du chatbot Transilien",
+        "width": 640,
+        "height": 360
+      },
+      "link": "https://www.transilien.com/en/page-medias/le-chatbot-transilien",
+      "experienceId": "sncf-connect-tech",
+      "featured": false,
+      "problem": "Fournir aux voyageurs Transilien une information en temps réel via un canal conversationnel.",
+      "solution": "Chatbot développé dans le cadre du produit conversationnel Information Voyageurs de SNCF Connect & Tech, sur la plateforme Tock.",
+      "architecture": [
+        "Plateforme conversationnelle Tock et composants NLP.",
+        "Backend Java / Kotlin, API REST, MongoDB.",
+        "Déploiement conteneurisé Kubernetes sur AWS, CI/CD GitLab et Jenkins."
+      ],
+      "stack": [
+        "Java",
+        "Kotlin",
+        "React",
+        "MongoDB",
+        "Nginx",
+        "Kubernetes",
+        "AWS",
+        "GitLab",
+        "Jenkins",
+        "Tock",
+        "NLP",
+        "API REST",
+        "Jira"
+      ]
+    },
+    {
+      "slug": "cs-le-club",
+      "title": "CS Le Club",
+      "summary": "Site institutionnel avec CMS, gestion d'adhésion et contenus dynamiques (actualités, pages, événements).",
+      "image": {
+        "src": "assets/projects/cs-le-club.webp",
+        "alt": "Logo de CS Le Club",
+        "width": 300,
+        "height": 100
+      },
+      "link": "https://www.csleclub.com/",
+      "featured": true,
+      "problem": "",
+      "solution": "Site institutionnel doté d'un CMS, d'une gestion d'adhésion et de contenus dynamiques (actualités, pages, événements).",
+      "architecture": [
+        "Frontend Next.js / TypeScript.",
+        "Backend Node.js / NestJS.",
+        "Données dans MongoDB et PostgreSQL."
+      ],
+      "stack": ["Next.js", "TypeScript", "Node.js", "NestJS", "MongoDB", "PostgreSQL"]
+    },
+    {
+      "slug": "tech-365",
+      "title": "Tech-365",
+      "summary": "Plateforme web de mise en relation et de catalogue de services avec gestion de contenu dynamique.",
+      "image": {
+        "src": "assets/projects/tech-365.webp",
+        "alt": "Logo de Tech-365",
+        "width": 200,
+        "height": 200
+      },
+      "link": "https://tech-365.fr/",
+      "featured": true,
+      "problem": "",
+      "solution": "Plateforme de mise en relation et de catalogue de services, avec gestion de contenu dynamique.",
+      "architecture": [
+        "Frontend Next.js / TypeScript.",
+        "Backend Node.js exposant des API REST et GraphQL.",
+        "Données dans MongoDB et PostgreSQL, cache Redis."
+      ],
+      "stack": ["Next.js", "TypeScript", "Node.js", "MongoDB", "PostgreSQL", "Redis", "API REST", "GraphQL"]
+    },
+    {
+      "slug": "qcmplus",
+      "title": "QCMPLUS",
+      "summary": "Plateforme complète de gestion de quiz et de questionnaires, structurée en contrôleurs, modèles, dépôts et services pour une architecture robuste et évolutive.",
+      "image": {
+        "src": "assets/projects/qcmplus.webp",
+        "alt": "Logo de QCMPLUS",
+        "width": 217,
+        "height": 75
+      },
+      "link": "https://qcmplus.vercel.app/",
+      "experienceId": "projet-academique",
+      "featured": true,
+      "problem": "Mettre en pratique une architecture full stack sécurisée, avec contrôle qualité et livraison automatisés, dans le cadre du cursus Bac+5.",
+      "solution": "Une API REST Java 17 / Spring Boot 3 sécurisée par Spring Security (JWT), une interface React, une base MySQL, et une image Docker produite à chaque évolution validée.",
+      "architecture": [
+        "Backend en couches : contrôleurs, services, dépôts, modèles.",
+        "Authentification JWT via Spring Security.",
+        "Tests unitaires et d’intégration JUnit / Mockito, analyse Qodana.",
+        "Pipeline GitHub Actions : build, tests, image Docker, déploiement."
+      ],
+      "stack": [
+        "Java 17",
+        "Spring Boot 3",
+        "Spring Security",
+        "React",
+        "MySQL",
+        "JWT",
+        "JUnit",
+        "Mockito",
+        "Docker",
+        "GitHub Actions",
+        "Qodana"
+      ]
+    },
+    {
+      "slug": "parking-qr-code",
+      "title": "Gestion Parking & QR Generator",
+      "summary": "Solution d'accès à un parking par QR code, avec back-office d'administration et statistiques.",
+      "image": {
+        "src": "assets/projects/parking-qr-code.webp",
+        "alt": "Logo Les Rives Droite",
+        "width": 300,
+        "height": 116
+      },
+      "link": "https://rivesqr.web-interactive.fr/",
+      "experienceId": "le-klub",
+      "featured": false,
+      "problem": "Simplifier et sécuriser l'accès au parking, et permettre aux administrateurs de gérer les utilisateurs et les droits.",
+      "solution": "Inscription des utilisateurs avec génération d'un QR code personnel, gestion des accès et back-office de gestion des droits et statistiques.",
+      "architecture": [
+        "Base MySQL : utilisateurs, historiques d'accès, droits d'administration.",
+        "Traitements PHP et JavaScript pour la gestion des QR codes et des accès.",
+        "Statistiques avec Chart.js."
+      ],
+      "stack": ["jQuery", "Bootstrap", "PHP", "SQL", "MySQL", "Chart.js"]
+    },
+    {
+      "slug": "boutique-de-fleurs",
+      "title": "La Petite Boutique de Fleurs",
+      "summary": "Template WordPress responsive pour une boutique de fleurs en ligne.",
+      "image": {
+        "src": "assets/projects/boutique-de-fleurs.webp",
+        "alt": "Aperçu de La Petite Boutique de Fleurs",
+        "width": 640,
+        "height": 640
+      },
+      "link": "https://www.la-petite-boutique-de-fleurs.fr/",
+      "experienceId": "le-klub",
+      "featured": false,
+      "problem": "Proposer une interface responsive adaptée à la présentation de produits en ligne.",
+      "solution": "Création d’un template WordPress et PHP responsive.",
+      "architecture": ["Thème WordPress personnalisé (PHP, HTML, CSS, JavaScript)."],
+      "stack": ["WordPress", "HTML", "CSS", "JavaScript", "PHP"]
+    }
+  ],
+  "skillGroups": [
+    {
+      "id": "backend",
+      "title": "Backend Java / Kotlin & Node.js",
+      "icon": "server",
+      "description": "Services backend et API sécurisées, de la conception à la mise en production.",
+      "skills": [
+        "Java 17 / 21",
+        "Kotlin 2",
+        "Spring Boot 3",
+        "Spring Security",
+        "Node.js",
+        "NestJS",
+        "TypeScript",
+        "API REST",
+        "GraphQL",
+        "JWT",
+        "OAuth2",
+        "Python",
+        "PHP"
+      ]
+    },
+    {
+      "id": "frontend",
+      "title": "Frontend Angular / React / Next.js",
+      "icon": "layout",
+      "description": "Interfaces web responsives et parcours utilisateurs intégrés aux API.",
+      "skills": [
+        "Angular",
+        "React",
+        "Next.js",
+        "TypeScript",
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "Bootstrap",
+        "jQuery",
+        "WordPress"
+      ]
+    },
+    {
+      "id": "data",
+      "title": "Données & cache",
+      "icon": "database",
+      "description": "Modélisation SQL / NoSQL et mise en cache pour réduire la charge base de données.",
+      "skills": ["PostgreSQL", "MySQL", "Oracle", "MongoDB", "Redis", "SQL"]
+    },
+    {
+      "id": "devops",
+      "title": "DevOps, Docker & CI/CD",
+      "icon": "workflow",
+      "description": "Builds, tests et déploiements automatisés, services conteneurisés.",
+      "skills": ["Git", "GitLab", "GitLab CI", "GitHub Actions", "Jenkins", "Docker", "Kubernetes", "Linux"]
+    },
+    {
+      "id": "quality",
+      "title": "Qualité & tests",
+      "icon": "shield",
+      "description": "Tests automatisés, revues de code et analyse des anomalies.",
+      "skills": [
+        "JUnit",
+        "Mockito",
+        "Jest",
+        "Pytest",
+        "Qodana",
+        "Tests unitaires",
+        "Tests d'intégration",
+        "Revue de code",
+        "Analyse de logs"
+      ]
+    },
+    {
+      "id": "cloud-ai",
+      "title": "Cloud & IA",
+      "icon": "cloud",
+      "description": "Déploiement cloud et briques conversationnelles.",
+      "skills": ["AWS", "SageMaker (entraînement de modèle)", "Tock Studio", "NLP"]
+    },
+    {
+      "id": "methods",
+      "title": "Méthodes Agile / Kanban",
+      "icon": "users",
+      "description": "Travail en équipe élargie, livraison itérative et amélioration continue.",
+      "skills": ["Agile", "Kanban", "Scrum", "Jira", "Pair programming", "UML", "Comités d’architecture"]
+    }
+  ],
+  "languages": [
+    {
+      "name": "Français",
+      "level": "Langue maternelle"
+    },
+    {
+      "name": "Anglais",
+      "level": "Professionnel"
+    }
+  ],
+  "education": [
+    {
+      "id": "ingetis",
+      "start": "2022-09",
+      "end": "2024-09",
+      "period": "2022 — 2024",
+      "title": "Expert en système informatique",
+      "level": "Niveau 7 (Bac+5)",
+      "school": "Ingetis",
+      "location": "Paris"
+    },
+    {
+      "id": "pmn",
+      "start": "2022-09",
+      "end": "2024-09",
+      "period": "2022 — 2024",
+      "title": "Mastère Lead Developer Java (double diplôme)",
+      "level": "Bac+5",
+      "school": "École PMN, Groupe FITEC"
+    },
+    {
+      "id": "greta",
+      "start": "2021-09",
+      "end": "2022-06",
+      "period": "2021 — 2022",
+      "title": "Concepteur développeur d'application",
+      "level": "Niveau 6 (Bac+3)",
+      "school": "GRETA Seine-et-Marne",
+      "location": "Lognes"
+    },
+    {
+      "id": "afpa",
+      "start": "2020-09",
+      "end": "2021-06",
+      "period": "2020 — 2021",
+      "title": "Développeur Web et Web Mobile",
+      "level": "Niveau 5 (Bac+2)",
+      "school": "AFPA",
+      "location": "Caen"
+    },
+    {
+      "id": "unicaen",
+      "start": "2018-09",
+      "end": "2019-06",
+      "period": "2018 — 2019",
+      "title": "Licence Mathématiques et Informatique Appliquées (MIASHS)",
+      "school": "Université de Caen",
+      "location": "Caen"
+    }
+  ],
+  "certifications": [],
+  "techLogos": [
+    {
+      "name": "Java",
+      "src": "assets/logos/java.png"
+    },
+    {
+      "name": "Kotlin",
+      "src": "assets/logos/kotlin.png"
+    },
+    {
+      "name": "Spring Boot",
+      "src": "assets/logos/spring-boot.png"
+    },
+    {
+      "name": "Spring Security",
+      "src": "assets/logos/spring-security.svg"
+    },
+    {
+      "name": "Node.js",
+      "src": "assets/logos/nodejs.png"
+    },
+    {
+      "name": "NestJS",
+      "src": "assets/logos/nestjs.svg"
+    },
+    {
+      "name": "TypeScript",
+      "src": "assets/logos/typescript.png"
+    },
+    {
+      "name": "JavaScript",
+      "src": "assets/logos/JavaScript.png"
+    },
+    {
+      "name": "Python",
+      "src": "assets/logos/python.png"
+    },
+    {
+      "name": "PHP",
+      "src": "assets/logos/php.png"
+    },
+    {
+      "name": "React",
+      "src": "assets/logos/react.png"
+    },
+    {
+      "name": "Next.js",
+      "src": "assets/logos/nextjs.png"
+    },
+    {
+      "name": "Angular",
+      "src": "assets/logos/angular.png"
+    },
+    {
+      "name": "Vue.js",
+      "src": "assets/logos/vue.png"
+    },
+    {
+      "name": "HTML",
+      "src": "assets/logos/html.png"
+    },
+    {
+      "name": "CSS",
+      "src": "assets/logos/css.png"
+    },
+    {
+      "name": "Tailwind CSS",
+      "src": "assets/logos/tailwind.png"
+    },
+    {
+      "name": "Bootstrap",
+      "src": "assets/logos/bootstrap.png"
+    },
+    {
+      "name": "jQuery",
+      "src": "assets/logos/jquery.png"
+    },
+    {
+      "name": "WordPress",
+      "src": "assets/logos/wordpress.svg"
+    },
+    {
+      "name": "Laravel",
+      "src": "assets/logos/laraval.png"
+    },
+    {
+      "name": "Symfony",
+      "src": "assets/logos/symfony.png"
+    },
+    {
+      "name": "Express.js",
+      "src": "assets/logos/express.png"
+    },
+    {
+      "name": "C#",
+      "src": "assets/logos/csharp.png"
+    },
+    {
+      "name": "PostgreSQL",
+      "src": "assets/logos/postgresql.png"
+    },
+    {
+      "name": "MySQL",
+      "src": "assets/logos/mysql.png"
+    },
+    {
+      "name": "Oracle",
+      "src": "assets/logos/oracle.png"
+    },
+    {
+      "name": "MongoDB",
+      "src": "assets/logos/mongodb.png"
+    },
+    {
+      "name": "Redis",
+      "src": "assets/logos/redis.svg"
+    },
+    {
+      "name": "REST API",
+      "src": "assets/logos/restapi.png"
+    },
+    {
+      "name": "JWT",
+      "src": "assets/logos/jwt.svg"
+    },
+    {
+      "name": "OAuth2",
+      "src": "assets/logos/oauth2.svg"
+    },
+    {
+      "name": "Git",
+      "src": "assets/logos/git.png"
+    },
+    {
+      "name": "GitHub",
+      "src": "assets/logos/github.png"
+    },
+    {
+      "name": "GitLab",
+      "src": "assets/logos/gitlab.png"
+    },
+    {
+      "name": "GitHub Actions",
+      "src": "assets/logos/github-actions.svg"
+    },
+    {
+      "name": "Jenkins",
+      "src": "assets/logos/jenkins.png"
+    },
+    {
+      "name": "Docker",
+      "src": "assets/logos/docker.png"
+    },
+    {
+      "name": "Kubernetes",
+      "src": "assets/logos/kubernetes.png"
+    },
+    {
+      "name": "Nginx",
+      "src": "assets/logos/nginx.png"
+    },
+    {
+      "name": "AWS",
+      "src": "assets/logos/aws.png"
+    },
+    {
+      "name": "SageMaker",
+      "src": "assets/logos/sagemaker.svg"
+    },
+    {
+      "name": "Tock",
+      "src": "assets/logos/tock.png"
+    },
+    {
+      "name": "JUnit",
+      "src": "assets/logos/Junit.png"
+    },
+    {
+      "name": "Jest",
+      "src": "assets/logos/jest.svg"
+    },
+    {
+      "name": "Pytest",
+      "src": "assets/logos/pytest.svg"
+    },
+    {
+      "name": "Jira",
+      "src": "assets/logos/jira.png"
+    },
+    {
+      "name": "Figma",
+      "src": "assets/logos/figma.png"
+    },
+    {
+      "name": "Linux",
+      "src": "assets/logos/linux.svg"
+    },
+    {
+      "name": "UML",
+      "src": "assets/logos/uml.svg"
+    }
+  ]
+}
