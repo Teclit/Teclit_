@@ -11,3 +11,7 @@ README.md
 coverage
 e2e
 *.log
+e2e
+test-results
+playwright-report
+out-tsc

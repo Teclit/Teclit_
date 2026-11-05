@@ -1,0 +1,10 @@
+dist
+coverage
+.angular
+node_modules
+package-lock.json
+public
+test-results
+playwright-report
+.vscode
+*.md

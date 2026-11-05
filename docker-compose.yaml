@@ -1,13 +1,11 @@
-version: '3.8'
-
 services:
-  # Service de développement
+  # Développement : serveur Angular avec rechargement à chaud — http://localhost:4200
   dev:
     build:
       context: .
       dockerfile: Dockerfile.dev
     ports:
-      - "4200:4200"
+      - '4200:4200'
     volumes:
       - ./:/app
       - /app/node_modules
@@ -15,27 +13,32 @@ services:
       - NODE_ENV=development
     restart: unless-stopped
 
-  # Service de production
+  # Production : build pré-rendu servi par Nginx non-root — http://localhost
   prod:
     build:
       context: .
       dockerfile: Dockerfile
+    image: teclit-portfolio:latest
     ports:
-      - "80:80"
+      - '80:8080'
     restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      test: ['CMD', 'wget', '-q', '--spider', 'http://127.0.0.1:8080/']
       interval: 30s
-      timeout: 10s
+      timeout: 5s
       retries: 3
-      start_period: 40s
+      start_period: 10s
 
-  # Service de test
+  # Tests unitaires (Chrome headless requis dans l'image ; à défaut, lancer `npm run test:ci` en local)
   test:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    command: npm run test -- --browsers=ChromeHeadless --watch=false
+    command: npm run test:ci
     volumes:
       - ./:/app
       - /app/node_modules
+    profiles: ['test']
