@@ -1,7 +1,6 @@
-
 import { Injectable, inject, DOCUMENT } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { PROFILE } from '../data/profile.data';
+import { PROFILE } from './content/content.service';
 import { filledUrl } from '../data/profile.utils';
 
 export interface PageSeo {

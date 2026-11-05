@@ -1,95 +1,56 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PROFILE } from '../data/profile.data';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ContentService } from '../core/content/content.service';
 import { IconComponent } from '../shared/icon/icon.component';
 import { RevealDirective } from '../shared/reveal.directive';
+import { CardComponent } from '../shared/ui/card.component';
+import { TagComponent } from '../shared/ui/tag.component';
 
-/** Section « Formation et certifications ». */
+/** Formations (et certifications si renseignées). */
 @Component({
   selector: 'app-formation',
-  imports: [IconComponent, RevealDirective],
+  imports: [IconComponent, RevealDirective, CardComponent, TagComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'block' },
   template: `
-    <section class="section section--alt" id="formation" aria-labelledby="formation-title">
-      <div class="container">
-        <header class="section__header" appReveal>
-          <span class="eyebrow">Formation</span>
-          <h2 id="formation-title" class="section__title">
-            {{ certifications.length ? 'Formation et certifications' : 'Formation' }}
-          </h2>
-          <p class="section__lead">
-            Un cursus progressif, du Bac+2 au Bac+5 (Niveau 7), orienté développement logiciel.
-          </p>
-        </header>
-
-        <ul class="grid grid--2" role="list">
-          @for (edu of education; track edu.id) {
-            <li class="card edu" appReveal>
-              <span class="edu__icon" aria-hidden="true"><app-icon name="graduation" /></span>
-              <div>
-                <p class="muted edu__period">{{ edu.period }}</p>
-                <h3 class="edu__title">{{ edu.title }}</h3>
-                <p class="edu__school">{{ edu.school }}{{ edu.location ? ' · ' + edu.location : '' }}</p>
-                @if (edu.level) {
-                  <p class="chip edu__level">{{ edu.level }}</p>
-                }
-              </div>
-            </li>
-          }
-        </ul>
-
-        @if (certifications.length) {
-          <h3 class="certs__title">Certifications</h3>
-          <ul class="grid grid--3" role="list">
-            @for (cert of certifications; track cert.name) {
-              <li class="card">
-                <h4>{{ cert.name }}</h4>
-                <p class="muted">{{ cert.issuer }} · {{ cert.date }}</p>
-                @if (cert.url) {
-                  <a [href]="cert.url" target="_blank" rel="noopener noreferrer">Vérifier la certification</a>
-                }
-              </li>
+    <ul role="list" class="grid gap-5 sm:grid-cols-2">
+      @for (edu of content.education; track edu.id) {
+        <li appCard appReveal class="flex gap-4">
+          <span
+            class="grid size-11 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent-strong dark:text-accent"
+            aria-hidden="true"
+          >
+            <app-icon name="graduation" />
+          </span>
+          <div>
+            <p class="text-sm text-muted">{{ edu.period }}</p>
+            <h3 class="text-h3 font-bold">{{ edu.title }}</h3>
+            <p class="font-semibold text-accent">{{ edu.school }}{{ edu.location ? ' · ' + edu.location : '' }}</p>
+            @if (edu.level) {
+              <app-tag variant="accent" class="mt-2">{{ edu.level }}</app-tag>
             }
-          </ul>
+          </div>
+        </li>
+      }
+    </ul>
+
+    @if (content.certifications.length) {
+      <h3 class="mb-4 mt-12 text-h3 font-bold" data-testid="certifications">Certifications</h3>
+      <ul role="list" class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        @for (cert of content.certifications; track cert.name) {
+          <li appCard>
+            <h4 class="font-bold">{{ cert.name }}</h4>
+            <p class="text-sm text-muted">{{ cert.issuer }} · {{ cert.date }}</p>
+            @if (cert.url) {
+              <a [href]="cert.url" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent"
+                >Vérifier la certification</a
+              >
+            }
+          </li>
         }
-      </div>
-    </section>
-  `,
-  styles: `
-    .edu {
-      display: flex;
-      gap: var(--sp-4);
-      list-style: none;
-    }
-    .edu__icon {
-      display: grid;
-      flex-shrink: 0;
-      place-items: center;
-      width: 44px;
-      height: 44px;
-      border-radius: var(--radius-sm);
-      background: var(--primary-soft);
-      color: var(--primary);
-    }
-    .edu__period {
-      font-size: var(--fs-sm);
-    }
-    .edu__title {
-      font-size: var(--fs-lg);
-    }
-    .edu__school {
-      color: var(--primary);
-      font-weight: 600;
-    }
-    .edu__level {
-      margin-top: var(--sp-2);
-    }
-    .certs__title {
-      margin: var(--sp-7) 0 var(--sp-4);
-      font-size: var(--fs-lg);
+      </ul>
     }
   `,
 })
 export class FormationComponent {
-  protected readonly education = PROFILE.education;
-  protected readonly certifications = PROFILE.certifications;
+  protected readonly content = inject(ContentService);
 }

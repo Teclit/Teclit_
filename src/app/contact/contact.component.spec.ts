@@ -1,6 +1,7 @@
-import { provideHttpClient, withXhr } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { CONTACT_ENDPOINT } from '../core/contact/contact.service';
 import { ContactComponent } from './contact.component';
 
@@ -22,7 +23,7 @@ describe('ContactComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ContactComponent],
-      providers: [provideHttpClient(withXhr()), provideHttpClientTesting()],
+      providers: [provideRouter([]), provideHttpClient(), provideHttpClientTesting()],
     });
     fixture = TestBed.createComponent(ContactComponent);
     component = fixture.componentInstance;
@@ -36,7 +37,7 @@ describe('ContactComponent', () => {
   it('affiche les erreurs et n’envoie rien si le formulaire est invalide', () => {
     component.onSubmit();
     fixture.detectChanges();
-    expect(el.querySelectorAll('.field__error').length).toBe(3);
+    expect(el.querySelectorAll('[data-testid="field-error"]').length).toBe(3);
     expect(el.querySelector('#contact-email')?.getAttribute('aria-invalid')).toBe('true');
     http.expectNone(CONTACT_ENDPOINT);
   });
@@ -71,7 +72,9 @@ describe('ContactComponent', () => {
     http.expectOne(CONTACT_ENDPOINT).flush({}, { status: 503, statusText: 'Unavailable' });
     fixture.detectChanges();
     expect(component.status()).toBe('error');
-    expect(el.querySelector('.contact__ko a')?.getAttribute('href')).toBe('mailto:tewoldeteklit@gmail.com');
+    expect(el.querySelector('[data-testid="contact-status"] a')?.getAttribute('href')).toBe(
+      'mailto:tewoldeteklit@gmail.com',
+    );
   });
 
   it('associe chaque champ à un label', () => {

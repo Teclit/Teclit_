@@ -1,115 +1,67 @@
+import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import type { Project } from '../../data/profile.model';
 import { IconComponent } from '../icon/icon.component';
+import { CardComponent } from '../ui/card.component';
+import { TagComponent } from '../ui/tag.component';
+
+const MAX_TAGS = 5;
 
 @Component({
   selector: 'app-project-card',
-  imports: [RouterLink, IconComponent],
+  imports: [RouterLink, NgOptimizedImage, IconComponent, CardComponent, TagComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: 'block h-full' },
   template: `
     @let p = project();
-    <article class="card pcard">
-      <div class="pcard__media">
+    <article appCard interactive padding="none" class="group flex h-full flex-col overflow-hidden">
+      <div
+        class="grid aspect-[16/9] place-items-center border-b border-border bg-linear-to-br from-accent-soft via-surface to-surface-2 p-6"
+      >
         <img
-          [src]="p.image.src"
-          [alt]="p.image.alt"
+          [ngSrc]="p.image.src"
           [width]="p.image.width"
           [height]="p.image.height"
-          loading="lazy"
-          decoding="async"
+          [alt]="p.image.alt"
+          class="max-h-full w-auto rounded-md object-contain transition-transform duration-500 ease-out-expo motion-safe:group-hover:scale-105"
         />
       </div>
-      <div class="pcard__body">
-        <h3 class="pcard__title">
-          <a class="pcard__link" [routerLink]="['/projets', p.slug]">{{ p.title }}</a>
+      <div class="flex flex-1 flex-col gap-3 p-5 sm:p-6">
+        <h3 class="text-h3 font-bold">
+          <a
+            class="text-fg no-underline after:absolute after:inset-0 after:content-[''] hover:text-accent"
+            [routerLink]="['/projets', p.slug]"
+            data-testid="project-link"
+            >{{ p.title }}</a
+          >
         </h3>
-        <p class="muted pcard__summary">{{ p.summary }}</p>
-        <ul class="chips" role="list" aria-label="Stack technique">
-          @for (tech of p.stack.slice(0, maxChips); track tech) {
-            <li class="chip chip--outline">{{ tech }}</li>
+        <p class="text-sm text-muted">{{ p.summary }}</p>
+        <ul role="list" class="flex flex-wrap gap-1.5" aria-label="Stack technique">
+          @for (tech of p.stack.slice(0, maxTags); track tech) {
+            <li>
+              <app-tag variant="outline">{{ tech }}</app-tag>
+            </li>
           }
-          @if (p.stack.length > maxChips) {
-            <li class="chip chip--outline">+{{ p.stack.length - maxChips }}</li>
+          @if (p.stack.length > maxTags) {
+            <li>
+              <app-tag variant="outline">+{{ p.stack.length - maxTags }}</app-tag>
+            </li>
           }
         </ul>
-        <p class="pcard__more" aria-hidden="true">Voir le détail <app-icon name="arrow-right" [size]="16" /></p>
+        <p class="mt-auto inline-flex items-center gap-1 pt-2 text-sm font-semibold text-accent" aria-hidden="true">
+          Voir le détail
+          <app-icon
+            name="arrow-right"
+            [size]="16"
+            class="transition-transform duration-300 motion-safe:group-hover:translate-x-1"
+          />
+        </p>
       </div>
     </article>
-  `,
-  styles: `
-    :host {
-      display: block;
-    }
-    .pcard {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      padding: 0;
-      overflow: hidden;
-      transition:
-        transform var(--transition),
-        box-shadow var(--transition),
-        border-color var(--transition);
-    }
-    .pcard:hover,
-    .pcard:focus-within {
-      border-color: var(--primary);
-      box-shadow: var(--shadow-lg);
-    }
-    .pcard__media {
-      display: grid;
-      place-items: center;
-      aspect-ratio: 16 / 9;
-      padding: var(--sp-5);
-      background: #f1f5f9;
-      border-bottom: 1px solid var(--border);
-    }
-    .pcard__media img {
-      max-height: 100%;
-      width: auto;
-      object-fit: contain;
-    }
-    .pcard__body {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      gap: var(--sp-3);
-      padding: var(--sp-5);
-    }
-    .pcard__title {
-      font-size: var(--fs-lg);
-    }
-    .pcard__link {
-      color: var(--text);
-      text-decoration: none;
-    }
-    .pcard__link::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-    }
-    .pcard__summary {
-      font-size: var(--fs-sm);
-    }
-    .pcard__more {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--sp-1);
-      margin-top: auto;
-      color: var(--primary);
-      font-weight: 600;
-      font-size: var(--fs-sm);
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .pcard:hover {
-        transform: translateY(-3px);
-      }
-    }
   `,
 })
 export class ProjectCardComponent {
   readonly project = input.required<Project>();
-  protected readonly maxChips = 5;
+  protected readonly maxTags = MAX_TAGS;
 }
