@@ -1,3 +1,4 @@
+import compression from 'compression';
 import express, { type ErrorRequestHandler, type Express, type RequestHandler } from 'express';
 import helmet from 'helmet';
 import { createContactRouter, type ContactRouterOptions } from './contact';
@@ -51,6 +52,7 @@ export function createApp({ browserDistFolder, renderer, contact, trustProxy, in
   app.disable('x-powered-by');
   if (trustProxy) app.set('trust proxy', trustProxy);
 
+  app.use(compression());
   app.use(securityHeaders(inlineHashes));
   app.use((_req, res, next) => {
     res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');

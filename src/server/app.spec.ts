@@ -87,3 +87,14 @@ describe('Serveur Express', () => {
     });
   });
 });
+
+describe('Compression', () => {
+  it('compresse les réponses (gzip)', async () => {
+    const app = createApp({ contact: { mailer: null } });
+    app.get('/big', (_req, res) => {
+      res.type('html').send('<p>portfolio</p>'.repeat(500));
+    });
+    const res = await request(app).get('/big').set('Accept-Encoding', 'gzip');
+    expect(res.headers['content-encoding']).toBe('gzip');
+  });
+});
