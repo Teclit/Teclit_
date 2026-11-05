@@ -6,7 +6,7 @@ import { IconComponent } from '../../shared/icon/icon.component';
 import { ButtonComponent } from '../../shared/ui/button.component';
 import { CardComponent } from '../../shared/ui/card.component';
 
-/** Page « CV » : PDF téléchargeable, CV en ligne et version imprimable générée depuis le contenu. */
+/** Page « CV » : CV en ligne et version imprimable générée depuis le contenu. */
 @Component({
   selector: 'app-cv-page',
   imports: [RouterLink, IconComponent, ButtonComponent, CardComponent],
@@ -16,22 +16,8 @@ import { CardComponent } from '../../shared/ui/card.component';
       <header class="print:hidden">
         <p class="text-xs font-bold uppercase tracking-[0.18em] text-accent">Curriculum vitæ</p>
         <h1 class="mt-3 text-h2 font-extrabold">Télécharger mon CV</h1>
-        <p class="mt-4 max-w-2xl text-lg text-muted">
-          {{ cvPdf ? 'Version PDF, CV en ligne' : 'CV en ligne' }}, ou version imprimable ci-dessous.
-        </p>
+        <p class="mt-4 max-w-2xl text-lg text-muted">CV en ligne, ou version imprimable ci-dessous.</p>
         <div class="mt-6 flex flex-wrap gap-3">
-          @if (cvPdf) {
-            <a
-              appButton
-              [href]="cvPdfHref"
-              [attr.download]="cvPdfExternal ? null : cvPdfName"
-              [attr.target]="cvPdfExternal ? '_blank' : null"
-              [attr.rel]="cvPdfExternal ? 'noopener noreferrer' : null"
-              data-testid="cv-download"
-            >
-              <app-icon name="download" [size]="18" /> Télécharger le PDF
-            </a>
-          }
           <a appButton variant="secondary" [href]="identity.links.cvOnline" target="_blank" rel="noopener noreferrer">
             <app-icon name="external" [size]="18" /> CV en ligne <span class="sr-only">(nouvel onglet)</span>
           </a>
@@ -129,10 +115,6 @@ export class CvPageComponent {
   private readonly document = inject(DOCUMENT);
 
   protected readonly identity = this.content.identity;
-  protected readonly cvPdf = this.identity.links.cvPdf;
-  protected readonly cvPdfExternal = /^https?:\/\//.test(this.cvPdf ?? '');
-  protected readonly cvPdfHref = this.cvPdfExternal ? this.cvPdf : `/${this.cvPdf}`;
-  protected readonly cvPdfName = `CV-${this.identity.firstName}-${this.identity.lastName}.pdf`;
 
   constructor() {
     inject(SeoService).update({

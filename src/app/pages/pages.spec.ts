@@ -61,16 +61,12 @@ describe('Pages', () => {
   });
 
   describe('CvPageComponent', () => {
-    it('propose le PDF, le CV en ligne et l’impression, et liste toutes les expériences', async () => {
+    it('propose le CV en ligne et l’impression, et liste toutes les expériences', async () => {
       await render(CvPageComponent, { providers });
       expect(screen.getByRole('link', { name: /CV en ligne/ }).getAttribute('href')).toBe(
         PROFILE.identity.links.cvOnline,
       );
-      const cvPdf = PROFILE.identity.links.cvPdf;
-      if (cvPdf) {
-        const expected = /^https?:\/\//.test(cvPdf) ? cvPdf : `/${cvPdf}`;
-        expect(screen.getByTestId('cv-download').getAttribute('href')).toBe(expected);
-      }
+      expect(screen.queryByTestId('cv-download')).toBeNull();
       expect(screen.getAllByTestId('resume-experience').length).toBe(PROFILE.experiences.length);
       const print = vi.spyOn(window, 'print').mockReturnValue(undefined);
       screen.getByTestId('cv-print').click();
