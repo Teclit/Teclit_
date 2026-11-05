@@ -74,7 +74,7 @@ describe('Layout', () => {
       const fixture = TestBed.createComponent(ExperiencesComponent);
       fixture.detectChanges();
       const headings = Array.from(fixture.nativeElement.querySelectorAll('h4')) as HTMLElement[];
-      expect(headings.some((h) => h.textContent?.includes('Réalisations chiffrées'))).toBeFalse();
+      expect(headings.some((h) => h.textContent?.includes('Réalisations chiffrées'))).toBe(false);
     });
   });
 });

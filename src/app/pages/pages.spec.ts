@@ -21,9 +21,7 @@ describe('Pages', () => {
       fixture.detectChanges();
       const el: HTMLElement = fixture.nativeElement;
       for (const id of ['accueil', 'a-propos', 'parcours', 'competences', 'projets', 'formation', 'contact']) {
-        expect(el.querySelector(`#${id}`))
-          .withContext(id)
-          .not.toBeNull();
+        expect(el.querySelector(`#${id}`), id).not.toBeNull();
       }
       expect(el.querySelectorAll('h1').length).toBe(1);
       const ld = document.head.querySelector('#jsonld-page')?.textContent ?? '';
@@ -38,7 +36,7 @@ describe('Pages', () => {
       fixture.detectChanges();
       const links = Array.from(fixture.nativeElement.querySelectorAll('.pcard__link')) as HTMLAnchorElement[];
       expect(links.length).toBe(PROFILE.projects.length);
-      expect(links.every((a) => a.getAttribute('href')?.startsWith('/projets/'))).toBeTrue();
+      expect(links.every((a) => a.getAttribute('href')?.startsWith('/projets/'))).toBe(true);
     });
   });
 
@@ -50,9 +48,7 @@ describe('Pages', () => {
       const el: HTMLElement = fixture.nativeElement;
       expect(el.querySelector('h1')?.textContent).toContain('QCMPLUS');
       for (const id of ['d-problem', 'd-solution', 'd-archi', 'd-stack']) {
-        expect(el.querySelector(`#${id}`))
-          .withContext(id)
-          .not.toBeNull();
+        expect(el.querySelector(`#${id}`), id).not.toBeNull();
       }
       expect(TestBed.inject(Meta).getTag('property="og:title"')?.content).toContain('QCMPLUS');
     });
@@ -72,7 +68,7 @@ describe('Pages', () => {
       const el: HTMLElement = fixture.nativeElement;
       expect(el.querySelector(`a[href="${PROFILE.identity.links.cvOnline}"]`)).not.toBeNull();
       expect(el.querySelectorAll('.resume__item').length).toBe(PROFILE.experiences.length);
-      const print = spyOn(window, 'print');
+      const print = vi.spyOn(window, 'print').mockReturnValue(undefined);
       (el.querySelector('button') as HTMLButtonElement).click();
       expect(print).toHaveBeenCalled();
     });

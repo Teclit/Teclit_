@@ -76,9 +76,7 @@ describe('ContactComponent', () => {
 
   it('associe chaque champ à un label', () => {
     for (const id of ['contact-name', 'contact-email', 'contact-subject', 'contact-message']) {
-      expect(el.querySelector(`label[for="${id}"]`))
-        .withContext(id)
-        .not.toBeNull();
+      expect(el.querySelector(`label[for="${id}"]`), id).not.toBeNull();
     }
   });
 });

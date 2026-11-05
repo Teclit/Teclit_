@@ -21,11 +21,9 @@ describe('PROFILE (intégrité de la source de données)', () => {
 
   it('utilise des dates YYYY-MM cohérentes (début <= fin)', () => {
     for (const item of [...PROFILE.experiences, ...PROFILE.education]) {
-      expect(item.start).withContext(item.id).toMatch(YEAR_MONTH);
-      expect(item.end).withContext(item.id).toMatch(YEAR_MONTH);
-      expect(item.start <= item.end)
-        .withContext(item.id)
-        .toBeTrue();
+      expect(item.start, item.id).toMatch(YEAR_MONTH);
+      expect(item.end, item.id).toMatch(YEAR_MONTH);
+      expect(item.start <= item.end, item.id).toBe(true);
     }
   });
 
@@ -33,21 +31,22 @@ describe('PROFILE (intégrité de la source de données)', () => {
     for (const exp of PROFILE.experiences) {
       for (const slug of exp.projectSlugs) {
         const project = findProject(PROFILE, slug);
-        expect(project).withContext(slug).toBeDefined();
-        expect(project?.experienceId).withContext(slug).toBe(exp.id);
+        expect(project, slug).toBeDefined();
+        expect(project?.experienceId, slug).toBe(exp.id);
       }
     }
     for (const project of PROFILE.projects.filter((p) => p.experienceId)) {
-      expect(PROFILE.experiences.some((e) => e.id === project.experienceId))
-        .withContext(project.slug)
-        .toBeTrue();
+      expect(
+        PROFILE.experiences.some((e) => e.id === project.experienceId),
+        project.slug,
+      ).toBe(true);
     }
   });
 
   it('renseigne une stack et des missions pour chaque expérience', () => {
     for (const exp of PROFILE.experiences) {
-      expect(exp.stack.length).withContext(exp.id).toBeGreaterThan(0);
-      expect(exp.missions.length).withContext(exp.id).toBeGreaterThan(0);
+      expect(exp.stack.length, exp.id).toBeGreaterThan(0);
+      expect(exp.missions.length, exp.id).toBeGreaterThan(0);
     }
   });
 
@@ -85,7 +84,7 @@ describe('profile.utils', () => {
     const timeline = buildTimeline(PROFILE.experiences, PROFILE.education);
     expect(timeline.length).toBe(PROFILE.experiences.length + PROFILE.education.length);
     for (let i = 1; i < timeline.length; i++) {
-      expect(timeline[i - 1].sortKey >= timeline[i].sortKey).toBeTrue();
+      expect(timeline[i - 1].sortKey >= timeline[i].sortKey).toBe(true);
     }
   });
 
