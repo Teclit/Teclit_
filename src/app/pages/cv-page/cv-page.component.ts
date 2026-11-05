@@ -5,7 +5,6 @@ import { SeoService } from '../../core/seo.service';
 import { PROFILE } from '../../data/profile.data';
 import { sortExperiences } from '../../data/profile.utils';
 import { IconComponent } from '../../shared/icon/icon.component';
-import { SHOW_TODOS } from '../../shared/todo.pipe';
 
 /** Page « CV » : téléchargement du PDF + version imprimable générée depuis la source de données. */
 @Component({
@@ -25,7 +24,6 @@ export class CvPageComponent implements OnInit {
   protected readonly skillGroups = PROFILE.skillGroups;
   protected readonly languages = PROFILE.languages;
   protected readonly cvPdf = PROFILE.identity.links.cvPdf;
-  protected readonly showTodos = inject(SHOW_TODOS);
   protected readonly cvPdfName = `CV-${PROFILE.identity.firstName}-${PROFILE.identity.lastName}.pdf`;
 
   ngOnInit(): void {

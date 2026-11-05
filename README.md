@@ -53,7 +53,8 @@ sinon `npx playwright install chromium` puis `PW_CHANNEL= npm run test:e2e`.
 - **Compétences, formations, certifications, langues** : `skillGroups`, `education`, `certifications`, `languages`.
 - **CV PDF** : déposer le fichier dans `public/cv/` puis renseigner `identity.links.cvPdf` (ex. `'cv/Teklit-TEWOLDE-CV.pdf'`).
 
-Toute valeur commençant par `TODO:` est un placeholder **affiché volontairement** sur le site (style jaune) tant qu'il n'est pas complété.
+Un champ texte vide (`''`) ou une liste vide (`[]`) **masque automatiquement** le bloc correspondant (titre compris) :
+par exemple, un projet sans `problem` n'affiche pas de section « Problème ». Il suffit de remplir le champ pour qu'il apparaisse.
 Un test (`profile.data.spec.ts`) vérifie la cohérence des données (slugs uniques, dates, liens https, relations expérience ↔ projet).
 
 ## Formulaire de contact
@@ -78,7 +79,7 @@ Sans configuration (ou hors Vercel, ex. Docker), l'API répond 503 et le formula
 
 - Pages pré-rendues : HTML complet pour `/`, `/cv` et chaque `/projets/<slug>`.
 - `SeoService` : `<title>`, description, canonical, Open Graph, Twitter Card par page ; JSON-LD `Person` sur l'accueil.
-- `sitemap.xml` et `robots.txt` générés depuis les données (`scripts/generate-seo.mjs`).
+- `sitemap.xml` et `robots.txt` générés depuis les données (`scripts/generate-seo.mjs`) ; le sitemap n'est produit que si `identity.siteUrl` est renseigné.
 - Accessibilité : lien d'évitement, landmarks, navigation clavier, focus visible, `aria-*` sur les formulaires, contrastes AA,
   audit axe automatisé dans les tests e2e.
 - Animations légères désactivées avec `prefers-reduced-motion`.
@@ -124,7 +125,7 @@ e2e/                           Tests Playwright
 scripts/                       Génération SEO, serveur statique de test
 src/app/data/                  Source de données unique (modèle, données, utilitaires)
 src/app/core/                  Services : SEO, thème, contact (+ validation partagée)
-src/app/shared/                Icônes, carte projet, directive d'animation, pipe TODO
+src/app/shared/                Icônes, carte projet, directive d'animation, pipes de contenu
 src/app/<section>/             Sections de l'accueil (home = hero, apropos, experiences, competences, realisation, formation, contact)
 src/app/pages/                 Pages routées : accueil, détail projet, CV, 404
 ```

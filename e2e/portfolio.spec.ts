@@ -51,6 +51,12 @@ test.describe('Accueil', () => {
 });
 
 test.describe('Projets', () => {
+  test('masque le bloc Problème quand il est vide', async ({ page }) => {
+    await page.goto('/projets/cs-le-club');
+    await expect(page.getByRole('heading', { level: 2, name: 'Problème' })).toHaveCount(0);
+    await expect(page.getByRole('heading', { level: 2, name: 'Solution' })).toBeVisible();
+  });
+
   test('ouvre la page détail depuis une carte', async ({ page }) => {
     await page.goto('/');
     await page.locator('#projets').getByRole('link', { name: 'QCMPLUS' }).click();
@@ -148,7 +154,6 @@ test.describe('Build de production', () => {
     test(`aucun placeholder TODO visible sur ${path}`, async ({ page }) => {
       await page.goto(path);
       await expect(page.locator('body')).not.toContainText('TODO');
-      await expect(page.locator('.todo')).toHaveCount(0);
     });
   }
 });

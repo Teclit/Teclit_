@@ -60,7 +60,7 @@
                     <h4>Réalisations chiffrées</h4>
                     <ul class="bullets">
                       @for (a of achievements; track $index) {
-                        <li [class.todo]="a | isTodo">{{ a }}</li>
+                        <li>{{ a }}</li>
                       }
                     </ul>
                   }

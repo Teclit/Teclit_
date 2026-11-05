@@ -70,10 +70,11 @@ describe('Layout', () => {
       expect(count()).toBe(PROFILE.experiences.length);
     });
 
-    it('rend les placeholders TODO visibles', () => {
+    it('masque « Réalisations chiffrées » quand la liste est vide', () => {
       const fixture = TestBed.createComponent(ExperiencesComponent);
       fixture.detectChanges();
-      expect(fixture.nativeElement.querySelector('li.todo')).not.toBeNull();
+      const headings = Array.from(fixture.nativeElement.querySelectorAll('h4')) as HTMLElement[];
+      expect(headings.some((h) => h.textContent?.includes('Réalisations chiffrées'))).toBeFalse();
     });
   });
 });

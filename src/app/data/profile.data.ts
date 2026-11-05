@@ -5,7 +5,7 @@ import type { Profile, TechLogo } from './profile.model';
  *
  * Tout le contenu affiché sur le site provient de ce fichier.
  * Origine des informations : dossier de compétences de Teklit TEWOLDE et contenu du site existant.
- * Les valeurs préfixées par `TODO:` sont des placeholders à compléter (elles s'affichent sur le site).
+ * Un champ texte vide ('') ou une liste vide ([]) masque automatiquement le bloc correspondant sur le site.
  */
 
 const LOGOS = 'assets/logos/';
@@ -37,13 +37,14 @@ export const PROFILE: Profile = {
       width: 640,
       height: 640,
     },
-    siteUrl: 'TODO: https://votre-domaine.fr',
+    // URL publique du site (ex. 'https://mon-domaine.fr') : active canonical, Open Graph absolu et sitemap.
+    siteUrl: '',
     links: {
       github: 'https://github.com/Teclit',
       linkedin: 'https://www.linkedin.com/in/teklittewolde/',
       email: 'tewoldeteklit@gmail.com',
       cvOnline: 'https://cvdesignr.com/p/RBGwWn8kzA75G8j',
-      // TODO: déposer le CV dans `public/cv/Teklit-TEWOLDE-CV.pdf` puis remplacer `null` par 'cv/Teklit-TEWOLDE-CV.pdf'.
+      // CV PDF : déposer le fichier dans `public/cv/` puis indiquer son chemin, ex. 'cv/Teklit-TEWOLDE-CV.pdf'.
       cvPdf: null,
     },
   },
@@ -70,7 +71,7 @@ export const PROFILE: Profile = {
         'Développer des tests automatisés et participer aux revues de code et au pipeline CI/CD.',
         "Collaborer avec l'équipe projet en développement itératif via Git et GitLab.",
       ],
-      achievements: ['TODO: réalisations chiffrées (ex. gain de temps de réponse, taux de couverture de tests…)'],
+      achievements: [],
       stack: [
         'Next.js',
         'TypeScript',
@@ -122,7 +123,7 @@ export const PROFILE: Profile = {
         'Développer les interfaces web associées en React.js et intégrer les parcours conversationnels avec Tock Studio.',
         'Participer aux revues de code, au pair programming et aux mises en production ponctuelles en Agile / Kanban.',
       ],
-      achievements: ['TODO: réalisations chiffrées (ex. volumétrie traitée, nombre de mises en production…)'],
+      achievements: [],
       stack: [
         'Java',
         'Kotlin 2',
@@ -414,15 +415,13 @@ export const PROFILE: Profile = {
       },
       link: 'https://www.csleclub.com/',
       featured: true,
-      problem:
-        'TODO: décrire le besoin client (contexte, contraintes) — et confirmer le cadre (Tx-Studio ? freelance ?)',
+      problem: '',
       solution:
         "Site institutionnel doté d'un CMS, d'une gestion d'adhésion et de contenus dynamiques (actualités, pages, événements).",
       architecture: [
         'Frontend Next.js / TypeScript.',
         'Backend Node.js / NestJS.',
         'Données dans MongoDB et PostgreSQL.',
-        "TODO: préciser l'architecture (hébergement, déploiement, CI/CD)",
       ],
       stack: ['Next.js', 'TypeScript', 'Node.js', 'NestJS', 'MongoDB', 'PostgreSQL'],
     },
@@ -438,14 +437,12 @@ export const PROFILE: Profile = {
       },
       link: 'https://tech-365.fr/',
       featured: true,
-      problem:
-        'TODO: décrire le besoin client (contexte, contraintes) — et confirmer le cadre (Tx-Studio ? freelance ?)',
+      problem: '',
       solution: 'Plateforme de mise en relation et de catalogue de services, avec gestion de contenu dynamique.',
       architecture: [
         'Frontend Next.js / TypeScript.',
         'Backend Node.js exposant des API REST et GraphQL.',
         'Données dans MongoDB et PostgreSQL, cache Redis.',
-        "TODO: préciser l'architecture (hébergement, déploiement, CI/CD)",
       ],
       stack: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB', 'PostgreSQL', 'Redis', 'API REST', 'GraphQL'],
     },
@@ -674,7 +671,7 @@ export const PROFILE: Profile = {
     },
   ],
 
-  // TODO: ajouter vos certifications (nom, organisme, date, lien de vérification). Aucune n'est mentionnée dans le CV.
+  // Certifications (nom, organisme, date, lien de vérification) : la section s'affiche dès qu'il y en a une.
   certifications: [],
 
   techLogos: [

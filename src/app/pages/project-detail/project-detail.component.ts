@@ -4,12 +4,12 @@ import { SeoService } from '../../core/seo.service';
 import { PROFILE } from '../../data/profile.data';
 import { findExperience, findProject } from '../../data/profile.utils';
 import { IconComponent } from '../../shared/icon/icon.component';
-import { HasContentPipe, IsTodoPipe, WithContentPipe } from '../../shared/todo.pipe';
+import { HasContentPipe, WithContentPipe } from '../../shared/content.pipe';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 @Component({
   selector: 'app-project-detail',
-  imports: [RouterLink, IconComponent, IsTodoPipe, HasContentPipe, WithContentPipe, NotFoundComponent],
+  imports: [RouterLink, IconComponent, HasContentPipe, WithContentPipe, NotFoundComponent],
   templateUrl: './project-detail.component.html',
   styleUrl: './project-detail.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

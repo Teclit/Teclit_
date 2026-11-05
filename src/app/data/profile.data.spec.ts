@@ -1,9 +1,13 @@
 import { PROFILE } from './profile.data';
-import { buildPersonJsonLd, buildTimeline, filledUrl, findProject, isTodo, sortExperiences } from './profile.utils';
+import { buildPersonJsonLd, buildTimeline, filledUrl, findProject, sortExperiences } from './profile.utils';
 
 const YEAR_MONTH = /^\d{4}-(0[1-9]|1[0-2])$/;
 
 describe('PROFILE (intégrité de la source de données)', () => {
+  it('ne contient aucun placeholder TODO', () => {
+    expect(JSON.stringify(PROFILE)).not.toContain('TODO');
+  });
+
   it('a des slugs de projets uniques et URL-safe', () => {
     const slugs = PROFILE.projects.map((p) => p.slug);
     expect(new Set(slugs).size).toBe(slugs.length);
@@ -64,14 +68,11 @@ describe('PROFILE (intégrité de la source de données)', () => {
 });
 
 describe('profile.utils', () => {
-  it('isTodo / filledUrl', () => {
-    expect(isTodo('TODO: à compléter')).toBeTrue();
-    expect(isTodo('  TODO: x')).toBeTrue();
-    expect(isTodo('Texte normal')).toBeFalse();
-    expect(isTodo(null)).toBeFalse();
-    expect(filledUrl('TODO: https://x')).toBeNull();
+  it('filledUrl', () => {
     expect(filledUrl('https://ok.fr')).toBe('https://ok.fr');
     expect(filledUrl('')).toBeNull();
+    expect(filledUrl('   ')).toBeNull();
+    expect(filledUrl(null)).toBeNull();
   });
 
   it('trie les expériences de la plus récente à la plus ancienne', () => {

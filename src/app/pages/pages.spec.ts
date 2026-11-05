@@ -6,7 +6,6 @@ import { provideRouter } from '@angular/router';
 import { PROFILE } from '../data/profile.data';
 import { CvPageComponent } from './cv-page/cv-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { SHOW_TODOS } from '../shared/todo.pipe';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 
 describe('Pages', () => {
@@ -58,13 +57,6 @@ describe('Pages', () => {
       expect(TestBed.inject(Meta).getTag('property="og:title"')?.content).toContain('QCMPLUS');
     });
 
-    it('affiche les TODO en développement', () => {
-      const fixture = TestBed.createComponent(ProjectDetailComponent);
-      fixture.componentRef.setInput('slug', 'cs-le-club');
-      fixture.detectChanges();
-      expect(fixture.nativeElement.querySelector('[aria-labelledby="d-problem"] .todo')).not.toBeNull();
-    });
-
     it('affiche la page 404 pour un slug inconnu', () => {
       const fixture = TestBed.createComponent(ProjectDetailComponent);
       fixture.componentRef.setInput('slug', 'inexistant');
@@ -86,10 +78,8 @@ describe('Pages', () => {
     });
   });
 
-  describe('en production (TODO masqués)', () => {
-    beforeEach(() => TestBed.overrideProvider(SHOW_TODOS, { useValue: false }));
-
-    it("n'affiche aucun TODO et masque les blocs vides d'un projet", () => {
+  describe('contenus vides', () => {
+    it("masque les blocs vides d'un projet (pas de « Problème » sans contenu)", () => {
       const fixture = TestBed.createComponent(ProjectDetailComponent);
       fixture.componentRef.setInput('slug', 'cs-le-club');
       fixture.detectChanges();
@@ -101,7 +91,7 @@ describe('Pages', () => {
       expect(el.querySelector('#d-archi')).not.toBeNull();
     });
 
-    it("n'affiche aucun TODO sur l'accueil ni de section certifications vide", () => {
+    it("n'affiche ni TODO ni section certifications vide sur l'accueil", () => {
       const fixture = TestBed.createComponent(HomePageComponent);
       fixture.detectChanges();
       const el: HTMLElement = fixture.nativeElement;

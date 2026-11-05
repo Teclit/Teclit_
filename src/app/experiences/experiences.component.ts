@@ -5,7 +5,7 @@ import type { ExperienceKind } from '../data/profile.model';
 import { buildTimeline, findProject, type TimelineEntry } from '../data/profile.utils';
 import { IconComponent } from '../shared/icon/icon.component';
 import { RevealDirective } from '../shared/reveal.directive';
-import { IsTodoPipe, WithContentPipe } from '../shared/todo.pipe';
+import { WithContentPipe } from '../shared/content.pipe';
 
 export type TimelineFilter = 'tout' | 'experience' | 'education';
 
@@ -19,7 +19,7 @@ export const KIND_LABELS: Record<ExperienceKind, string> = {
 /** Section « Parcours » : timeline chronologique complète (expériences + formations). */
 @Component({
   selector: 'app-experiences',
-  imports: [RouterLink, IconComponent, RevealDirective, IsTodoPipe, WithContentPipe],
+  imports: [RouterLink, IconComponent, RevealDirective, WithContentPipe],
   templateUrl: './experiences.component.html',
   styleUrl: './experiences.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

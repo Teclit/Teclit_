@@ -1,15 +1,8 @@
 import type { Education, Experience, Profile, Project } from './profile.model';
 
-export const TODO_PREFIX = 'TODO:';
-
-/** Vrai si la valeur est un placeholder à compléter. */
-export function isTodo(value: string | null | undefined): boolean {
-  return typeof value === 'string' && value.trim().startsWith(TODO_PREFIX);
-}
-
-/** Retourne l'URL si elle est renseignée (non vide, non TODO), sinon null. */
+/** Retourne la valeur si elle est renseignée (non vide), sinon null. */
 export function filledUrl(value: string | null | undefined): string | null {
-  return value && !isTodo(value) ? value : null;
+  return value?.trim() ? value.trim() : null;
 }
 
 /** Compare deux dates `YYYY-MM` (ordre décroissant). */

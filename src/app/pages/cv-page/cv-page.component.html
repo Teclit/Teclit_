@@ -13,8 +13,6 @@
           <a class="btn btn--primary" [href]="cvPdf" [attr.download]="cvPdfName">
             <app-icon name="download" [size]="18" /> Télécharger le PDF
           </a>
-        } @else if (showTodos) {
-          <span class="todo">TODO: déposer le CV dans public/cv/ et renseigner links.cvPdf</span>
         }
         <a class="btn btn--ghost" [href]="identity.links.cvOnline" target="_blank" rel="noopener noreferrer">
           <app-icon name="external" [size]="18" /> CV en ligne <span class="sr-only">(nouvel onglet)</span>

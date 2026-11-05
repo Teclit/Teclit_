@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PROFILE } from '../data/profile.data';
 import { IconComponent } from '../shared/icon/icon.component';
 import { RevealDirective } from '../shared/reveal.directive';
-import { SHOW_TODOS } from '../shared/todo.pipe';
 
 /** Section « Formation et certifications ». */
 @Component({
@@ -51,9 +50,6 @@ import { SHOW_TODOS } from '../shared/todo.pipe';
               </li>
             }
           </ul>
-        } @else if (showTodos) {
-          <h3 class="certs__title">Certifications</h3>
-          <p><span class="todo">TODO: ajouter vos certifications dans src/app/data/profile.data.ts</span></p>
         }
       </div>
     </section>
@@ -96,5 +92,4 @@ import { SHOW_TODOS } from '../shared/todo.pipe';
 export class FormationComponent {
   protected readonly education = PROFILE.education;
   protected readonly certifications = PROFILE.certifications;
-  protected readonly showTodos = inject(SHOW_TODOS);
 }

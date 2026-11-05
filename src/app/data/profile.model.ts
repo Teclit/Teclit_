@@ -1,6 +1,6 @@
 /**
  * Modèle typé de toutes les données du portfolio.
- * Toute valeur commençant par `TODO:` est un placeholder visible à compléter.
+ * Un champ texte vide ou une liste vide masque le bloc correspondant à l'affichage.
  */
 
 /** Date au format `YYYY-MM` (ou `YYYY`). */

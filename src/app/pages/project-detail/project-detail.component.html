@@ -43,13 +43,13 @@
         @if (p.problem | hasContent) {
           <section class="card" aria-labelledby="d-problem">
             <h2 id="d-problem" class="detail__h2">Problème</h2>
-            <p [class.todo]="p.problem | isTodo">{{ p.problem }}</p>
+            <p>{{ p.problem }}</p>
           </section>
         }
         @if (p.solution | hasContent) {
           <section class="card" aria-labelledby="d-solution">
             <h2 id="d-solution" class="detail__h2">Solution</h2>
-            <p [class.todo]="p.solution | isTodo">{{ p.solution }}</p>
+            <p>{{ p.solution }}</p>
           </section>
         }
         @let architecture = p.architecture | withContent;
@@ -58,9 +58,7 @@
             <h2 id="d-archi" class="detail__h2">Architecture</h2>
             <ul class="bullets">
               @for (item of architecture; track $index) {
-                <li>
-                  <span [class.todo]="item | isTodo">{{ item }}</span>
-                </li>
+                <li>{{ item }}</li>
               }
             </ul>
           </section>
