@@ -132,7 +132,7 @@ export class CvPageComponent {
   protected readonly cvPdf = this.identity.links.cvPdf;
   protected readonly cvPdfExternal = /^https?:\/\//.test(this.cvPdf ?? '');
   protected readonly cvPdfHref = this.cvPdfExternal ? this.cvPdf : `/${this.cvPdf}`;
-  protected readonly cvPdfName =`CV-${this.identity.firstName}-${this.identity.lastName}.pdf`;
+  protected readonly cvPdfName = `CV-${this.identity.firstName}-${this.identity.lastName}.pdf`;
 
   constructor() {
     inject(SeoService).update({

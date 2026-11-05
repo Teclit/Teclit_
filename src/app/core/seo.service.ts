@@ -11,7 +11,7 @@ import { OG_IMAGE_FILE } from './og-image.generated';
  * (image pleine largeur en haut, titre + description en dessous).
  */
 export interface SeoImage {
-  /** Chemin local (`/og-image.png`) ou URL absolue. */
+  /** Chemin local (`/og-image.jpg`) ou URL absolue. */
   url: string;
   width: number;
   height: number;
@@ -24,19 +24,22 @@ export interface PageSeo {
   description: string;
   /** Chemin de la page, ex. `/projets/qcmplus`. */
   path: string;
-  /** Image propre à la page ; par défaut `public/og-image.png`. */
+  /** Image propre à la page ; par défaut `public/og-image.jpg`. */
   image?: SeoImage;
   type?: 'website' | 'profile' | 'article';
   noindex?: boolean;
 }
 
-/** Image de partage par défaut (1200x630, ratio 1,91:1), générée par `npm run og-image`. */
+/**
+ * Image de partage par défaut (1200x630, ratio 1,91:1, photo pleine largeur sans texte),
+ * générée par `npm run og-image`.
+ */
 export const DEFAULT_OG_IMAGE: SeoImage = {
   url: OG_IMAGE_FILE.path,
   width: OG_IMAGE_FILE.width,
   height: OG_IMAGE_FILE.height,
   type: OG_IMAGE_FILE.type,
-  alt: `${PROFILE.identity.fullName} — ${PROFILE.identity.title}`,
+  alt: `Portrait de ${PROFILE.identity.fullName}, développeur Full Stack`,
 };
 
 const SITE_NAME = `${PROFILE.identity.fullName} — Portfolio`;
@@ -123,7 +126,7 @@ export class SeoService {
       // Grande carte : image pleine largeur en haut, titre et description en dessous.
       og('og:image', imageUrl),
       ...(imageUrl.startsWith('https://') ? [og('og:image:secure_url', imageUrl)] : []),
-      og('og:image:type', image.type ?? 'image/png'),
+      og('og:image:type', image.type ?? 'image/jpeg'),
       og('og:image:width', String(image.width)),
       og('og:image:height', String(image.height)),
       og('og:image:alt', image.alt),

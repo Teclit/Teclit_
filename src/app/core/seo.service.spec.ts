@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Meta } from '@angular/platform-browser';
 import { PROFILE } from './content/content.service';
@@ -16,17 +17,21 @@ describe('SeoService', () => {
   });
 
   it('émet la grande carte (image pleine largeur) avec dimensions explicites', () => {
-    seo.update({ title: 'Accueil', description: 'Desc', path: '/', type: 'profile' });
+    seo.update({ title: 'Accueil', description: 'Desc', path: '/' });
+    expect(prop('og:type')).toBe('website');
     expect(name('twitter:card')).toBe('summary_large_image');
     expect(prop('og:image')).toBe(`${base}${DEFAULT_OG_IMAGE.url}`);
-    expect(prop('og:image')).toMatch(/\?v=[0-9a-f]{8}$/);
+    expect(prop('og:image')).toMatch(/^https:\/\/.+\/og-image\.jpg\?v=[0-9a-f]{8}$/);
     expect(prop('og:image:secure_url')).toBe(prop('og:image'));
     expect(prop('og:image:width')).toBe('1200');
     expect(prop('og:image:height')).toBe('630');
-    expect(prop('og:image:type')).toBe('image/png');
+    expect(prop('og:image:type')).toBe('image/jpeg');
     expect(prop('og:image:alt')).toContain(PROFILE.identity.fullName);
+    expect(name('twitter:title')).toBe(prop('og:title'));
+    expect(name('twitter:description')).toBe(prop('og:description'));
     expect(name('twitter:image')).toBe(prop('og:image'));
     expect(prop('og:url')).toBe(`${base}/`);
+    expect(TestBed.inject(DOCUMENT).querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${base}/`);
     expect(name('robots')).toContain('max-image-preview:large');
   });
 

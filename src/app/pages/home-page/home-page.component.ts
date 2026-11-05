@@ -88,10 +88,11 @@ export class HomePageComponent {
   constructor() {
     const { identity } = this.content;
     this.seo.update({
-      title: `${identity.fullName} — Développeur Full Stack Java / Kotlin, Spring Boot, Node.js`,
-      description: identity.shortBio,
+      title: `${identity.fullName} — Développeur Full Stack`,
+      description:
+        'Développeur Full Stack Java / Kotlin, Spring Boot, Node.js et Next.js. Découvrez mes projets, compétences et expériences.',
       path: '/',
-      type: 'profile',
+      type: 'website',
     });
     this.seo.setJsonLd(buildPersonJsonLd(this.content.profile));
 

@@ -61,7 +61,7 @@ export function buildPersonJsonLd(profile: Profile): Record<string, unknown> {
     jobTitle: 'Développeur Full Stack',
     description: identity.shortBio,
     email: `mailto:${identity.links.email}`,
-    ...(site ? { url: site, image: `${site.replace(/\/$/, '')}/og-image.png` } : {}),
+    ...(site ? { url: site, image: `${site.replace(/\/$/, '')}/${identity.photo.src}` } : {}),
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Vaires-sur-Marne',
