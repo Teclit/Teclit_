@@ -17,6 +17,8 @@ const SITE_NAME = `${PROFILE.identity.fullName} — Portfolio`;
 const JSON_LD_ID = 'jsonld-page';
 /** Image de partage par défaut (`public/og-image.png`), au format recommandé 1,91:1. */
 const OG_IMAGE = {
+  /** `?v=` : à incrémenter quand l'image change, les plateformes la mettent en cache par URL. */
+  path: '/og-image.png?v=2',
   width: 1200,
   height: 630,
   alt: `${PROFILE.identity.fullName} — ${PROFILE.identity.title}`,
@@ -38,7 +40,7 @@ export class SeoService {
     const fullTitle = page.path === '/' ? page.title : `${page.title} | ${PROFILE.identity.fullName}`;
     // Tant que le domaine n'est pas configuré, on n'émet pas d'URL relative (invalide pour canonical / og:url).
     const url = this.absoluteUrl(page.path);
-    const image = this.absoluteUrl(page.image ?? '/og-image.png') ?? page.image ?? '/og-image.png';
+    const image = this.absoluteUrl(page.image ?? OG_IMAGE.path) ?? page.image ?? OG_IMAGE.path;
 
     this.title.setTitle(fullTitle);
     this.setName('description', page.description);
