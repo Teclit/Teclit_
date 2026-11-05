@@ -15,6 +15,12 @@ export interface PageSeo {
 
 const SITE_NAME = `${PROFILE.identity.fullName} — Portfolio`;
 const JSON_LD_ID = 'jsonld-page';
+/** Image de partage par défaut (`public/og-image.png`), au format recommandé 1,91:1. */
+const OG_IMAGE = {
+  width: 1200,
+  height: 630,
+  alt: `${PROFILE.identity.fullName} — ${PROFILE.identity.title}`,
+};
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
@@ -42,6 +48,16 @@ export class SeoService {
     this.setProperty('og:type', page.type ?? 'website');
     if (url) this.setProperty('og:url', url);
     this.setProperty('og:image', image);
+    // Dimensions explicites : WhatsApp, LinkedIn, Facebook affichent alors la grande carte
+    // (image pleine largeur) dès le premier partage, au lieu d'une vignette.
+    if (!page.image) {
+      this.setProperty('og:image:secure_url', image);
+      this.setProperty('og:image:type', 'image/png');
+      this.setProperty('og:image:width', String(OG_IMAGE.width));
+      this.setProperty('og:image:height', String(OG_IMAGE.height));
+    }
+    this.setProperty('og:image:alt', OG_IMAGE.alt);
+    this.setName('twitter:image:alt', OG_IMAGE.alt);
     this.setProperty('og:site_name', SITE_NAME);
     this.setProperty('og:locale', 'fr_FR');
     this.setName('twitter:card', 'summary_large_image');
