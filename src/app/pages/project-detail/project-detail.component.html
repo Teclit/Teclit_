@@ -74,10 +74,10 @@
       </div>
 
       <nav class="pager" aria-label="Autres projets">
-        <a class="btn btn--ghost" [routerLink]="['/projets', siblings().previous?.slug]">
+        <a class="btn btn--ghost" [routerLink]="['/projets', $safeNavigationMigration(siblings().previous?.slug)]">
           <app-icon name="arrow-left" [size]="16" /> {{ siblings().previous?.title }}
         </a>
-        <a class="btn btn--ghost" [routerLink]="['/projets', siblings().next?.slug]">
+        <a class="btn btn--ghost" [routerLink]="['/projets', $safeNavigationMigration(siblings().next?.slug)]">
           {{ siblings().next?.title }} <app-icon name="arrow-right" [size]="16" />
         </a>
       </nav>

@@ -1,4 +1,4 @@
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withXhr } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CONTACT_ENDPOINT } from '../core/contact/contact.service';
@@ -22,7 +22,7 @@ describe('ContactComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ContactComponent],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [provideHttpClient(withXhr()), provideHttpClientTesting()],
     });
     fixture = TestBed.createComponent(ContactComponent);
     component = fixture.componentInstance;
