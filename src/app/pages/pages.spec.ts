@@ -6,6 +6,7 @@ import { provideRouter } from '@angular/router';
 import { PROFILE } from '../data/profile.data';
 import { CvPageComponent } from './cv-page/cv-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { SHOW_TODOS } from '../shared/todo.pipe';
 import { ProjectDetailComponent } from './project-detail/project-detail.component';
 
 describe('Pages', () => {
@@ -76,6 +77,37 @@ describe('Pages', () => {
       const print = spyOn(window, 'print');
       (el.querySelector('button') as HTMLButtonElement).click();
       expect(print).toHaveBeenCalled();
+    });
+  });
+
+  describe('en production (TODO masqués)', () => {
+    beforeEach(() => TestBed.overrideProvider(SHOW_TODOS, { useValue: false }));
+
+    it("n'affiche aucun TODO et masque les blocs vides d'un projet", () => {
+      const fixture = TestBed.createComponent(ProjectDetailComponent);
+      fixture.componentRef.setInput('slug', 'cs-le-club');
+      fixture.detectChanges();
+      const el: HTMLElement = fixture.nativeElement;
+      expect(el.textContent).not.toContain('TODO');
+      expect(el.querySelector('#d-problem')).toBeNull();
+      expect(el.querySelector('#d-results')).toBeNull();
+      expect(el.querySelector('#d-solution')).not.toBeNull();
+      expect(el.querySelector('#d-archi')).not.toBeNull();
+    });
+
+    it("n'affiche aucun TODO sur l'accueil ni de section certifications vide", () => {
+      const fixture = TestBed.createComponent(HomePageComponent);
+      fixture.detectChanges();
+      const el: HTMLElement = fixture.nativeElement;
+      expect(el.textContent).not.toContain('TODO');
+      expect(el.querySelector('.certs__title')).toBeNull();
+      expect(el.querySelector('#formation-title')?.textContent?.trim()).toBe('Formation');
+    });
+
+    it("n'affiche aucun TODO sur la page CV", () => {
+      const fixture = TestBed.createComponent(CvPageComponent);
+      fixture.detectChanges();
+      expect(fixture.nativeElement.textContent).not.toContain('TODO');
     });
   });
 });

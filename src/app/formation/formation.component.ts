@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { PROFILE } from '../data/profile.data';
 import { IconComponent } from '../shared/icon/icon.component';
 import { RevealDirective } from '../shared/reveal.directive';
+import { SHOW_TODOS } from '../shared/todo.pipe';
 
 /** Section « Formation et certifications ». */
 @Component({
@@ -13,7 +14,9 @@ import { RevealDirective } from '../shared/reveal.directive';
       <div class="container">
         <header class="section__header" appReveal>
           <span class="eyebrow">Formation</span>
-          <h2 id="formation-title" class="section__title">Formation et certifications</h2>
+          <h2 id="formation-title" class="section__title">
+            {{ certifications.length ? 'Formation et certifications' : 'Formation' }}
+          </h2>
           <p class="section__lead">
             Un cursus progressif, du Bac+2 au Bac+5 (Niveau 7), orienté développement logiciel.
           </p>
@@ -35,8 +38,8 @@ import { RevealDirective } from '../shared/reveal.directive';
           }
         </ul>
 
-        <h3 class="certs__title">Certifications</h3>
         @if (certifications.length) {
+          <h3 class="certs__title">Certifications</h3>
           <ul class="grid grid--3" role="list">
             @for (cert of certifications; track cert.name) {
               <li class="card">
@@ -48,7 +51,8 @@ import { RevealDirective } from '../shared/reveal.directive';
               </li>
             }
           </ul>
-        } @else {
+        } @else if (showTodos) {
+          <h3 class="certs__title">Certifications</h3>
           <p><span class="todo">TODO: ajouter vos certifications dans src/app/data/profile.data.ts</span></p>
         }
       </div>
@@ -92,4 +96,5 @@ import { RevealDirective } from '../shared/reveal.directive';
 export class FormationComponent {
   protected readonly education = PROFILE.education;
   protected readonly certifications = PROFILE.certifications;
+  protected readonly showTodos = inject(SHOW_TODOS);
 }

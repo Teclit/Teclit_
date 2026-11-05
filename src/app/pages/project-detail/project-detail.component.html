@@ -40,34 +40,44 @@
       </header>
 
       <div class="detail__grid">
-        <section class="card" aria-labelledby="d-problem">
-          <h2 id="d-problem" class="detail__h2">Problème</h2>
-          <p [class.todo]="p.problem | isTodo">{{ p.problem }}</p>
-        </section>
-        <section class="card" aria-labelledby="d-solution">
-          <h2 id="d-solution" class="detail__h2">Solution</h2>
-          <p [class.todo]="p.solution | isTodo">{{ p.solution }}</p>
-        </section>
-        <section class="card" aria-labelledby="d-archi">
-          <h2 id="d-archi" class="detail__h2">Architecture</h2>
-          <ul class="bullets">
-            @for (item of p.architecture; track $index) {
-              <li>
-                <span [class.todo]="item | isTodo">{{ item }}</span>
-              </li>
-            }
-          </ul>
-        </section>
-        <section class="card" aria-labelledby="d-results">
-          <h2 id="d-results" class="detail__h2">Résultats</h2>
-          <ul class="bullets">
-            @for (item of p.results; track $index) {
-              <li>
-                <span [class.todo]="item | isTodo">{{ item }}</span>
-              </li>
-            }
-          </ul>
-        </section>
+        @if (p.problem | hasContent) {
+          <section class="card" aria-labelledby="d-problem">
+            <h2 id="d-problem" class="detail__h2">Problème</h2>
+            <p [class.todo]="p.problem | isTodo">{{ p.problem }}</p>
+          </section>
+        }
+        @if (p.solution | hasContent) {
+          <section class="card" aria-labelledby="d-solution">
+            <h2 id="d-solution" class="detail__h2">Solution</h2>
+            <p [class.todo]="p.solution | isTodo">{{ p.solution }}</p>
+          </section>
+        }
+        @let architecture = p.architecture | withContent;
+        @if (architecture.length) {
+          <section class="card" aria-labelledby="d-archi">
+            <h2 id="d-archi" class="detail__h2">Architecture</h2>
+            <ul class="bullets">
+              @for (item of architecture; track $index) {
+                <li>
+                  <span [class.todo]="item | isTodo">{{ item }}</span>
+                </li>
+              }
+            </ul>
+          </section>
+        }
+        @let results = p.results | withContent;
+        @if (results.length) {
+          <section class="card" aria-labelledby="d-results">
+            <h2 id="d-results" class="detail__h2">Résultats</h2>
+            <ul class="bullets">
+              @for (item of results; track $index) {
+                <li>
+                  <span [class.todo]="item | isTodo">{{ item }}</span>
+                </li>
+              }
+            </ul>
+          </section>
+        }
         <section class="card detail__stack" aria-labelledby="d-stack">
           <h2 id="d-stack" class="detail__h2">Stack technique</h2>
           <ul class="chips" role="list">

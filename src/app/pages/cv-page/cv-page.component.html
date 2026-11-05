@@ -4,7 +4,8 @@
       <span class="eyebrow">Curriculum vitæ</span>
       <h1 class="section__title">Télécharger mon CV</h1>
       <p class="section__lead">
-        Version PDF, CV en ligne, ou version imprimable ci-dessous (Imprimer → Enregistrer au format PDF).
+        {{ cvPdf ? 'Version PDF, CV en ligne' : 'CV en ligne' }}, ou version imprimable ci-dessous (Imprimer →
+        Enregistrer au format PDF).
       </p>
 
       <div class="cv-actions">
@@ -12,7 +13,7 @@
           <a class="btn btn--primary" [href]="cvPdf" [attr.download]="cvPdfName">
             <app-icon name="download" [size]="18" /> Télécharger le PDF
           </a>
-        } @else {
+        } @else if (showTodos) {
           <span class="todo">TODO: déposer le CV dans public/cv/ et renseigner links.cvPdf</span>
         }
         <a class="btn btn--ghost" [href]="identity.links.cvOnline" target="_blank" rel="noopener noreferrer">

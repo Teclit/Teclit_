@@ -55,10 +55,11 @@
                       <li>{{ mission }}</li>
                     }
                   </ul>
-                  @if (entry.item.achievements.length) {
+                  @let achievements = entry.item.achievements | withContent;
+                  @if (achievements.length) {
                     <h4>Réalisations chiffrées</h4>
                     <ul class="bullets">
-                      @for (a of entry.item.achievements; track $index) {
+                      @for (a of achievements; track $index) {
                         <li [class.todo]="a | isTodo">{{ a }}</li>
                       }
                     </ul>

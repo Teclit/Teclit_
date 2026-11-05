@@ -56,9 +56,11 @@ test.describe('Projets', () => {
     await page.locator('#projets').getByRole('link', { name: 'QCMPLUS' }).click();
     await expect(page).toHaveURL(/\/projets\/qcmplus$/);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('QCMPLUS');
-    for (const name of ['Problème', 'Solution', 'Architecture', 'Résultats', 'Stack technique']) {
+    for (const name of ['Problème', 'Solution', 'Architecture', 'Stack technique']) {
       await expect(page.getByRole('heading', { level: 2, name })).toBeVisible();
     }
+    // Résultats encore à compléter (TODO) : bloc masqué en production
+    await expect(page.getByRole('heading', { level: 2, name: 'Résultats' })).toHaveCount(0);
     await expect(page).toHaveTitle(/QCMPLUS/);
   });
 
@@ -139,4 +141,15 @@ test.describe('CV et navigation', () => {
     await expect(burger).toHaveAttribute('aria-expanded', 'false');
     await expect(page).toHaveURL(/#projets$/);
   });
+});
+
+test.describe('Build de production', () => {
+  const pages = ['/', '/cv', '/projets/cs-le-club', '/projets/tech-365', '/projets/qcmplus'];
+  for (const path of pages) {
+    test(`aucun placeholder TODO visible sur ${path}`, async ({ page }) => {
+      await page.goto(path);
+      await expect(page.locator('body')).not.toContainText('TODO');
+      await expect(page.locator('.todo')).toHaveCount(0);
+    });
+  }
 });
