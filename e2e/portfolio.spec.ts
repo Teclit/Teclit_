@@ -10,7 +10,6 @@ test.describe('Accueil', () => {
     await expect(page).toHaveTitle(/Teklit TEWOLDE/);
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Teklit TEWOLDE');
     await expect(page.locator('#accueil').getByRole('link', { name: 'Voir les projets' })).toBeVisible();
-    await expect(page.locator('#accueil').getByRole('link', { name: 'Télécharger le CV' })).toBeVisible();
     await expect(page.locator('#accueil').getByRole('link', { name: 'Me contacter' })).toBeVisible();
     for (const id of ['a-propos', 'parcours', 'competences', 'projets', 'formation', 'contact']) {
       await expect(page.locator(`section#${id}`)).toHaveCount(1);

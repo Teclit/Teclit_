@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { ContentService } from '../core/content/content.service';
 import {
   CONTACT_LIMITS,
@@ -30,7 +29,7 @@ const FIELD =
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, RouterLink, IconComponent, ButtonComponent, CardComponent],
+  imports: [ReactiveFormsModule, IconComponent, ButtonComponent, CardComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   hostDirectives: [HydratedDirective],
   host: { class: 'block' },
@@ -60,9 +59,6 @@ const FIELD =
           </li>
         </ul>
         <div class="mt-8 flex flex-wrap gap-3">
-          <a appButton variant="secondary" routerLink="/cv"
-            ><app-icon name="download" [size]="18" /> Télécharger le CV</a
-          >
           <a
             appButton
             variant="secondary"

@@ -57,9 +57,6 @@ import { TypedTextComponent } from '../shared/ui/typed-text.component';
             <a appButton routerLink="/" fragment="projets">
               Voir les projets <app-icon name="arrow-right" [size]="18" />
             </a>
-            <a appButton variant="secondary" routerLink="/cv">
-              <app-icon name="download" [size]="18" /> Télécharger le CV
-            </a>
             <a appButton variant="ghost" routerLink="/" fragment="contact">
               <app-icon name="mail" [size]="18" /> Me contacter
             </a>

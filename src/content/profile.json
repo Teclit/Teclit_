@@ -37,12 +37,12 @@
     "fullName": "Teklit TEWOLDE",
     "brand": "Teklit T.",
     "title": "Développeur Full Stack — Java / Kotlin, Spring Boot, Node.js / NestJS",
-    "tagline": "Je conçois, teste et déploie des applications web de bout en bout : API REST et GraphQL, interfaces React / Next.js, CI/CD et conteneurs Docker / Kubernetes.",
+    "tagline": "Je conçois, teste et déploie des applications web de bout en bout : API REST et GraphQL en Java / Kotlin, Node.js, PHP / Symfony ou Python, interfaces React, Next.js, Angular ou Vue.js, CI/CD et conteneurs Docker / Kubernetes.",
     "shortBio": "Développeur Full Stack à dominante backend, plus de trois ans d'expérience en Java, Kotlin, Spring Boot, Node.js et NestJS, sur l'ensemble du cycle de vie applicatif.",
     "longBio": [
-      "Développeur Full Stack à dominante backend, fort de plus de trois ans d'expérience en conception et développement d'applications avec Java, Kotlin, Spring Boot, Node.js et NestJS. J'interviens sur l'ensemble du cycle de vie applicatif : conception d'API REST et GraphQL, sécurisation des accès (JWT, OAuth2), modélisation et exploitation de données SQL et NoSQL, mise en cache avec Redis, tests automatisés, intégration continue avec GitLab et déploiement conteneurisé avec Docker et Kubernetes.",
+      "Développeur Full Stack à dominante backend, fort de plus de trois ans d'expérience en conception et développement d'applications avec Java, Kotlin, Spring Boot, Node.js et NestJS, et à l'aise également avec PHP / Symfony, Python et Vue.js. J'interviens sur l'ensemble du cycle de vie applicatif : conception d'API REST et GraphQL, sécurisation des accès (JWT, OAuth2), modélisation et exploitation de données SQL et NoSQL, mise en cache avec Redis, tests automatisés, intégration continue avec GitLab et déploiement conteneurisé avec Docker et Kubernetes.",
       "Mon expérience chez SNCF Connect & Tech, au sein d'une équipe pouvant compter jusqu'à dix développeurs sur un produit conversationnel multicanal à fort trafic, m'a confronté à des enjeux de robustesse, de volumétrie et de rythme de livraison soutenu. Chez Tx-Studio, j'ai conçu des services backend Node.js / NestJS avec une architecture de données combinant PostgreSQL, MongoDB et Redis, avec une attention particulière portée à la sécurité et à la réactivité.",
-      "Autonome, rigoureux et curieux, je m'investis pleinement dans les échanges techniques et les comités d'architecture, et j'apprécie les environnements Agile fondés sur la qualité du code, les revues de code et l'amélioration continue."
+      "Autonome, rigoureux et curieux, je m'investis pleinement dans les échanges techniques et les comités d'architecture, et j'apprécie les environnements Agile fondés sur la qualité du code, les revues de code et l'amélioration continue. J'ai acquis des notions en cloud (AWS) sur des projets déployés en production, et je souhaite aujourd'hui monter en compétence sur ce domaine."
     ],
     "location": "Vaires-sur-Marne (77), Île-de-France",
     "phone": "06 95 58 33 63",
@@ -66,10 +66,24 @@
       "Développeur Full Stack",
       "Backend Java / Kotlin",
       "Spring Boot & Node.js",
-      "Angular / React / Next.js",
+      "PHP / Symfony & Python",
+      "Angular / React / Vue.js / Next.js",
       "Docker & CI/CD"
     ],
-    "highlights": ["Java", "Kotlin", "Spring Boot", "Node.js", "NestJS", "React", "Next.js", "Docker"],
+    "highlights": [
+      "Java",
+      "Kotlin",
+      "Spring Boot",
+      "Node.js",
+      "NestJS",
+      "PHP",
+      "Symfony",
+      "Python",
+      "React",
+      "Vue.js",
+      "Next.js",
+      "Docker"
+    ],
     "facts": [
       {
         "label": "Expérience",
@@ -555,7 +569,8 @@
         "JWT",
         "OAuth2",
         "Python",
-        "PHP"
+        "PHP",
+        "Symfony"
       ]
     },
     {
@@ -567,6 +582,7 @@
         "Angular",
         "React",
         "Next.js",
+        "Vue.js",
         "TypeScript",
         "JavaScript",
         "HTML5",
@@ -612,8 +628,8 @@
       "id": "cloud-ai",
       "title": "Cloud & IA",
       "icon": "cloud",
-      "description": "Déploiement cloud et briques conversationnelles.",
-      "skills": ["AWS", "SageMaker (entraînement de modèle)", "Tock Studio", "NLP"]
+      "description": "Notions en cloud AWS acquises en projet, montée en compétence en cours ; briques conversationnelles et NLP.",
+      "skills": ["AWS (notions)", "SageMaker (notions, entraînement de modèle)", "Tock Studio", "NLP"]
     },
     {
       "id": "methods",

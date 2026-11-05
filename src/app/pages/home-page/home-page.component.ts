@@ -42,7 +42,7 @@ import { SectionComponent } from '../../shared/ui/section.component';
       @defer (on viewport; prefetch on idle; hydrate on viewport) {
         <app-experiences />
       } @placeholder {
-        <div class="min-h-[60rem]"></div>
+        <div class="min-h-240"></div>
       }
     </app-section>
 
@@ -50,7 +50,7 @@ import { SectionComponent } from '../../shared/ui/section.component';
       @defer (on viewport; prefetch on idle; hydrate on viewport) {
         <app-competences />
       } @placeholder {
-        <div class="min-h-[50rem]"></div>
+        <div class="min-h-200"></div>
       }
     </app-section>
 
@@ -58,7 +58,7 @@ import { SectionComponent } from '../../shared/ui/section.component';
       @defer (on viewport; prefetch on idle; hydrate on viewport) {
         <app-realisation />
       } @placeholder {
-        <div class="min-h-[60rem]"></div>
+        <div class="min-h-240"></div>
       }
     </app-section>
 
@@ -66,7 +66,7 @@ import { SectionComponent } from '../../shared/ui/section.component';
       @defer (on viewport; prefetch on idle; hydrate on viewport) {
         <app-formation />
       } @placeholder {
-        <div class="min-h-[24rem]"></div>
+        <div class="min-h-96"></div>
       }
     </app-section>
 
@@ -75,7 +75,7 @@ import { SectionComponent } from '../../shared/ui/section.component';
         <!-- hydratation dès que le navigateur est inactif : formulaire prêt avant toute saisie -->
         <app-contact />
       } @placeholder {
-        <div class="min-h-[36rem]"></div>
+        <div class="min-h-144"></div>
       }
     </app-section>
   `,
