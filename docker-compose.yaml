@@ -1,3 +1,6 @@
+# Nom explicite : celui dérivé du dossier (« teclit_ ») donne un nom d'image invalide (« teclit_-dev »).
+name: mon-portfolio
+
 services:
   # Développement : serveur Angular avec rechargement à chaud — http://localhost:4200
   dev:
