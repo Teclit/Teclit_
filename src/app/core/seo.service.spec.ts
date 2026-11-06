@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { Meta } from '@angular/platform-browser';
 import { PROFILE } from './content/content.service';
 import { DEFAULT_OG_IMAGE, SeoService, truncate } from './seo.service';
+import { OG_IMAGE_FILE } from './og-image.generated';
 
 describe('SeoService', () => {
   let seo: SeoService;
@@ -23,8 +24,8 @@ describe('SeoService', () => {
     expect(prop('og:image')).toBe(`${base}${DEFAULT_OG_IMAGE.url}`);
     expect(prop('og:image')).toMatch(/^https:\/\/.+\/og-image\.jpg\?v=[0-9a-f]{8}$/);
     expect(prop('og:image:secure_url')).toBe(prop('og:image'));
-    expect(prop('og:image:width')).toBe('1200');
-    expect(prop('og:image:height')).toBe('630');
+    expect(prop('og:image:width')).toBe(String(OG_IMAGE_FILE.width));
+    expect(prop('og:image:height')).toBe(String(OG_IMAGE_FILE.height));
     expect(prop('og:image:type')).toBe('image/jpeg');
     expect(prop('og:image:alt')).toContain(PROFILE.identity.fullName);
     expect(name('twitter:title')).toBe(prop('og:title'));

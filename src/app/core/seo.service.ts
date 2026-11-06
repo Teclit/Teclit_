@@ -31,15 +31,15 @@ export interface PageSeo {
 }
 
 /**
- * Image de partage par défaut (1200x630, ratio 1,91:1, photo pleine largeur sans texte),
- * générée par `npm run og-image`.
+ * Image de partage par défaut : `public/og-image.jpg` telle quelle. Dimensions et version
+ * sont relues sur le fichier à chaque build (`scripts/generate-seo.mjs`).
  */
 export const DEFAULT_OG_IMAGE: SeoImage = {
   url: OG_IMAGE_FILE.path,
   width: OG_IMAGE_FILE.width,
   height: OG_IMAGE_FILE.height,
   type: OG_IMAGE_FILE.type,
-  alt: `Portrait de ${PROFILE.identity.fullName}, développeur Full Stack`,
+  alt: `${PROFILE.identity.fullName}, développeur Full Stack — photo de profil et présentation du portfolio`,
 };
 
 const SITE_NAME = `${PROFILE.identity.fullName} — Portfolio`;

@@ -19,6 +19,39 @@ if (!parsed.success) {
 const profile = parsed.data;
 console.log('[generate-seo] contenu valide.');
 
+// Métadonnées de l'image de partage, lues sur le fichier réel `public/og-image.jpg` (lecture seule :
+// l'image n'est jamais modifiée). Les dimensions déclarées (og:image:width/height) doivent être
+// exactes : sinon Facebook / LinkedIn / WhatsApp peuvent rejeter l'image ou retomber sur la petite
+// vignette. Le `?v=` (empreinte du fichier) change à chaque remplacement de l'image et force un
+// nouveau scraping, les plateformes mettant l'image en cache par URL.
+{
+  const { createHash } = await import('node:crypto');
+  const { default: sharp } = await import('sharp');
+  const ogFile = resolve(root, 'public/og-image.jpg');
+  const ogBytes = readFileSync(ogFile);
+  const { width, height, format } = await sharp(ogBytes).metadata();
+  if (format !== 'jpeg') throw new Error(`[generate-seo] public/og-image.jpg n'est pas un JPEG (${format}).`);
+  const version = createHash('sha256').update(ogBytes).digest('hex').slice(0, 8);
+  writeFileSync(
+    resolve(root, 'src/app/core/og-image.generated.ts'),
+    `// Généré par scripts/generate-seo.mjs (prebuild) depuis public/og-image.jpg — ne pas modifier à la main.
+export const OG_IMAGE_FILE = {
+  path: '/og-image.jpg?v=${version}',
+  width: ${width},
+  height: ${height},
+  type: 'image/jpeg',
+} as const;
+`,
+  );
+  const ratio = width / height;
+  console.log(`[generate-seo] og-image.jpg ${width}x${height} (ratio ${ratio.toFixed(2)}:1, v=${version}).`);
+  if (width < 1200 || ratio < 1.7 || ratio > 2.1) {
+    console.warn(
+      '[generate-seo] og-image.jpg : < 1200 px de large ou ratio éloigné de 1,91:1 — grande carte non garantie.',
+    );
+  }
+}
+
 const base = (process.env.SITE_URL || profile.identity.siteUrl).trim().replace(/\/$/, '');
 const sitemapPath = resolve(root, 'public/sitemap.xml');
 const robotsPath = resolve(root, 'public/robots.txt');
